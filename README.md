@@ -1,3 +1,3 @@
 # Pixelly
-Projet SilNti
+Projet SilNti .
 Ceci est le ReadMe 7
