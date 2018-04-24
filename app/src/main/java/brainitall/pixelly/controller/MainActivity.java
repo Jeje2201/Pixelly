@@ -1,7 +1,9 @@
-package brainitall.pixelly;
+package brainitall.pixelly.controller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import brainitall.pixelly.R;
 
 public class MainActivity extends AppCompatActivity {
 
