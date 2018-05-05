@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".controller.MainActivity"
-    android:background="#333756">
+    android:background="@color/bg_menu">
 
     <Button
         android:id="@+id/btn_jouer"
         android:layout_width="139dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
-        android:background="#E5E057"
+        android:background="@color/btn_menu_jouer"
         android:text="@string/btn_menu_jouer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -24,7 +24,7 @@
         android:id="@+id/btn_option"
         android:layout_width="143dp"
         android:layout_height="wrap_content"
-        android:background="#7EE3F7"
+        android:background="@color/btn_menu_options"
         android:text="@string/btn_menu_Option"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +39,7 @@
         android:layout_width="143dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="152dp"
-        android:background="#0BD804"
+        android:background="@color/btn_menu_quitter"
         android:text="@string/btn_menu_Quitter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -56,6 +56,6 @@
         android:text="?"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="#6C4BA0" />/>
+        android:background="#6C4BA0" />
 
 </android.support.constraint.ConstraintLayout>
