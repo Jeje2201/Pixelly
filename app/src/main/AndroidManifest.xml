@@ -16,6 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".controller.PlayActivity" />
+        <activity android:name=".controller.OptionActivity" />
+        <activity android:name=".controller.LevelActivity" />
+        <activity android:name=".controller.HelpActivity"></activity>
     </application>
 
 </manifest>
