@@ -9,7 +9,7 @@
 
 
     <ToggleButton
-        android:id="@+id/toggleButton2"
+        android:id="@+id/activity_option_btn_son"
         android:layout_width="142dp"
         android:layout_height="48dp"
         android:background="#b5d2e6"
@@ -23,7 +23,7 @@
         app:layout_constraintVertical_bias="0.332" />
 
     <Button
-        android:id="@+id/activity_option_btn_son"
+        android:id="@+id/activity_option_btn_reset"
         android:layout_width="143dp"
         android:layout_height="wrap_content"
         android:background="#b5e6c2"
