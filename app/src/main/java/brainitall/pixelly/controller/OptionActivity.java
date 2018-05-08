@@ -49,13 +49,7 @@ public class OptionActivity extends AppCompatActivity {
             Action lorsque le joueur clique sur le bouton 'Reset'
          */
 
-        reset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent levelActivity = new Intent(OptionActivity.this, LevelActivity.class);
-                startActivity(levelActivity);
-            }
-        });
+        
 
         /*
             Action lorsque le joueur clique sur le bouton 'Aide'
