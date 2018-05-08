@@ -46,12 +46,12 @@ public class PlayView extends View {
         super.onDraw(canvas);
         paint.setTextAlign(Paint.Align.CENTER);
         // Dessin des cellules
-        for(int y = 0; y < 3; y++){
+        /*for(int y = 0; y < 3; y++){
             for(int x = 0; x <3; x++){
                 paint.setColor(Color.WHITE);
                 canvas.drawRect(x*largeurCellule,y*largeurCellule,(x+1)*largeurCellule,(y+1)*largeurCellule,paint);
             }
-        }
+        }*/
         // Dessin des lignes de la grille
 
         paint.setColor(Color.BLACK);
