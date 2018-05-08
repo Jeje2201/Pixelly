@@ -4,19 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.OptionActivity">
+    tools:context=".controller.OptionActivity"
+    tools:ignore="ExtraText">
 
 
     <ToggleButton
         android:id="@+id/toggleButton2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="142dp"
+        android:layout_height="48dp"
         android:background="#b5d2e6"
         android:checked="true"
         android:text="ToggleButton"
         android:visibility="visible"
-        tools:layout_editor_absoluteX="147dp"
-        tools:layout_editor_absoluteY="137dp" />
+        tools:layout_editor_absoluteX="121dp"
+        tools:layout_editor_absoluteY="136dp" />
 
     <Button
         android:id="@+id/activity_option_btn_son"
@@ -26,8 +27,7 @@
         android:text="Reset"
         android:visibility="visible"
         tools:layout_editor_absoluteX="121dp"
-        tools:layout_editor_absoluteY="213dp" />"
-        android:text="Reset"
+        tools:layout_editor_absoluteY="213dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -40,8 +40,8 @@
         android:layout_width="43dp"
         android:layout_height="19dp"
         android:text="Son :"
-        tools:layout_editor_absoluteX="96dp"
-        tools:layout_editor_absoluteY="151dp" />
+        tools:layout_editor_absoluteX="60dp"
+        tools:layout_editor_absoluteY="150dp" />
 
     <Button
         android:id="@+id/activity_main_btn_aide"
