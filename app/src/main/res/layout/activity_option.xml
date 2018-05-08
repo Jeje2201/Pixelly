@@ -17,7 +17,7 @@
         android:text="ToggleButton"
         android:visibility="visible"
         tools:layout_editor_absoluteX="121dp"
-        tools:layout_editor_absoluteY="136dp" />
+        tools:layout_editor_absoluteY="155dp" />
 
     <Button
         android:id="@+id/activity_option_btn_son"
@@ -26,22 +26,24 @@
         android:background="#b5e6c2"
         android:text="Reset"
         android:visibility="visible"
-        tools:layout_editor_absoluteX="121dp"
-        tools:layout_editor_absoluteY="213dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.468" />
+        app:layout_constraintVertical_bias="0.542" />
 
     <TextView
         android:id="@+id/activity_option_textView_son"
         android:layout_width="43dp"
         android:layout_height="19dp"
         android:text="Son :"
-        tools:layout_editor_absoluteX="60dp"
-        tools:layout_editor_absoluteY="150dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.199"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.343" />
 
     <Button
         android:id="@+id/activity_main_btn_aide"
