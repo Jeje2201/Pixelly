@@ -6,9 +6,53 @@
     android:layout_height="match_parent"
     tools:context=".controller.OptionActivity">
 
+
+    <ToggleButton
+        android:id="@+id/toggleButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#b5d2e6"
+        android:checked="true"
+        android:text="ToggleButton"
+        android:visibility="visible"
+        tools:layout_editor_absoluteX="147dp"
+        tools:layout_editor_absoluteY="137dp" />
+
+    <Button
+        android:id="@+id/activity_option_btn_son"
+        android:layout_width="143dp"
+        android:layout_height="wrap_content"
+        android:background="#b5e6c2"
+        android:text="Reset"
+        android:visibility="visible"
+        tools:layout_editor_absoluteX="121dp"
+        tools:layout_editor_absoluteY="213dp" />"
+        android:text="Reset"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.468" />
+
     <TextView
-        android:text= "Activité des Options"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:id="@+id/activity_option_textView_son"
+        android:layout_width="43dp"
+        android:layout_height="19dp"
+        android:text="Son :"
+        tools:layout_editor_absoluteX="96dp"
+        tools:layout_editor_absoluteY="151dp" />
+
+    <Button
+        android:id="@+id/activity_main_btn_aide"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:text="?"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="#cbb5e6" />
+
 
 </android.support.constraint.ConstraintLayout>
