@@ -11,15 +11,15 @@ import brainitall.pixelly.view.PlayView;
 
 public class PlayActivity extends AppCompatActivity {
 
-    private PlayView vue;
+    private PlayView mVue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Création du widget de la vue de la grille
-        vue = new PlayView(this);
+        mVue = new PlayView(this);
         // Définition de la grille comme contentView
-        setContentView(vue);
+        setContentView(mVue);
 
     }
 }

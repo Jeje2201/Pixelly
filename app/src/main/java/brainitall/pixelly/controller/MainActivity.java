@@ -11,10 +11,10 @@ import brainitall.pixelly.R;
 public class MainActivity extends AppCompatActivity {
 
     // Référencement des différents éléments de la vue
-    private Button jouer;
-    private Button option;
-    private Button quitter;
-    private Button aide;
+    private Button mJouer;
+    private Button mOption;
+    private Button mQuitter;
+    private Button mAide;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,16 +22,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Branchements entre Vue et Controlleur
-        jouer = (Button) findViewById(R.id.activity_main_btn_jouer);
-        option = (Button) findViewById(R.id.activity_main_btn_option);
-        quitter = (Button) findViewById(R.id.activity_main_btn_quitter);
-        aide = (Button) findViewById(R.id.activity_main_btn_aide);
+        mJouer = (Button) findViewById(R.id.activity_main_btn_jouer);
+        mOption = (Button) findViewById(R.id.activity_main_btn_option);
+        mQuitter = (Button) findViewById(R.id.activity_main_btn_quitter);
+        mAide = (Button) findViewById(R.id.activity_main_btn_aide);
 
         /*
             Action lorsque le joueur clique sur le bouton 'Jouer'
          */
 
-        jouer.setOnClickListener(new View.OnClickListener() {
+        mJouer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent levelActivity = new Intent(MainActivity.this, LevelActivity.class);
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         /*
             Action lorsque le joueur clique sur le bouton 'Option'
          */
-        option.setOnClickListener(new View.OnClickListener() {
+        mOption.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent optionActivity = new Intent(MainActivity.this, OptionActivity.class);
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             Action lorsque le joueur clique sur le bouton 'Quitter'
          */
 
-         quitter.setOnClickListener(new View.OnClickListener() {
+         mQuitter.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
                  finish();
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         /*
             Action lorsque le joueur clique sur le bouton 'Aide'
          */
-        aide.setOnClickListener(new View.OnClickListener() {
+        mAide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent helpActivity = new Intent(MainActivity.this, HelpActivity.class);

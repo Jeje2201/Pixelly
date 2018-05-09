@@ -13,38 +13,38 @@ import brainitall.pixelly.model.metier.Grille;
 public class PlayView extends View {
 
     // Modele
-    Grille laGrille;
+    Grille mGrille;
 
     // Elements graphiques
-    private Paint paint;
-    private float largeurGrille;
-    private float tailleSeparateur;
-    private float largeurCellule;
+    private Paint mPaint;
+    private float mLargeurGrille;
+    private float mTailleSeparateur;
+    private float mLargeurCellule;
 
 
     public PlayView(Context context) {
         super(context);
-        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     }
 
     public PlayView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
     }
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         // Calculs des différentes tailles
-        tailleSeparateur = (w /9f) / 20f;
-        largeurGrille = w;
-        largeurCellule = largeurGrille /9f;
+        mTailleSeparateur = (w /9f) / 20f;
+        mLargeurGrille = w;
+        mLargeurCellule = mLargeurGrille /9f;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        paint.setTextAlign(Paint.Align.CENTER);
+        mPaint.setTextAlign(Paint.Align.CENTER);
         // Dessin des cellules
         /*for(int y = 0; y < 3; y++){
             for(int x = 0; x <3; x++){
@@ -54,11 +54,11 @@ public class PlayView extends View {
         }*/
         // Dessin des lignes de la grille
 
-        paint.setColor(Color.BLACK);
-        paint.setStrokeWidth(tailleSeparateur);
+        mPaint.setColor(Color.BLACK);
+        mPaint.setStrokeWidth(mTailleSeparateur);
         for( int i=0; i<=3; i++ ) {
-            canvas.drawLine( i*(largeurCellule*3), 0, i*(largeurCellule*3), largeurCellule*9, paint );
-            canvas.drawLine( 0,i*(largeurCellule*3), largeurCellule*9, i*(largeurCellule*3), paint );
+            canvas.drawLine( i*(mLargeurCellule*3), 0, i*(mLargeurCellule*3), mLargeurCellule*9, mPaint );
+            canvas.drawLine( 0,i*(mLargeurCellule*3), mLargeurCellule*9, i*(mLargeurCellule*3), mPaint );
         }
 
 
