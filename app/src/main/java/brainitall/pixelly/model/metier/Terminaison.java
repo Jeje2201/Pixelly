@@ -19,7 +19,7 @@ public class Terminaison extends Case {
      * @param b
      */
     public Terminaison(int tailleChemin, int x, int y, int r, int g, int b) {
-        super(r,g,b,x,y);
+        super(x,y,r,g,b);
         mTailleChemin = tailleChemin;
     }
 
