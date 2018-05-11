@@ -18,7 +18,7 @@ public abstract class Case {
         mDansChemin = false;
     }
 
-    public Case(int r, int g, int b, int x, int y) {
+    public Case(int x, int y, int r, int g, int b) {
         mR = r;
         mG = g;
         mB = b;
