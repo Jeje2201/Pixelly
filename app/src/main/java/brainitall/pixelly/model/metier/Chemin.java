@@ -8,13 +8,11 @@ public class Chemin {
 
     /**
      * taille max du chemin
-     * @param mTailleMax
      */
     private int mTailleMax;
 
     /**
      * liste des cases comprises dans un chemin
-     * @param mCasesChemin
      */
     private List<Case> mCasesChemin;
 

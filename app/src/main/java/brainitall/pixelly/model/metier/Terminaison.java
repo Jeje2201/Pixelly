@@ -4,7 +4,6 @@ public class Terminaison extends Case {
 
     /**
      * taille du chemin compris entre deux terminaisons
-     * @param mTailleChemin
      */
     private int mTailleChemin;
 

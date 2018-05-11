@@ -4,36 +4,30 @@ public abstract class Case {
 
     /**
      * code couleur informatique représentant du rouge
-     * @param mR
      */
     private int mR;
 
     /**
      * code couleur informatique représentant du vert
-     * @param mG
      */
     private int mG;
 
     /**
      * code couleur informatique représentant du bleu
-     * @param mB
      */
     private int mB;
     /**
      * coordonnées x d'une case
-     *@param mX
      */
     private int mX;
 
     /**
      * coordonnées y d'une case
-     * @param mY
      */
     private int mY;
 
     /**
      * boolean pour savoir si une case est dans un chemin
-     * @param mDansChemin
      */
     private boolean mDansChemin;
 
