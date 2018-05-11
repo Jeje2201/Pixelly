@@ -4,7 +4,7 @@ public class Grille {
     private int mNumGrille;
     private int mLargeurGrille;
     private int mHauteurGrille;
-    private Case[][] lesCases;
+    private Case[][] mLesCases;
 
     public Grille(){
         mNumGrille = 0;
@@ -21,15 +21,15 @@ public class Grille {
     }
 
     private void initCases(){
-        lesCases = new Case[mHauteurGrille][mLargeurGrille];
+        mLesCases = new Case[mHauteurGrille][mLargeurGrille];
         for(int i = 0; i< mHauteurGrille;i++){
             for(int j = 0; j < mLargeurGrille ;j++){
-                lesCases[i][j] = new CaseVide(i,j);
+                mLesCases[i][j] = new CaseVide(i,j);
             }
         }
     }
 
     public void ajouterTerminaison(int tailleChemin, int x, int y, int r, int g, int b){
-        lesCases[x][y] = new Terminaison(tailleChemin, x,y,r,g,b);
+        mLesCases[x][y] = new Terminaison(tailleChemin, x,y,r,g,b);
     }
 }
