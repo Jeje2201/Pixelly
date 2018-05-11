@@ -50,7 +50,7 @@ public abstract class Case {
         mDansChemin = false;
     }
 
-<<<<<<< HEAD
+
     /**
      * constructeur de la classe Case utilisé dans la classe Terminaison
      * @param r
@@ -59,10 +59,7 @@ public abstract class Case {
      * @param x
      * @param y
      */
-    public Case(int r, int g, int b, int x, int y) {
-=======
     public Case(int x, int y, int r, int g, int b) {
->>>>>>> 5ff581d69530b52f1599c67a89b5ecf7ac899f19
         mR = r;
         mG = g;
         mB = b;
