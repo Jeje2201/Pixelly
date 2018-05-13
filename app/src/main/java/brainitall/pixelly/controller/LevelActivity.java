@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.logging.Level;
+
 import brainitall.pixelly.R;
 
 public class LevelActivity extends AppCompatActivity {
@@ -53,6 +55,18 @@ public class LevelActivity extends AppCompatActivity {
                 mNiveau1.setEnabled(false); // on désactive le bouton niveau 1
                 mNiveau2.setEnabled(false); // on désactive le bouton niveau 2 qui sera debloqué lors d'un succés au niveau 1
                 startActivity(playActivity);
+
+                // ----------------------------il faudra activer les boutons lorsqu'un niveau sera finit -------------------------
+
+
+            /*ouverture de l'activitée aide lorsque l'utilisateur cliquera sur le bouton d'aide */
+                mHelp.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent helpActivity = new Intent(LevelActivity.this, LevelActivity.class);
+                        startActivity(helpActivity);
+                    }
+                });
             }
         });
     }
