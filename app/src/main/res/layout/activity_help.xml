@@ -63,8 +63,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="133dp"
-        tools:layout_editor_absoluteY="222dp" />
+        app:layout_constraintVertical_bias="0.546" />
     <!-- relativeLayout qui est caché tant que l'utilisateur n'a pas cliqué sur
     plus de détail -->
 
@@ -93,8 +92,6 @@
 
 
         </RelativeLayout>
-
-
 
 
 </android.support.constraint.ConstraintLayout>
