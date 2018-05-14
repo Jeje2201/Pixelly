@@ -60,14 +60,16 @@ public class LevelActivity extends AppCompatActivity {
                 // ----------------------------il faudra activer les boutons lorsqu'un niveau sera finit -------------------------
 
 
-            /*ouverture de l'activitée aide lorsque l'utilisateur cliquera sur le bouton d'aide */
-                mHelp.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent helpActivity = new Intent(LevelActivity.this, HelpActivity.class);
-                        startActivity(helpActivity);
-                    }
-                });
+
+            }
+        });
+
+        /*ouverture de l'activitée aide lorsque l'utilisateur cliquera sur le bouton d'aide */
+        mHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent helpActivity = new Intent(LevelActivity.this, HelpActivity.class);
+                startActivity(helpActivity);
             }
         });
     }
