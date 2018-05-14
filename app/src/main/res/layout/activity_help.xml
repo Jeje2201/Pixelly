@@ -12,12 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textSize="25dp"
-        android:textColor="black"
         android:gravity="center_horizontal"
         android:paddingVertical="20dp"
         />
 
     <!-- image 1 d'aide du jeu  -->
+
     <ImageView
         android:id="@+id/activity_help_image1"
         android:layout_width="300dp"
@@ -32,6 +32,7 @@
         />
 
     <!-- image 2 d'aide du jeu -->
+
     <ImageView
         android:id="@+id/activity_help_image2"
         android:layout_width="260dp"
@@ -51,16 +52,20 @@
         android:layout_margin="8dp"
         android:layout_alignParentLeft="true"/>
 
+
     <Button
         android:id="@+id/activity_help_Button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:text="@string/detail"
         tools:layout_editor_absoluteX="133dp"
         tools:layout_editor_absoluteY="222dp" />
+
+    
     <!-- relativeLayout qui est caché tant que l'utilisateur n'a pas cliqué sur
     plus de détail -->
+
+
     <RelativeLayout
             android:id="@+id/activity_help_detailLayout"
             android:layout_width="match_parent"
@@ -80,7 +85,6 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_below="@id/activity_help_textview3"
-            android:text="@string/fermer"
             />
 
 

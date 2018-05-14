@@ -15,7 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textSize="25dp"
-        android:textColor="black"
         android:gravity="center_horizontal"
         android:textStyle="italic"
         />
