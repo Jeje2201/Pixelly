@@ -32,4 +32,36 @@ public class Grille {
     public void ajouterTerminaison(int tailleChemin, int x, int y, int r, int g, int b){
         mLesCases[x][y] = new Terminaison(tailleChemin, x,y,r,g,b);
     }
+
+    public int getNumGrille() {
+        return mNumGrille;
+    }
+
+    public void setNumGrille(int numGrille) {
+        mNumGrille = numGrille;
+    }
+
+    public int getLargeurGrille() {
+        return mLargeurGrille;
+    }
+
+    public void setLargeurGrille(int largeurGrille) {
+        mLargeurGrille = largeurGrille;
+    }
+
+    public int getHauteurGrille() {
+        return mHauteurGrille;
+    }
+
+    public void setHauteurGrille(int hauteurGrille) {
+        mHauteurGrille = hauteurGrille;
+    }
+
+    public Case[][] getLesCases() {
+        return mLesCases;
+    }
+
+    public void setLesCases(Case[][] lesCases) {
+        mLesCases = lesCases;
+    }
 }
