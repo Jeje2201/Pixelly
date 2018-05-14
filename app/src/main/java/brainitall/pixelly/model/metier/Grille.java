@@ -13,6 +13,7 @@ public class Grille {
         initCases();
     }
 
+    // Constructeur à appeler pour créer la grille après lecture des 3 premières lignes du fichier JSon
     public Grille(int numGrille, int largeurGrille, int hauteurGrille) {
         mNumGrille = numGrille;
         mLargeurGrille = largeurGrille;
@@ -29,6 +30,7 @@ public class Grille {
         }
     }
 
+    // Methode à utiliser pour ajouter les terminaisons lues dans le fichier Json
     public void ajouterTerminaison(int tailleChemin, int x, int y, int r, int g, int b){
         mLesCases[x][y] = new Terminaison(tailleChemin, x,y,r,g,b);
     }
