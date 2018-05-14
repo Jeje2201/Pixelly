@@ -12,4 +12,23 @@
 /build
 /captures
 .externalNativeBuild
+<<<<<<< HEAD
+.idea/caches/build_file_checksums.ser
+.idea/caches/build_file_checksums.ser
+.idea/misc.xml
+.idea/caches/build_file_checksums.ser
+.idea/caches/build_file_checksums.ser
+.idea/caches/build_file_checksums.ser
+.idea/caches/build_file_checksums.ser
+.idea/caches/build_file_checksums.ser
+.idea/caches/build_file_checksums.ser
+.idea/misc.xml
 .idea/vcs.xml
+.idea/caches/build_file_checksums.ser
+.idea/caches/build_file_checksums.ser
+.idea/caches/build_file_checksums.ser
+.idea/caches/build_file_checksums.ser
+app/src/main/res/layout/activity_help.xml
+=======
+.idea/vcs.xml
+>>>>>>> 3eb7bfa930358c8d44ee6827b8ba0e04c8b95571

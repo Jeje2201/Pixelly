@@ -47,26 +47,29 @@ public class LevelActivity extends AppCompatActivity {
         mNiveau1 = (Button) findViewById(R.id.activity_level_btn_niveau1);
         mNiveau2 = (Button) findViewById(R.id.activity_level_btn_niveau2);
         mHelp = (Button) findViewById(R.id.activity_main_btn_aide);
+        mNiveau1.setEnabled(false); // on désactive le bouton niveau 1
+        mNiveau2.setEnabled(false); // on désactive le bouton niveau 2 qui sera debloqué lors d'un succés au niveau 1
 
         mNiveauTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent playActivity = new Intent(LevelActivity.this, PlayActivity.class);
-                mNiveau1.setEnabled(false); // on désactive le bouton niveau 1
-                mNiveau2.setEnabled(false); // on désactive le bouton niveau 2 qui sera debloqué lors d'un succés au niveau 1
+
                 startActivity(playActivity);
 
                 // ----------------------------il faudra activer les boutons lorsqu'un niveau sera finit -------------------------
 
 
-            /*ouverture de l'activitée aide lorsque l'utilisateur cliquera sur le bouton d'aide */
-                mHelp.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent helpActivity = new Intent(LevelActivity.this, LevelActivity.class);
-                        startActivity(helpActivity);
-                    }
-                });
+
+            }
+        });
+
+        /*ouverture de l'activitée aide lorsque l'utilisateur cliquera sur le bouton d'aide */
+        mHelp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent helpActivity = new Intent(LevelActivity.this, HelpActivity.class);
+                startActivity(helpActivity);
             }
         });
     }
