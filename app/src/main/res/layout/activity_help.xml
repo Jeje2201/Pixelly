@@ -6,95 +6,96 @@
     android:layout_height="match_parent"
     tools:context=".controller.HelpActivity">
 
-    <TextView
-        android:text="Aide du jeu"
-        android:id="@+id/activity_help_textview1"
+    <!-- élément graphique qui va servir à faire défiler l'activitée -->
+    <ScrollView
+        android:id="@+id/activity_help_defilement"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="25dp"
-        android:textColor="#000000"
-        android:gravity="center_horizontal"
-        android:paddingVertical="20dp"
-        />
-
-    <!-- image 1 d'aide du jeu  -->
-
-    <ImageView
-        android:id="@+id/activity_help_image1"
-        android:layout_width="300dp"
-        android:layout_height="150dp"
-        android:gravity="center_horizontal"
-        android:src="@drawable/presentation_jeu"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.2"
-        />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <!-- image 2 d'aide du jeu -->
-
-    <ImageView
-        android:id="@+id/activity_help_image2"
-        android:layout_width="260dp"
-        android:layout_height="150dp"
-        android:gravity="center_horizontal"
-        android:src="@drawable/presentation_jeu2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.9"
-        />
-         <TextView
-        android:id="@+id/activity_help_textview2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:layout_alignParentLeft="true"/>
-
-
-    <Button
-        android:id="@+id/activity_help_Button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="133dp"
-        tools:layout_editor_absoluteY="222dp" />
-    <!-- relativeLayout qui est caché tant que l'utilisateur n'a pas cliqué sur
-    plus de détail -->
-
-
-    <RelativeLayout
-            android:id="@+id/activity_help_detailLayout"
+        <!-- élément graphique servant à la mise en page des différents éléments de l'activitée -->
+        <LinearLayout
+            android:id="@+id/activity_help_mise_en_page"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            >
-        <TextView
-            android:id="@+id/activity_help_textview3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_margin="8dp"
-            />
-        <Button
-            android:id="@+id/activity_help_Button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@id/activity_help_textview3"
-            />
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
 
+            <!-- texte de présentation de la page -->
+            <TextView
+                android:id="@+id/activity_help_textview1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:paddingVertical="20dp"
+                android:text="Aide du jeu"
+                android:textColor="#000000"
+                android:textSize="25dp" />
 
+            <!-- image 1 d'aide du jeu  -->
 
-        </RelativeLayout>
+            <ImageView
+                android:id="@+id/activity_help_image1"
+                android:layout_width="300dp"
+                android:layout_height="150dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal"
+                android:src="@drawable/presentation_jeu"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.2" />
 
+            <!-- texte descriptif de la première image -->
+            <TextView
+                android:id="@+id/activity_help_textview2"
+                android:layout_width="220dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="  1. Un chemin ne peut relier que deux terminaisons
 
+    2. La longueur des chemins
+    doit correspondre au nombre
+    de points indiqués dans les terminaisons
+        "
+                android:textColor="#000000"
+                android:textSize="16dp"
+                android:textStyle="italic"
+                android:textAlignment="center"/>
+            <!-- image 2 d'aide du jeu -->
 
+            <ImageView
+                android:id="@+id/activity_help_image2"
+                android:layout_width="260dp"
+                android:layout_height="150dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal"
+                android:src="@drawable/presentation_jeu2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.9" />
 
+            <!-- texte descriptif de la seconde image -->
+            <TextView
+                android:id="@+id/activity_help_textview3"
+                android:layout_width="220dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="3. Un chemin ne peut pas croiser d'autres chemins ou passer au travers des terminaisons."
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="16dp"
+                android:textStyle="italic"
+
+                />
+        </LinearLayout>
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>
