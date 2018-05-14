@@ -60,8 +60,6 @@
         android:layout_alignParentRight="true"
         tools:layout_editor_absoluteX="133dp"
         tools:layout_editor_absoluteY="222dp" />
-
-    
     <!-- relativeLayout qui est caché tant que l'utilisateur n'a pas cliqué sur
     plus de détail -->
 
