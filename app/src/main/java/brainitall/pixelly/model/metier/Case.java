@@ -31,6 +31,11 @@ public abstract class Case {
      */
     private boolean mDansChemin;
 
+    /**
+     * Permet de savoir s'il s'agit d'une case Terminaison ou non
+     */
+    private boolean mTerminaison;
+
 
     /**
      * constructeur par default de la classe Case
@@ -42,6 +47,8 @@ public abstract class Case {
         mX = 0;
         mY = 0;
         mDansChemin = false;
+        mTerminaison = false;
+
     }
 
 
@@ -60,6 +67,7 @@ public abstract class Case {
         mX = x;
         mY = y;
         mDansChemin = false;
+        mTerminaison = false;
     }
 
 
@@ -172,5 +180,17 @@ public abstract class Case {
      */
     public void setDansChemin(boolean dansChemin) {
         mDansChemin = dansChemin;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean isTerminaison() {
+        return mTerminaison;
+    }
+
+    public void setTerminaison(boolean terminaison) {
+        mTerminaison = terminaison;
     }
 }
