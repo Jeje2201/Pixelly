@@ -18,7 +18,7 @@ public class OptionActivity extends AppCompatActivity {
     private Button mReset;
     private Button mAide;
 
-    private MediaPlayer mMediaPlayer;
+    MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,25 +30,25 @@ public class OptionActivity extends AppCompatActivity {
         mReset = (Button) findViewById(R.id.activity_option_btn_reset);
         mAide = (Button) findViewById(R.id.activity_main_btn_aide);
 
-
-        // Context = this, et deuxième argument = musique (ex : R.raw.musique.mp3)
-        // mMediaPlayer = MediaPlayer.create(this, R.id.activity_option_btn_son);
-
-
-
-
+        mp=MediaPlayer.create(this, R.raw.musique_test);
+        mp.start();
+        
         /*
             Action lorsque le joueur clique sur le bouton 'on/off' du son
          */
-//        mSon.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            public void onCheckedChanged(CompoundButton son, boolean isChecked) {
-//                if (isChecked) {
-//                    mMediaPlayer.start();
-//                } else {
-//                    mMediaPlayer.stop();
-//                }
-//            }
-//        });
+        mSon.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton son, boolean isChecked) {
+                if (isChecked) {
+                    System.out.println("- - - - - - - - - - - - -");
+                    System.out.println("Play musique");
+                    mp.start();
+                } else {
+                    System.out.println("- - - - - - - - - - - - -");
+                    System.out.println("Stop musique");
+                    mp.stop();
+                }
+            }
+        });
 
         /*
             Action lorsque le joueur clique sur le bouton 'Reset'

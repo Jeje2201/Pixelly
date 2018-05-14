@@ -73,10 +73,10 @@
     doit correspondre au nombre
     de points indiqués dans les terminaisons
         "
+                android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="16dp"
-                android:textStyle="italic"
-                android:textAlignment="center"/>
+                android:textStyle="italic" />
             <!-- image 2 d'aide du jeu -->
 
             <ImageView
