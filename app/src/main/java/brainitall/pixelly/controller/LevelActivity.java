@@ -64,7 +64,7 @@ public class LevelActivity extends AppCompatActivity {
                 mHelp.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent helpActivity = new Intent(LevelActivity.this, LevelActivity.class);
+                        Intent helpActivity = new Intent(LevelActivity.this, HelpActivity.class);
                         startActivity(helpActivity);
                     }
                 });
