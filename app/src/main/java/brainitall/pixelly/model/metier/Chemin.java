@@ -70,4 +70,48 @@ public class Chemin {
     public boolean verifierTaille(){
         return mTailleMax > mCasesChemin.size();
     }
+
+    /**
+     * Permet d'obtenir la case contenue dans le chemin
+     * @param x l'abcisse de la case dans la grille
+     * @param y l'ordonnée de la case dans la grille
+     * @return la case recherchée
+     */
+    public Case getCaseChemin(int x, int y){
+        Case laCase = null;
+        if(isCaseChemin(x,y)){
+            laCase = mCasesChemin.get(getIndexCase(x,y));
+        }
+        return laCase;
+    }
+
+    /**
+     * Permet d'obtenir l'index de la case dans le chemin
+     * @param x l'abcisse de la case dans la grille
+     * @param y l'ordonnée de la case dans la grikke
+     * @return l'index de la case dans le chemin
+     */
+    public int getIndexCase(int x, int y){
+        int index = -1;
+        for(int i = 0; i < mCasesChemin.size(); i++){
+            if(mCasesChemin.get(i).getX() == x && mCasesChemin.get(i).getY() == y){
+                index = i;
+            }
+        }
+        return index;
+    }
+
+    /**
+     * Permet de savoir si la case aux coordonnées (x,y) fait partie du chemin ou non
+     * @param x l'abcisse de la case de la grille
+     * @param y l'ordonnée de la case de la grille
+     * @return true si elle fait partie de ce chemin, false sinon
+     */
+    public boolean isCaseChemin(int x, int y){
+        for(Case c : mCasesChemin){
+            if(c.getX() == x && c.getY() == y)
+                return true;
+        }
+        return false;
+    }
 }

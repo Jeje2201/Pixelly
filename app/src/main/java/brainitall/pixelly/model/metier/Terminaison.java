@@ -20,6 +20,7 @@ public class Terminaison extends Case {
     public Terminaison(int tailleChemin, int x, int y, int r, int g, int b) {
         super(x,y,r,g,b);
         mTailleChemin = tailleChemin;
+        setTerminaison(true);
     }
 
     /**
