@@ -18,13 +18,13 @@
         app:layout_constraintStart_toStartOf="parent"
 
         app:layout_constraintTop_toTopOf="parent">
-=======
+
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.546" />
     <!-- relativeLayout qui est caché tant que l'utilisateur n'a pas cliqué sur
     plus de détail -->
 
->>>>>>> 608193c550635ae776532e86ba94835a3a39deb3
+
 
         <!-- élément graphique servant à la mise en page des différents éléments de l'activitée -->
         <LinearLayout
