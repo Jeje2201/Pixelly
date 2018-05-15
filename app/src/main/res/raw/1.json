@@ -1,0 +1,75 @@
+{
+  "numeroNiveau" : 1,
+  "tailleGrille": [
+      {
+        "hauteur": 3,
+        "largeur": 3
+      }
+    ],
+  "terminaison": [
+    {
+      "tailleChemin": 3,
+      "x": 0,
+      "y": 0,
+      "r": 255,
+      "g": 0,
+      "b": 0
+    },
+    {
+      "tailleChemin": 3,
+      "x": 0,
+      "y": 2,
+      "r": 255,
+      "g": 0,
+      "b": 0
+    },
+    {
+      "tailleChemin": 2,
+      "x": 1,
+      "y": 0,
+      "r": 0,
+      "g": 255,
+      "b": 0
+    },
+    {
+      "tailleChemin": 1,
+      "x": 1,
+      "y": 1,
+      "r": 255,
+      "g": 255,
+      "b": 0
+    },
+    {
+      "tailleChemin": 2,
+      "x": 1,
+      "y": 2,
+      "r": 0,
+      "g": 0,
+      "b": 255
+    },
+    {
+      "tailleChemin": 2,
+      "x": 2,
+      "y": 0,
+      "r": 0,
+      "g": 255,
+      "b": 0
+    },
+    {
+      "tailleChemin": 1,
+      "x": 2,
+      "y": 1,
+      "r": 199,
+      "g": 57,
+      "b": 0
+    },
+    {
+      "tailleChemin": 2,
+      "x": 2,
+      "y": 2,
+      "r": 0,
+      "g": 0,
+      "b": 255
+    }
+  ]
+}
