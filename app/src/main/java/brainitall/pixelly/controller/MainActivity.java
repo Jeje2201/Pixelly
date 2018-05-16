@@ -1,6 +1,8 @@
 package brainitall.pixelly.controller;
 
+
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +18,14 @@ public class MainActivity extends AppCompatActivity {
     private Button mQuitter;
     private Button mAide;
 
+    public static MediaPlayer getMp() {
+        return mp;
+    }
+
+    private static MediaPlayer mp;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +36,16 @@ public class MainActivity extends AppCompatActivity {
         mOption = (Button) findViewById(R.id.activity_main_btn_option);
         mQuitter = (Button) findViewById(R.id.activity_main_btn_quitter);
         mAide = (Button) findViewById(R.id.activity_main_btn_aide);
+
+        //Si le média pour la musique n'existe pas (donc au premier lancement), le créer
+        if( mp == null) {
+            mp = MediaPlayer.create(this, R.raw.background_music);
+        }
+        //Si la musique n'est pas lancer, alors la lancer
+        if(!mp.isPlaying()) {
+            mp.setLooping(true);
+            mp.start();
+        }
 
         /*
             Action lorsque le joueur clique sur le bouton 'Jouer'

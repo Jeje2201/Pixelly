@@ -12,6 +12,7 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 
+import brainitall.pixelly.controller.Manager;
 import brainitall.pixelly.model.metier.Grille;
 
 public class PlayView extends View implements GestureDetector.OnGestureListener{
@@ -70,7 +71,7 @@ public class PlayView extends View implements GestureDetector.OnGestureListener{
             canvas.drawLine(0, i * (mLargeurCellule * 3), mLargeurCellule * 9, i * (mLargeurCellule * 3), mPaint);
         }
         if (ok) {
-            canvas.drawText("C'EST OK !!!!! ",
+            canvas.drawText("Numéro de la grille "+ Manager.getInstance().getmLaGrille().getNumGrille()+"\n X de la case 0,0"+Manager.getInstance().getmLaGrille().getCase(0,0).getX(),
                     i * mLargeurCellule + mLargeurCellule / 2,
                     i * mLargeurCellule + mLargeurCellule * 0.75f, mPaint);
         }

@@ -10,8 +10,11 @@ import android.widget.TextView;
 import java.util.logging.Level;
 
 import brainitall.pixelly.R;
+import brainitall.pixelly.model.technique.Fichier;
 
 public class LevelActivity extends AppCompatActivity {
+
+    private Fichier mLeFichier;
 
     /**
      * bouton niveau test
@@ -54,7 +57,11 @@ public class LevelActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent playActivity = new Intent(LevelActivity.this, PlayActivity.class);
+                mLeFichier = new Fichier("n1.json");
 
+                //mLeFichier.lireFichier(LevelActivity.this);
+
+                mLeFichier.lireFichier(getApplicationContext());
                 startActivity(playActivity);
 
                 // ----------------------------il faudra activer les boutons lorsqu'un niveau sera finit -------------------------

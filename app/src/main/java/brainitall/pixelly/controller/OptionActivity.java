@@ -1,10 +1,10 @@
 package brainitall.pixelly.controller;
 
-import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 import android.content.Intent;
 import android.view.View;
@@ -18,8 +18,6 @@ public class OptionActivity extends AppCompatActivity {
     private Button mReset;
     private Button mAide;
 
-    MediaPlayer mp;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,22 +28,28 @@ public class OptionActivity extends AppCompatActivity {
         mReset = (Button) findViewById(R.id.activity_option_btn_reset);
         mAide = (Button) findViewById(R.id.activity_main_btn_aide);
 
-        mp=MediaPlayer.create(this, R.raw.musique_test);
-        mp.start();
-        
+        //Si la musique n'est pas jouée lorsque l'on arrive sur la view, alors toggle le bouton, sinon ne rien toggle
+        //L'on obtiens un état de toggle toujours opposé à l'état de notre musique lorsque l'on arrive sur la view
+        if(!MainActivity.getMp().isPlaying()){
+            mSon.toggle();
+        }
+
         /*
             Action lorsque le joueur clique sur le bouton 'on/off' du son
          */
         mSon.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton son, boolean isChecked) {
-                if (isChecked) {
-                    System.out.println("- - - - - - - - - - - - -");
-                    System.out.println("Play musique");
-                    mp.start();
-                } else {
-                    System.out.println("- - - - - - - - - - - - -");
-                    System.out.println("Stop musique");
-                    mp.stop();
+                //Si le toggle est sur true et qu'aucun sons est en cours, alors lancer la musique
+                if (isChecked && !MainActivity.getMp().isPlaying()) {
+                    Toast.makeText(OptionActivity.this, "Musique play", Toast.LENGTH_SHORT).show();
+                    MainActivity.getMp().start();
+                }
+                //Sinon si le toggle est sur false que la musique est en cours, alors la mettre sur pause
+                else {
+                    Toast.makeText(OptionActivity.this, "Musique Stop", Toast.LENGTH_SHORT).show();
+                    if(MainActivity.getMp().isPlaying()) {
+                        MainActivity.getMp().pause();
+                    }
                 }
             }
         });
@@ -54,7 +58,7 @@ public class OptionActivity extends AppCompatActivity {
             Action lorsque le joueur clique sur le bouton 'Reset'
          */
 
-        
+
 
         /*
             Action lorsque le joueur clique sur le bouton 'Aide'

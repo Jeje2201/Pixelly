@@ -1,15 +1,35 @@
 package brainitall.pixelly.model.technique;
 
+import android.content.Context;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+
+import brainitall.pixelly.controller.Manager;
+
 public class Fichier {
 
-    /*
-    // methode a revoir !
+    private String mNomFichier;
 
-    public ArrayList<MaTerminaison> loadJSONFromAsset() {
-        ArrayList<MaTerminaison> locList = new ArrayList<>();
+    public Fichier(String nomFichier){
+        mNomFichier = nomFichier;
+
+    }
+
+    // methode a revoir !
+    /**
+     * Permet de lire un fichier Json
+     */
+    public void lireFichier(Context context) {
+
+        System.out.println("LALA");
         String json = null;
         try {
-            InputStream is = getAssets().open("1.json");
+            InputStream is = context.getAssets().open(mNomFichier);
             int size = is.available();
             byte[] buffer = new byte[size];
             is.read(buffer);
@@ -17,29 +37,45 @@ public class Fichier {
             json = new String(buffer, "UTF-8");
         } catch (IOException ex) {
             ex.printStackTrace();
-            return null;
         }
-        try {
-            JSONObject obj = new JSONObject(json);
-            JSONArray m_jArry = obj.getJSONArray("terminaison");
 
-            for (int i = 0; i < m_jArry.length(); i++) {
-                JSONObject jo_inside = m_jArry.getJSONObject(i);
-                MaTerminaison terminaison = new MaTerminaison();
-                terminaison.setTailleChemin(jo_inside.getInt("tailleChemin"));
-                terminaison.setX(jo_inside.getInt("x"));
-                terminaison.setY(jo_inside.getInt("y"));
-                terminaison.setR(jo_inside.getInt("r"));
-                terminaison.setG(jo_inside.getInt("g"));
-                terminaison.setB(jo_inside.getInt("b"));
+
+
+        try {
+
+            JSONObject jsonRootObject = new JSONObject(json);
+            JSONArray jsonArray = jsonRootObject.optJSONArray("infoGrille");
+
+            JSONObject obj = new JSONObject(json);
+            JSONObject tailleGrille = obj.getJSONObject("infoGrille");
+
+
+            for(int i = 0; i < jsonArray.length(); i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                int numGrille = Integer.parseInt(jsonObject.optString("numGrille").toString());
+                int hauteur = Integer.parseInt(jsonObject.optString("hauteur").toString());
+                int largeur = Integer.parseInt(jsonObject.optString("largeur").toString());
+
+
+                Manager.getInstance().ajouterGrille(numGrille,largeur,hauteur);
+            }
+            JSONObject  terminaison = jsonRootObject.getJSONObject("terminaison");
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                int tailleChemin = Integer.parseInt(jsonObject.optString("tailleChemin").toString());
+                int x = Integer.parseInt(jsonObject.optString("x").toString());
+                int y = Integer.parseInt(jsonObject.optString("y").toString());
+                int r = Integer.parseInt(jsonObject.optString("r").toString());
+                int g = Integer.parseInt(jsonObject.optString("g").toString());
+                int b = Integer.parseInt(jsonObject.optString("b").toString());
+
 
                 //Ajouter les valeurs dans la ArrayList
-                locList.add(terminaison);
+                Manager.getInstance().ajouterTerminaison(tailleChemin,x,y,r,g,b);
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
+        } catch (JSONException e2) {
+            e2.printStackTrace();
         }
-        return locList;
+
     }
-    */
 }
