@@ -42,13 +42,13 @@ public class Fichier {
 
 
         try {
-<<<<<<< HEAD
+
             JSONObject jsonRootObject = new JSONObject(json);
             JSONArray jsonArray = jsonRootObject.optJSONArray("infoGrille");
-=======
+
             JSONObject obj = new JSONObject(json);
             JSONObject tailleGrille = obj.getJSONObject("infoGrille");
->>>>>>> 1da9d2169f0c399dec60b4c991539baceaa091fc
+
 
             for(int i = 0; i < jsonArray.length(); i++){
                 JSONObject jsonObject = jsonArray.getJSONObject(i);

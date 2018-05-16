@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Si le média pour la musique n'existe pas (donc au premier lancement), le créer
         if( mp == null) {
-            mp = MediaPlayer.create(this, R.raw.musique_test);
+            mp = MediaPlayer.create(this, R.raw.background_music);
         }
         //Si la musique n'est pas lancer, alors la lancer
         if(!mp.isPlaying()) {

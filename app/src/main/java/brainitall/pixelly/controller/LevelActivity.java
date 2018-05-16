@@ -58,10 +58,9 @@ public class LevelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent playActivity = new Intent(LevelActivity.this, PlayActivity.class);
                 mLeFichier = new Fichier("n1.json");
-<<<<<<< HEAD
+
                 //mLeFichier.lireFichier(LevelActivity.this);
-=======
->>>>>>> 1da9d2169f0c399dec60b4c991539baceaa091fc
+
                 mLeFichier.lireFichier(getApplicationContext());
                 startActivity(playActivity);
 
