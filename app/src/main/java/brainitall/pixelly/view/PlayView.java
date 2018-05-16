@@ -10,36 +10,71 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 
 import brainitall.pixelly.controller.Manager;
 import brainitall.pixelly.model.metier.Grille;
 
-public class PlayView extends View implements GestureDetector.OnGestureListener{
+public class PlayView extends SurfaceView implements SurfaceHolder.Callback, GestureDetector.OnGestureListener{
 
-    // Modele
-    Grille mGrille;
+    // Elements Techniques
+    private DrawingThread mThread;
+
+
 
     // Elements graphiques
+    private static final float TOUCH_TOLERANCE = 4;
+    private SurfaceHolder mSurfaceHolder;
+    private GestureDetector mDetector;
     private Paint mPaint;
     private float mLargeurGrille;
     private float mTailleSeparateur;
     private float mLargeurCellule;
-    private boolean ok;
-    private GestureDetector mDetector;
+
+    // Elements Positionnement
+    private float mX;
+    private float mY;
+
 
 
     public PlayView(Context context) {
         super(context);
         mDetector = new GestureDetector(getContext(),this);
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        ok = false;
+        mSurfaceHolder = getHolder();
+        mSurfaceHolder.addCallback(this);
+        mThread = new DrawingThread();
+
+        // Initialisation du pinceau
+        mPaint.setAntiAlias(true);
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(2);
+        mPaint.setColor(Color.WHITE);
+        mPaint.setStrokeCap(Paint.Cap.ROUND);
+
+
     }
 
     public PlayView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        mDetector = new GestureDetector(getContext(),this);
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mSurfaceHolder = getHolder();
+        mSurfaceHolder.addCallback(this);
+        mThread = new DrawingThread();
+
+        // Initialisation du pinceau
+        mPaint.setAntiAlias(true);
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStrokeWidth(2);
+        mPaint.setColor(Color.WHITE);
+        mPaint.setStrokeCap(Paint.Cap.ROUND);
     }
+
+    // ----------------------- METHODES LIEES A LA SURFACEVIEW -------------------------
+
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -51,44 +86,94 @@ public class PlayView extends View implements GestureDetector.OnGestureListener{
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-        mPaint.setTextAlign(Paint.Align.CENTER);
-        // Dessin des cellules
-        /*for(int y = 0; y < 3; y++){
-            for(int x = 0; x <3; x++){
-                paint.setColor(Color.WHITE);
-                canvas.drawRect(x*largeurCellule,y*largeurCellule,(x+1)*largeurCellule,(y+1)*largeurCellule,paint);
-            }
-        }*/
-        // Dessin des lignes de la grille
-
-        mPaint.setColor(Color.BLACK);
+    public void draw(Canvas canvas) {
+        super.draw(canvas);
+        mPaint.setColor(Color.WHITE);
         mPaint.setStrokeWidth(mTailleSeparateur);
         int i;
         for (i = 0; i <= 3; i++) {
             canvas.drawLine(i * (mLargeurCellule * 3), 0, i * (mLargeurCellule * 3), mLargeurCellule * 9, mPaint);
             canvas.drawLine(0, i * (mLargeurCellule * 3), mLargeurCellule * 9, i * (mLargeurCellule * 3), mPaint);
         }
-        if (ok) {
-            canvas.drawText("Numéro de la grille "+ Manager.getInstance().getmLaGrille().getNumGrille()+"\n X de la case 0,0"+Manager.getInstance().getmLaGrille().getCase(0,0).getX(),
-                    i * mLargeurCellule + mLargeurCellule / 2,
-                    i * mLargeurCellule + mLargeurCellule * 0.75f, mPaint);
+
+    }
+
+    @Override
+    public void surfaceCreated(SurfaceHolder holder) {
+        mThread.setKeepDrawing(true);
+        mThread.start();
+    }
+
+    @Override
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+        // A utiliser si on change l'orientation du téléphone
+    }
+
+    @Override
+    public void surfaceDestroyed(SurfaceHolder holder) {
+        mThread.keepDrawing = false;
+        boolean joined = false;
+        while (!joined) {
+            try {
+                mThread.join();
+                joined = true;
+            } catch (InterruptedException e) {}
+                // Gestion Exception
         }
-        else  {
-            canvas.drawText("C'EST PAS OK !!!!! ",
-                    i * mLargeurCellule + mLargeurCellule / 2,
-                    i * mLargeurCellule + mLargeurCellule * 0.75f, mPaint);
+    }
+
+    // -------------------------------- METHODES LIEES AU TACTIL -----------------------
+
+    private void touchStart(float x, float y) {
+        //mPath = new Path();
+        //Trace ligne = new Trace(Color.RED, 10, mPath);
+        // mLignes.add(ligne);
+
+        //mPath.reset();
+        //mPath.moveTo(x, y);
+
+
+        mX = x;
+        mY = y;
+    }
+
+    private void touchMove(float x, float y) {
+        float dx = Math.abs(x - mX);
+        float dy = Math.abs(y - mY);
+
+        if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
+            //mPath.quadTo(mX, mY, (x + mX) / 2, (y + mY) / 2);
+            //mPath.lineTo(x,y);
+            mX = x;
+            mY = y;
         }
+    }
+
+    private void touchUp() {
+        //mPath.lineTo(mX, mY);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(mDetector.onTouchEvent(event)){
-            return true;
+
+        float x = event.getX();
+        float y = event.getY();
+
+        switch(event.getAction()) {
+            case MotionEvent.ACTION_DOWN :
+                touchStart(x, y);
+                break;
+            case MotionEvent.ACTION_MOVE :
+                touchMove(x, y);
+                break;
+            case MotionEvent.ACTION_UP :
+                touchUp();
+                break;
         }
-        return super.onTouchEvent(event);
+
+        return mDetector.onTouchEvent(event);
     }
+
 
     @Override
     public boolean onDown(MotionEvent e) {
@@ -102,19 +187,13 @@ public class PlayView extends View implements GestureDetector.OnGestureListener{
 
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
-        if(ok){
-            ok = false;
-        }
-        else{
-            ok = true;
-        }
-        postInvalidate();
+
         return true;
     }
 
     @Override
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-        return true;
+        return false;
     }
 
     @Override
@@ -126,5 +205,46 @@ public class PlayView extends View implements GestureDetector.OnGestureListener{
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         return false;
     }
+
+    // ---------------------------------- CLASSE INTERNE : THREAD -----------------------
+
+    public class DrawingThread extends Thread {
+        private boolean keepDrawing = true;
+
+        @Override
+        public void run() {
+            while(keepDrawing){
+                Canvas canvas = null;
+                try {
+                    // On récupère le canvas pour dessiner dessus
+                    canvas = mSurfaceHolder.lockCanvas();
+                    // On s'assure qu'aucun autre thread n'accède au holder
+                    synchronized (mSurfaceHolder) {
+                        // Et on dessine
+                        draw(canvas);
+                    }
+                } finally {
+                    // Notre dessin fini, on relâche le Canvas pour que le dessin s'affiche
+                    if (canvas != null)
+                        mSurfaceHolder.unlockCanvasAndPost(canvas);
+                }
+
+                // Pour redessiner
+                try {
+                    Thread.sleep(20);
+                } catch (InterruptedException e) {}
+            }
+        }
+
+        public boolean isKeepDrawing() {
+            return keepDrawing;
+        }
+
+        public void setKeepDrawing(boolean keepDrawing) {
+            this.keepDrawing = keepDrawing;
+        }
+    }
+
+
 }
 
