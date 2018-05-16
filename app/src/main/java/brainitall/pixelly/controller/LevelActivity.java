@@ -58,7 +58,7 @@ public class LevelActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent playActivity = new Intent(LevelActivity.this, PlayActivity.class);
                 mLeFichier = new Fichier("n1.json");
-                mLeFichier.lireFichier(LevelActivity.this);
+                mLeFichier.lireFichier(getApplicationContext());
                 startActivity(playActivity);
 
                 // ----------------------------il faudra activer les boutons lorsqu'un niveau sera finit -------------------------

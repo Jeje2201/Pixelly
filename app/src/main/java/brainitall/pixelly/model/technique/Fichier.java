@@ -41,7 +41,7 @@ public class Fichier {
 
         try {
             JSONObject obj = new JSONObject(json);
-            JSONObject  tailleGrille = obj.getJSONObject("infoGrille");
+            JSONObject tailleGrille = obj.getJSONObject("infoGrille");
 
             for (int i = 0; i < tailleGrille.length(); i++) {
                 //JSONObject jo_inside = tailleGrille.getJSONObject(i);
