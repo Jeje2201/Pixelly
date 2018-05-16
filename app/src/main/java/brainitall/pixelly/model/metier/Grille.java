@@ -25,13 +25,20 @@ public class Grille {
      */
     private List<Chemin> mLesChemins;
 
+    /**
+     * Liste des différentes terminaisons de la grille
+     */
+    private List<Terminaison> mLesTerminaisons;
+
     public Grille(){
         mNumGrille = 0;
         mLargeurGrille = 1;
         mHauteurGrille = 1;
         initCases();
         initLesChemins();
+        initLesTerminaisons();
     }
+
 
     // Constructeur à appeler pour créer la grille après lecture des 3 premières lignes du fichier JSon
     public Grille(int numGrille, int largeurGrille, int hauteurGrille) {
@@ -40,6 +47,7 @@ public class Grille {
         mHauteurGrille = hauteurGrille;
         initCases();
         initLesChemins();
+        initLesTerminaisons();
     }
 
     // ----------------------------------------- Initialisations -------------------------------------
@@ -61,6 +69,13 @@ public class Grille {
      */
     private void initLesChemins() {
         mLesChemins = new Vector<>();
+    }
+
+    /**
+     * Permet d'initialiser la liste des terminaisons de la grille
+     */
+    private void initLesTerminaisons() {
+        mLesTerminaisons = new Vector<>();
     }
 
     // ---------------------------------------- Ajouts / Suppressions --------------------------------
@@ -108,7 +123,9 @@ public class Grille {
 
     // Methode à utiliser pour ajouter les terminaisons lues dans le fichier Json
     public void ajouterTerminaison(int tailleChemin, int x, int y, int r, int g, int b){
-        mLesCases[x][y] = new Terminaison(tailleChemin, x,y,r,g,b);
+        Terminaison t =  new Terminaison(tailleChemin, x,y,r,g,b);
+        mLesCases[x][y] = t;
+        mLesTerminaisons.add(t);
     }
 
     // ------------------------------------ Recherches -----------------------------------------------
