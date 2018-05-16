@@ -11,22 +11,30 @@ import java.util.ArrayList;
 
 import brainitall.pixelly.controller.Manager;
 
+/**
+ * Classe représentant un fichier
+ */
 public class Fichier {
 
+    /**
+     * Nom du fichier
+     */
     private String mNomFichier;
 
+    /**
+     * Constructeur
+     * @param nomFichier le nom du fichier donné en paramètre
+     */
     public Fichier(String nomFichier){
         mNomFichier = nomFichier;
 
     }
 
-    // methode a revoir !
     /**
-     * Permet de lire un fichier Json
+     * Permet de lire un fichier Json et stocke les valeurs dans la grille
      */
     public void lireFichier(Context context) {
 
-        System.out.println("LALA");
         String json = null;
         try {
             InputStream is = context.getAssets().open(mNomFichier);
@@ -39,16 +47,10 @@ public class Fichier {
             ex.printStackTrace();
         }
 
-
-
         try {
 
             JSONObject jsonRootObject = new JSONObject(json);
             JSONArray jsonArray = jsonRootObject.optJSONArray("infoGrille");
-
-            JSONObject obj = new JSONObject(json);
-            JSONObject tailleGrille = obj.getJSONObject("infoGrille");
-
 
             for(int i = 0; i < jsonArray.length(); i++){
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -56,9 +58,10 @@ public class Fichier {
                 int hauteur = Integer.parseInt(jsonObject.optString("hauteur").toString());
                 int largeur = Integer.parseInt(jsonObject.optString("largeur").toString());
 
-
+                // Association de la grille
                 Manager.getInstance().ajouterGrille(numGrille,largeur,hauteur);
             }
+
             JSONObject  terminaison = jsonRootObject.getJSONObject("terminaison");
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -70,7 +73,7 @@ public class Fichier {
                 int b = Integer.parseInt(jsonObject.optString("b").toString());
 
 
-                //Ajouter les valeurs dans la ArrayList
+                //Ajouter les valeurs dans la grille via le Manager
                 Manager.getInstance().ajouterTerminaison(tailleChemin,x,y,r,g,b);
             }
         } catch (JSONException e2) {
