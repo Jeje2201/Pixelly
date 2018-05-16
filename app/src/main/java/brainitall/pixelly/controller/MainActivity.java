@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
         }
         //Si la musique n'est pas lancer, alors la lancer
         if(!mp.isPlaying()) {
+            mp.setLooping(true);
             mp.start();
         }
 

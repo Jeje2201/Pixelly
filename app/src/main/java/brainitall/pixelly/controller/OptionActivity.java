@@ -18,8 +18,6 @@ public class OptionActivity extends AppCompatActivity {
     private Button mReset;
     private Button mAide;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +43,6 @@ public class OptionActivity extends AppCompatActivity {
                 if (isChecked && !MainActivity.getMp().isPlaying()) {
                     Toast.makeText(OptionActivity.this, "Musique play", Toast.LENGTH_SHORT).show();
                     MainActivity.getMp().start();
-
                 }
                 //Sinon si le toggle est sur false que la musique est en cours, alors la mettre sur pause
                 else {
