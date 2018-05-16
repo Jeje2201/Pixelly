@@ -20,7 +20,6 @@ public class Fichier {
 
     }
 
-    // methode a revoir !
     /**
      * Permet de lire un fichier Json
      */
@@ -35,33 +34,33 @@ public class Fichier {
             is.read(buffer);
             is.close();
             json = new String(buffer, "UTF-8");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
 
-
-
-        try {
 
             JSONObject jsonRootObject = new JSONObject(json);
-            JSONArray jsonArray = jsonRootObject.optJSONArray("infoGrille");
+            //Racine de l'objet infoGrille
+            JSONArray infoGrille = jsonRootObject.optJSONArray("infoGrille");
 
-            JSONObject obj = new JSONObject(json);
-            JSONObject tailleGrille = obj.getJSONObject("infoGrille");
+            //test qui fonctionne pas
+//            JSONObject infoGrille = (new JSONObject(json)).getJSONObject("infoGrille");
+//            int numGrille = infoGrille.getInt("numGrille");
+//            int hauteur = infoGrille.getInt("hauteur");
+//            int largeur = infoGrille.getInt("largeur");
 
-
-            for(int i = 0; i < jsonArray.length(); i++){
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
+            for(int i = 0; i < infoGrille.length(); i++){
+                JSONObject jsonObject = infoGrille.getJSONObject(i);
                 int numGrille = Integer.parseInt(jsonObject.optString("numGrille").toString());
                 int hauteur = Integer.parseInt(jsonObject.optString("hauteur").toString());
                 int largeur = Integer.parseInt(jsonObject.optString("largeur").toString());
 
-
                 Manager.getInstance().ajouterGrille(numGrille,largeur,hauteur);
             }
-            JSONObject  terminaison = jsonRootObject.getJSONObject("terminaison");
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+            //Racine de l'objet terminaison
+            //JSONObject  terminaison = jsonRootObject.getJSONObject("terminaison");
+            JSONArray terminaison = jsonRootObject.optJSONArray("terminaison");
+
+            for (int i = 0; i < terminaison.length(); i++) {
+                JSONObject jsonObject = terminaison.getJSONObject(i);
                 int tailleChemin = Integer.parseInt(jsonObject.optString("tailleChemin").toString());
                 int x = Integer.parseInt(jsonObject.optString("x").toString());
                 int y = Integer.parseInt(jsonObject.optString("y").toString());
@@ -69,13 +68,14 @@ public class Fichier {
                 int g = Integer.parseInt(jsonObject.optString("g").toString());
                 int b = Integer.parseInt(jsonObject.optString("b").toString());
 
-
-                //Ajouter les valeurs dans la ArrayList
+                //Ajouter les valeurs dans la methode ajouterTerminaison() de la classe Manager
                 Manager.getInstance().ajouterTerminaison(tailleChemin,x,y,r,g,b);
             }
-        } catch (JSONException e2) {
-            e2.printStackTrace();
-        }
 
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }
