@@ -51,7 +51,7 @@ public class Grille {
         mLesCases = new Case[mHauteurGrille][mLargeurGrille];
         for(int i = 0; i< mHauteurGrille;i++){
             for(int j = 0; j < mLargeurGrille ;j++){
-                mLesCases[i][j] = new CaseVide(i,j);
+                mLesCases[i][j] = new CaseSimple(i,j);
             }
         }
     }

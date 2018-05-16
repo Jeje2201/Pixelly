@@ -72,7 +72,7 @@ public abstract class Case {
 
 
     /**
-     * constructeur de la classe Case utilisé dans la classe CaseVide
+     * constructeur de la classe Case utilisé dans la classe CaseSimple
      * @param x
      * @param y
      */
