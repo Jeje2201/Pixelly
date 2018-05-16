@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.support.annotation.Nullable;
 import android.support.v4.view.GestureDetectorCompat;
 import android.util.AttributeSet;
@@ -14,8 +15,11 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 
+import brainitall.pixelly.R;
 import brainitall.pixelly.controller.Manager;
 import brainitall.pixelly.model.metier.Grille;
+
+import static android.graphics.Color.BLACK;
 
 public class PlayView extends SurfaceView implements SurfaceHolder.Callback, GestureDetector.OnGestureListener{
 
@@ -43,6 +47,8 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
         super(context);
         mDetector = new GestureDetector(getContext(),this);
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+
+
         mSurfaceHolder = getHolder();
         mSurfaceHolder.addCallback(this);
         mThread = new DrawingThread();
@@ -88,8 +94,10 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-        mPaint.setColor(Color.WHITE);
+        canvas.drawColor(0, PorterDuff.Mode.CLEAR);
+        mPaint.setColor(Color.BLACK);
         mPaint.setStrokeWidth(mTailleSeparateur);
+
         int i;
         for (i = 0; i <= 3; i++) {
             canvas.drawLine(i * (mLargeurCellule * 3), 0, i * (mLargeurCellule * 3), mLargeurCellule * 9, mPaint);

@@ -1,5 +1,6 @@
 package brainitall.pixelly.controller;
 
+import android.graphics.PixelFormat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
@@ -18,6 +19,8 @@ public class PlayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // Création du widget de la vue de la grille
         mVue = new PlayView(this);
+        mVue.setZOrderOnTop(true);
+        mVue.getHolder().setFormat(PixelFormat.TRANSLUCENT);
         // Définition de la grille comme contentView
         setContentView(mVue);
 
