@@ -143,6 +143,9 @@ public class Grille {
 
     // --------------------------------------- GETTER & SETTER ---------------------------------------
 
+    public Case getCase(int x, int y){
+        return mLesCases[x][y];
+    }
     public int getNumGrille() {
         return mNumGrille;
     }
