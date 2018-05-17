@@ -27,6 +27,8 @@ public class Chemin {
         terminaison.setDansChemin(true);
     }
 
+
+
     /**
      * méthode qui ajoute une case dans le chemin si
      * verifierTaille est vrai
@@ -113,5 +115,9 @@ public class Chemin {
                 return true;
         }
         return false;
+    }
+
+    public List<Case> getCasesChemin() {
+        return mCasesChemin;
     }
 }

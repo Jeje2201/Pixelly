@@ -81,14 +81,22 @@ public class Grille {
     // ---------------------------------------- Ajouts / Suppressions --------------------------------
 
 
-    /**
-     * Permet d'ajouter une case à un chemin
-     * @param x l'abcisse de la case
-     * @param y l'ordonnée de la case
-     */
-    public void ajouterCaseChemin(int x, int y){
-        if(donneIndiceChemin(x,y) == -1){
 
+    public void ajouterCaseChemin(int xStart, int yStart, int x, int y){
+        // Si la case de départ ne se trouve pas déjà dans un chemin
+        if(donneIndiceChemin(xStart,yStart) == -1){
+            // Si la case de départ est une terminaison
+            if(mLesCases[xStart][yStart].isTerminaison()){
+                // Création du chemin
+                Terminaison t = (Terminaison) mLesCases[xStart][yStart];
+                Chemin c = new Chemin(t);
+                // Ajout du chemin à la liste des chemins connus par la grille
+                mLesChemins.add(c);
+            }
+        }
+        else{
+            // On ajoute la nouvelle case, dans le chemin auquel la case de départ appartient
+            mLesChemins.get(donneIndiceChemin(xStart,yStart)).getCasesChemin().add(mLesCases[x][y]);
         }
 
     }
