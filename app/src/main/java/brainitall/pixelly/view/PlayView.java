@@ -4,22 +4,16 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
 import android.support.annotation.Nullable;
-import android.support.v4.view.GestureDetectorCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
 
-import brainitall.pixelly.R;
 import brainitall.pixelly.controller.Manager;
-import brainitall.pixelly.model.metier.Grille;
 
-import static android.graphics.Color.BLACK;
+import static android.graphics.Color.rgb;
 
 public class PlayView extends SurfaceView implements SurfaceHolder.Callback, GestureDetector.OnGestureListener{
 
@@ -33,6 +27,7 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
     private SurfaceHolder mSurfaceHolder;
     private GestureDetector mDetector;
     private Paint mPaint;
+    private int mLargeurGrilleCases;
     private float mLargeurGrille;
     private float mTailleSeparateur;
     private float mLargeurCellule;
@@ -55,7 +50,7 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
 
         // Initialisation du pinceau
         mPaint.setAntiAlias(true);
-        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStyle(Paint.Style.FILL);
         mPaint.setStrokeWidth(2);
         mPaint.setColor(Color.WHITE);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
@@ -73,7 +68,7 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
 
         // Initialisation du pinceau
         mPaint.setAntiAlias(true);
-        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStyle(Paint.Style.FILL);
         mPaint.setStrokeWidth(2);
         mPaint.setColor(Color.WHITE);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
@@ -86,22 +81,81 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         // Calculs des différentes tailles
+        mLargeurGrilleCases = Manager.getInstance().getLaGrille().getLargeurGrille();
         mTailleSeparateur = (w /9f) / 20f;
         mLargeurGrille = w;
-        mLargeurCellule = mLargeurGrille /9f;
+        mLargeurCellule = mLargeurGrille / mLargeurGrilleCases;
     }
 
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-        canvas.drawColor(0, PorterDuff.Mode.CLEAR);
-        mPaint.setColor(Color.BLACK);
-        mPaint.setStrokeWidth(mTailleSeparateur);
+        /* CREATION DE LA GRILLE ------------------------- */
+        float rayonCercle = mLargeurCellule / 2 - mLargeurCellule / 10;
 
-        int i;
-        for (i = 0; i <= 3; i++) {
-            canvas.drawLine(i * (mLargeurCellule * 3), 0, i * (mLargeurCellule * 3), mLargeurCellule * 9, mPaint);
-            canvas.drawLine(0, i * (mLargeurCellule * 3), mLargeurCellule * 9, i * (mLargeurCellule * 3), mPaint);
+        for (int y = 0; y < mLargeurGrilleCases; y++) {
+            for (int x = 0; x < mLargeurGrilleCases; x++) {
+
+
+                // Positionnement des terminaisons : chiffre + couleur
+
+                // Si la case courante est une terminaison
+                if (Manager.getInstance().getLaGrille().getCase(y, x).isTerminaison()) {
+
+                    // Recherche de l'indice dans la liste des terminaisons
+                    int indice = Manager.getInstance().getLaGrille().donneIndiceTerminaison(y,x);
+
+
+                    // Couleur de la case
+                    int r = Manager.getInstance().getLaGrille().getLesTerminaisons().get(indice).getR();
+                    int g = Manager.getInstance().getLaGrille().getLesTerminaisons().get(indice).getG();
+                    int b = Manager.getInstance().getLaGrille().getLesTerminaisons().get(indice).getB();
+                    mPaint.setColor(rgb(r, g, b));
+
+
+                    // CERCLE si taille de la terminaison != 1
+                    if( Manager.getInstance().getLaGrille().getLesTerminaisons().get(indice).getTailleChemin() != 1) {
+                        canvas.drawCircle((x + 1) * mLargeurCellule - mLargeurCellule/2,
+                                (y +1) * mLargeurCellule - mLargeurCellule/2,
+                                rayonCercle,
+                                mPaint);
+                    }else{
+                        canvas.drawRect(x * mLargeurCellule,
+                                y * mLargeurCellule,
+                                (x + 1) * mLargeurCellule,
+                                (y + 1) * mLargeurCellule,
+                                mPaint);
+                    }
+
+                    // Chiffre terminaison
+                    mPaint.setColor(Color.BLACK);
+                    mPaint.setTextAlign(Paint.Align.CENTER);
+                    mPaint.setTextSize(mLargeurCellule * 0.7f);
+                    canvas.drawText("" + Manager.getInstance().getLaGrille().getLesTerminaisons().get(indice).getTailleChemin(),
+                            x * mLargeurCellule + mLargeurCellule / 2,
+                            y * mLargeurCellule + mLargeurCellule * 0.75f, mPaint);
+                }
+
+
+            }
+        }
+
+        // Création des bordures
+        for(int i=0; i<= mLargeurGrilleCases; i++ )
+        {
+            // Bordures épaisses = extremités de la grilles
+            if(i==0 || i== mLargeurGrilleCases) {
+                mPaint.setColor(Color.BLACK);
+                mPaint.setStrokeWidth(mTailleSeparateur);
+            }
+            else{
+                mPaint.setColor( Color.GRAY );
+                mPaint.setStrokeWidth( mTailleSeparateur/2 );
+            }
+            // Bordures verticales
+            canvas.drawLine(i * mLargeurCellule, 0, i * mLargeurCellule, mLargeurCellule * mLargeurGrilleCases, mPaint);
+            // Bordures horizontales
+            canvas.drawLine(0, i * mLargeurCellule, mLargeurCellule * mLargeurGrilleCases, i * mLargeurCellule, mPaint);
         }
 
     }

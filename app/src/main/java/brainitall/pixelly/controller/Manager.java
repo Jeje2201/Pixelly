@@ -30,7 +30,7 @@ public class Manager {
         return instance;
     }
 
-    public Grille getmLaGrille() {
+    public Grille getLaGrille() {
         return mLaGrille;
     }
 }
