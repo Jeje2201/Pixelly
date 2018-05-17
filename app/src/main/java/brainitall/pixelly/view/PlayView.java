@@ -268,6 +268,10 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
         return false;
     }
 
+    public void interruptedThread(){
+        mThread.interrupt();
+    }
+
     // ---------------------------------- CLASSE INTERNE : THREAD -----------------------
 
     public class DrawingThread extends Thread {
@@ -282,21 +286,26 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
                     canvas = mSurfaceHolder.lockCanvas();
                     // On s'assure qu'aucun autre thread n'accède au holder
                     synchronized (mSurfaceHolder) {
-                        // Et on dessine
+                        // on dessine
                         draw(canvas);
                     }
-                } finally {
+                }
+                finally {
                     // Notre dessin fini, on relâche le Canvas pour que le dessin s'affiche
                     if (canvas != null)
                         mSurfaceHolder.unlockCanvasAndPost(canvas);
                 }
-
                 // Pour redessiner
                 try {
-                    Thread.sleep(20);
-                } catch (InterruptedException e) {}
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                }
             }
         }
+
+        // ---------------------------------------- GETTER & SETTER -----------------------------------------------
+
+
 
         public boolean isKeepDrawing() {
             return keepDrawing;
