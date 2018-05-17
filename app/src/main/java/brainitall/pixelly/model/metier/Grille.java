@@ -87,7 +87,7 @@ public class Grille {
      * @param y l'ordonnée de la case
      */
     public void ajouterCaseChemin(int x, int y){
-        if(rechercherChemin(x,y) == -1){
+        if(donneIndiceChemin(x,y) == -1){
 
         }
 
@@ -109,7 +109,7 @@ public class Grille {
      */
     public void supprimerChemin(int x, int y){
         // Recherche l'index du chemin dans la liste des chemins connus par la grille
-        int index = rechercherChemin(x,y);
+        int index = donneIndiceChemin(x,y);
         // Si le chemin existe :
         if(index != -1 ){
             // Si les coordonnées correspondent à une terminaison, alors on supprime tout le chemin
@@ -131,15 +131,31 @@ public class Grille {
     // ------------------------------------ Recherches -----------------------------------------------
 
     /**
-     * Permet de rechercher un chemin contenant une case en particulier aux coordonnées x et y
+     * Permet d'obtenir l'indice d'une chemin dans la liste des chemins à partir des coordonnées d'une case
      * @param x abcisse de la case
      * @param y ordonnée de la case
      * @ la position du chemin dans la liste des différents chemins
      */
-    public int rechercherChemin(int x, int y){
+    public int donneIndiceChemin(int x, int y){
         int index = -1;
         for(int i = 0; i < mLesChemins.size(); i++){
             if(mLesChemins.get(i).isCaseChemin(x,y)){
+                index = i;
+            }
+        }
+        return index;
+    }
+
+    /**
+     * Permet d'obtenir l'indice d'une terminaison à partir de ses coordonnées
+     * @param x abcisse de la case
+     * @param y ordonnée de la case
+     * @return l'indice de la terminaison dans la liste des terminaisons
+     */
+    public int donneIndiceTerminaison(int x, int y){
+        int index = -1;
+        for(int i =0; i < mLesTerminaisons.size(); i++){
+            if(mLesTerminaisons.get(i).getY() == y && mLesTerminaisons.get(i).getX() == x){
                 index = i;
             }
         }
@@ -193,5 +209,21 @@ public class Grille {
 
     public void setLesCases(Case[][] lesCases) {
         mLesCases = lesCases;
+    }
+
+    public List<Chemin> getLesChemins() {
+        return mLesChemins;
+    }
+
+    public void setLesChemins(List<Chemin> lesChemins) {
+        mLesChemins = lesChemins;
+    }
+
+    public List<Terminaison> getLesTerminaisons() {
+        return mLesTerminaisons;
+    }
+
+    public void setLesTerminaisons(List<Terminaison> lesTerminaisons) {
+        mLesTerminaisons = lesTerminaisons;
     }
 }
