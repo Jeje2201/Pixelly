@@ -25,4 +25,11 @@ public class PlayActivity extends AppCompatActivity {
         setContentView(mVue);
 
     }
+
+    @Override
+    public void onBackPressed() {
+        mVue.interruptedThread();
+        finish();
+        super.onBackPressed();
+    }
 }
