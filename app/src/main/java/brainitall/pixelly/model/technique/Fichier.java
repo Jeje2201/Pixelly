@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import brainitall.pixelly.controller.Manager;
+import brainitall.pixelly.model.metier.CaseSimple;
 
 /**
  * Classe représentant un fichier
@@ -29,7 +30,7 @@ public class Fichier {
     }
 
     /**
-     * Permet de lire un fichier Json et stocke les valeurs dans la grille
+     * Permet de lire un fichier Json contenant un niveau et stocke les valeurs dans la grille
      */
     public void lireFichier(Context context) {
 
@@ -46,23 +47,18 @@ public class Fichier {
             //Racine de l'objet infoGrille
             JSONArray infoGrille = jsonRootObject.optJSONArray("infoGrille");
 
-            //test qui fonctionne pas
-//            JSONObject infoGrille = (new JSONObject(json)).getJSONObject("infoGrille");
-//            int numGrille = infoGrille.getInt("numGrille");
-//            int hauteur = infoGrille.getInt("hauteur");
-//            int largeur = infoGrille.getInt("largeur");
 
             for(int i = 0; i < infoGrille.length(); i++){
                 JSONObject jsonObject = infoGrille.getJSONObject(i);
                 int numGrille = Integer.parseInt(jsonObject.optString("numGrille").toString());
                 int hauteur = Integer.parseInt(jsonObject.optString("hauteur").toString());
                 int largeur = Integer.parseInt(jsonObject.optString("largeur").toString());
-                // Association de la grille
+
+                //Ajouter les valeurs dans la grille via le Manager
                 Manager.getInstance().ajouterGrille(numGrille,largeur,hauteur);
             }
 
             //Racine de l'objet terminaison
-            //JSONObject  terminaison = jsonRootObject.getJSONObject("terminaison");
             JSONArray terminaison = jsonRootObject.optJSONArray("terminaison");
 
             for (int i = 0; i < terminaison.length(); i++) {
@@ -74,7 +70,6 @@ public class Fichier {
                 int g = Integer.parseInt(jsonObject.optString("g").toString());
                 int b = Integer.parseInt(jsonObject.optString("b").toString());
 
-                //Ajouter les valeurs dans la methode ajouterTerminaison() de la classe Manager
                 //Ajouter les valeurs dans la grille via le Manager
                 Manager.getInstance().ajouterTerminaison(tailleChemin,x,y,r,g,b);
             }
@@ -87,4 +82,52 @@ public class Fichier {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Permet de lire un fichier Json de sauvegarde et stocke les valeurs
+     */
+    /*
+    public void lireFichierSave(Context context) {
+
+        String json = null;
+        try {
+            InputStream is = context.getAssets().open(mNomFichier);
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            json = new String(buffer, "UTF-8");
+
+            JSONObject jsonRootObject = new JSONObject(json);
+            //Racine de l'objet chemins
+            JSONArray chemins = jsonRootObject.optJSONArray("chemins");
+
+            for (int i = 0; i < chemins.length(); i++) {
+                JSONObject jsonObject = chemins.getJSONObject(i);
+                int r = Integer.parseInt(jsonObject.optString("r").toString());
+                int g = Integer.parseInt(jsonObject.optString("g").toString());
+                int b = Integer.parseInt(jsonObject.optString("b").toString());
+
+                //Ajouter les valeurs dans le Chemin via le Manager
+
+                //Racine de l'objet cases
+                JSONArray cases = jsonRootObject.optJSONArray("cases");
+
+                for (int j = 0; j < cases.length(); j++) {
+                    JSONObject jsonObj = cases.getJSONObject(j);
+                    int x = Integer.parseInt(jsonObj.optString("x").toString());
+                    int y = Integer.parseInt(jsonObj.optString("y").toString());
+
+                    //Ajouter les valeurs dans le Chemin via le Manager
+
+                }
+            }
+        }catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }*/
 }
