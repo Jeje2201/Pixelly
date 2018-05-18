@@ -8,7 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import brainitall.pixelly.controller.Manager;
-import brainitall.pixelly.model.metier.CaseSimple;
+import brainitall.pixelly.model.metier.Chemin;
+import brainitall.pixelly.model.metier.Terminaison;
 
 /**
  * Classe représentant un fichier
@@ -111,6 +112,8 @@ public class Fichier {
 
                 //Ajouter les valeurs dans le Chemin via le Manager
 
+
+
                 //Racine de l'objet cases
                 JSONArray cases = jsonRootObject.optJSONArray("cases");
 
@@ -119,7 +122,8 @@ public class Fichier {
                     int x = Integer.parseInt(jsonObj.optString("x").toString());
                     int y = Integer.parseInt(jsonObj.optString("y").toString());
 
-                    //Ajouter les valeurs dans le Chemin via le Manager
+                    //Ajouter les valeurs dans le Chemin via le Manager ajouter chemin
+                    Terminaison t = new Terminaison(tailleChemin,x,y,r,g,b);
 
                 }
             }
