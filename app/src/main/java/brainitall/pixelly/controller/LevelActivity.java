@@ -71,6 +71,9 @@ public class LevelActivity extends AppCompatActivity {
                 Intent playActivity = new Intent(LevelActivity.this, PlayActivity.class);
                 mLeFichier = new Fichier("n1.json");
 
+                mLeFichierSave = new Fichier("DontTouchMe.json");
+
+
                 //mLeFichier.lireFichier(LevelActivity.this);
 
                 mLeFichier.lireFichier(getApplicationContext());
