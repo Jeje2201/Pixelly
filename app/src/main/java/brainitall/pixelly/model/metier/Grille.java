@@ -3,6 +3,10 @@ package brainitall.pixelly.model.metier;
 import java.util.List;
 import java.util.Vector;
 
+/**
+ * Classe représentant une Grille de jeu
+ * @author Mélodie Meissel
+ */
 public class Grille {
     /**
      * Numéro de la grille (niveau)
@@ -30,6 +34,9 @@ public class Grille {
      */
     private List<Terminaison> mLesTerminaisons;
 
+    /**
+     * Constructeur par défaut
+     */
     public Grille(){
         mNumGrille = 0;
         mLargeurGrille = 1;
@@ -81,10 +88,16 @@ public class Grille {
     // ---------------------------------------- Ajouts / Suppressions --------------------------------
 
 
-
+    /**
+     * Permet d'ajouter une case à un chemin
+     * @param xStart abcisse de la case départ
+     * @param yStart ordonnée de la case de départ
+     * @param x abcisse de la case d'arrivée
+     * @param y ordonnée de la case d'arrivée
+     */
     public void ajouterCaseChemin(int xStart, int yStart, int x, int y){
         // Si la case de départ ne se trouve pas déjà dans un chemin
-        if(donneIndiceChemin(xStart,yStart) == -1){
+        if(!isChemin(xStart,yStart)){
             // Si la case de départ est une terminaison
             if(mLesCases[xStart][yStart].isTerminaison()){
                 // Création du chemin
@@ -92,11 +105,17 @@ public class Grille {
                 Chemin c = new Chemin(t);
                 // Ajout du chemin à la liste des chemins connus par la grille
                 mLesChemins.add(c);
+                // Verifcation des coordonées de la case avant ajout + Ajout de la case au chemin
+                if(verifierCoordonnees(xStart,yStart,x,y)){
+                    mLesChemins.get(donneIndiceChemin(xStart,yStart)).getCasesChemin().add(mLesCases[x][y]);
+                }
             }
         }
         else{
-            // On ajoute la nouvelle case, dans le chemin auquel la case de départ appartient
-            mLesChemins.get(donneIndiceChemin(xStart,yStart)).getCasesChemin().add(mLesCases[x][y]);
+            // Verifcation des coordonées de la case avant ajout + Ajout de la case au chemin
+            if(verifierCoordonnees(xStart,yStart,x,y)){
+                mLesChemins.get(donneIndiceChemin(xStart,yStart)).getCasesChemin().add(mLesCases[x][y]);
+            }
         }
 
     }
@@ -189,57 +208,92 @@ public class Grille {
         return c.isTerminaison();
     }
 
+    /**
+     * Permet de savoir si la case aux coordonnées (x,y) est dans un chemin ou non
+     * @param x l'abcisse de la case
+     * @param y l'ordonnée de la case
+     * @return true si la case est dans un chemin, false sinon
+     */
+    public boolean isChemin(int x,int y){
+        return donneIndiceChemin(x,y) != -1;
+    }
 
+    /**
+     * Permet de vérifier si les coordonnées de case que l'on souhaite ajouter sont possibles ou non
+     * @param xStart abcisse de la case de départ
+     * @param yStart ordonnée de la case de départ
+     * @param x abcisse de la case d'arrivée
+     * @param y ordonnée de la case d'arrivée
+     * @return true si les coordonnées sont possibles, false sinon
+     */
+    public boolean verifierCoordonnees(int xStart, int yStart, int x, int y){
+        if(x == xStart+1 && y == yStart+1)
+            return false;
+        if(x == xStart+1 && y == yStart-1)
+            return false;
+        if(x == xStart-1 && y == yStart-1)
+            return false;
+        if(x == xStart-1 && y == yStart+1)
+            return false;
+        return true;
+    }
     // --------------------------------------- GETTER & SETTER ---------------------------------------
 
+    /**
+     * Permet d'obtenir une case dans le tableau de case
+     * @param x abcisse de la case que l'on souhaite obtenir
+     * @param y ordonnée de la case que l'on souhaite obtenir
+     * @return la case aux coordonnées (x,y)
+     */
     public Case getCase(int x, int y){
         return mLesCases[x][y];
     }
+
+    /**
+     * Permet d'obtenir le numéro de la grille
+     * @return le numéro de la grille
+     */
     public int getNumGrille() {
         return mNumGrille;
     }
 
-    public void setNumGrille(int numGrille) {
-        mNumGrille = numGrille;
-    }
-
+    /**
+     * Permet d'obtenir la largeur de la grille
+     * @return la largeur de la grille
+     */
     public int getLargeurGrille() {
         return mLargeurGrille;
     }
 
-    public void setLargeurGrille(int largeurGrille) {
-        mLargeurGrille = largeurGrille;
-    }
-
+    /**
+     * Permet d'obtenir la hauteur de la grille
+     * @return la hauteur de la grille
+     */
     public int getHauteurGrille() {
         return mHauteurGrille;
     }
 
-    public void setHauteurGrille(int hauteurGrille) {
-        mHauteurGrille = hauteurGrille;
-    }
-
+    /**
+     * Permet d'obtenir le tableau de cases composant la grille
+     * @return les cases
+     */
     public Case[][] getLesCases() {
         return mLesCases;
     }
 
-    public void setLesCases(Case[][] lesCases) {
-        mLesCases = lesCases;
-    }
-
+    /**
+     * Permet d'obtenir la liste des chemins de la grille
+     * @return la liste des chemins
+     */
     public List<Chemin> getLesChemins() {
         return mLesChemins;
     }
 
-    public void setLesChemins(List<Chemin> lesChemins) {
-        mLesChemins = lesChemins;
-    }
-
+    /**
+     * Permet d'obtenir la liste des terminaisons
+     * @return la liste des terminaisons
+     */
     public List<Terminaison> getLesTerminaisons() {
         return mLesTerminaisons;
-    }
-
-    public void setLesTerminaisons(List<Terminaison> lesTerminaisons) {
-        mLesTerminaisons = lesTerminaisons;
     }
 }

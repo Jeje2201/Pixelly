@@ -13,6 +13,7 @@ import brainitall.pixelly.model.metier.Terminaison;
 
 /**
  * Classe représentant un fichier
+ * @author Manon Brun, Jérémy Leriche
  */
 public class Fichier {
 

@@ -10,23 +10,41 @@ import android.widget.Button;
 
 import brainitall.pixelly.R;
 
+/**
+ * Classe représentant l'activité principale, lancée au début de l'application
+ * @author Jérémy Leriche
+ */
 public class MainActivity extends AppCompatActivity {
 
-    // Référencement des différents éléments de la vue
+    //---------------------------REFERENCEMENT DES DIFFERENTS OBJETS DE LA VUE ------------------------------
+    /**
+     * Bouton permettant de jouer
+     */
     private Button mJouer;
+    /**
+     * Bouton permettant d'avoir accès aux différentes options du jeu
+     */
     private Button mOption;
+    /**
+     * Bouton permettant de quitter l'application
+     */
     private Button mQuitter;
+    /**
+     * Bouton permettant d'avoir accès à l'aide du jeu
+     */
     private Button mAide;
 
-    public static MediaPlayer getMp() {
-        return mp;
-    }
-
+    /**
+     * Lecteur audio
+     */
     private static MediaPlayer mp;
 
 
 
     @Override
+    /**
+     * Permet d'initialiser l'activité
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -93,8 +111,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    /**
+     * Permet de gérer les activités lorsque l'on va en arrière
+     */
     public void onBackPressed() {
         finishAffinity();
+    }
+
+    /**
+     * Permet d'obtenir le lecteur audio
+     * @return le lecteur audio
+     */
+    public static MediaPlayer getMp() {
+        return mp;
     }
 
 

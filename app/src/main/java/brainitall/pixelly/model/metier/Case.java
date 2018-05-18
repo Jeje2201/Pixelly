@@ -1,5 +1,9 @@
 package brainitall.pixelly.model.metier;
 
+/**
+ * Classe abstraite représentant une case
+ * @author Loïc Ezrati
+ */
 public abstract class Case {
 
     /**
@@ -54,11 +58,11 @@ public abstract class Case {
 
     /**
      * constructeur de la classe Case utilisé dans la classe Terminaison
-     * @param r
-     * @param g
-     * @param b
-     * @param x
-     * @param y
+     * @param r le code du rouge
+     * @param g le code du vert
+     * @param b le code du bleu
+     * @param x abcisse de la case dans la grille
+     * @param y ordonnée de la case dans la grille
      */
     public Case(int x, int y, int r, int g, int b) {
         mR = r;
@@ -73,8 +77,8 @@ public abstract class Case {
 
     /**
      * constructeur de la classe Case utilisé dans la classe CaseSimple
-     * @param x
-     * @param y
+     * @param x abcisse de la case dans la grille
+     * @param y ordonnée de la case dans la grille
      */
     public Case(int x, int y) {
         mR = 0;
@@ -85,17 +89,18 @@ public abstract class Case {
         mDansChemin = false;
     }
 
+    // --------------------------------------- GETTER & SETTER -----------------------------------------
     /**
-     * getter mR
-     * @return mR
+     * Permet d'obtenir le code du rouge
+     * @return le code du rouge
      */
     public int getR() {
         return mR;
     }
 
     /**
-     * setter mR
-     * @param r
+     * pemet de modifier le code du rouge
+     * @param r le nouveau code du rouge
      */
     public void setR(int r) {
         mR = r;
@@ -103,32 +108,32 @@ public abstract class Case {
 
 
     /**
-     * getter mG
-     * @return mG
+     * Permet d'obtenir le code du vert
+     * @return le code du vert
      */
     public int getG() {
         return mG;
     }
 
     /**
-     * setter mG
-     * @param g
+     * Permet de modifier le code du vert
+     * @param g le nouveau code du vert
      */
     public void setG(int g) {
         mG = g;
     }
 
     /**
-     * getter mB
-     * @return mB
+     * Permet d'obtenir le code du bleu
+     * @return le code du bleu
      */
     public int getB() {
         return mB;
     }
 
     /**
-     * setter mB
-     * @param b
+     * Permet de modifier le code du bleu
+     * @param b le nouveau code du bleu
      */
     public void setB(int b) {
         mB = b;
@@ -143,14 +148,6 @@ public abstract class Case {
     }
 
     /**
-     * setter mX
-     * @param x
-     */
-    public void setX(int x) {
-        mX = x;
-    }
-
-    /**
      * getter mY
      * @return mY
      */
@@ -159,37 +156,33 @@ public abstract class Case {
     }
 
     /**
-     * setter mY
-     * @param y
-     */
-    public void setY(int y) {
-        mY = y;
-    }
-
-    /**
-     *
-     * @return mDansChemin
+     * Permet de savoir si une case est dans un chemin ou non
+     * @return true si la case est dans un chemin, false sinon
      */
     public boolean isDansChemin() {
         return mDansChemin;
     }
 
     /**
-     * setter dansChemin
-     * @param dansChemin
+     * Permet de modifier l'état de la case
+     * @param dansChemin le nouvel état (true est dans un chemin, false sinon)
      */
     public void setDansChemin(boolean dansChemin) {
         mDansChemin = dansChemin;
     }
 
     /**
-     *
-     * @return
+     * Permet de savoir si la case est une terminaison ou non
+     * @return true si c'est une terminaison, false sinon
      */
     public boolean isTerminaison() {
         return mTerminaison;
     }
 
+    /**
+     * Permet de modifier l'état de la case
+     * @param terminaison le nouvel état (true = est une terminaison, false sinon)
+     */
     public void setTerminaison(boolean terminaison) {
         mTerminaison = terminaison;
     }
