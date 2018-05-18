@@ -8,13 +8,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import brainitall.pixelly.controller.Manager;
+import brainitall.pixelly.model.metier.Case;
 import brainitall.pixelly.model.metier.Chemin;
 import brainitall.pixelly.model.metier.Terminaison;
-<<<<<<< HEAD
 import java.util.List;
-=======
-
->>>>>>> 790f73e80ef27bd951abd132e9046c594dd9b6ac
 /**
  * Classe représentant un fichier
  * @author Manon Brun, Jérémy Leriche
@@ -107,26 +104,27 @@ public class Fichier {
             JSONObject infoCase=new JSONObject();
 
             List<Chemin> lesChemins = Manager.getInstance().getLaGrille().getLesChemins();//pour chaque chemins
-            System.out.println("Dam son look at this: "+lesChemins);
+            for(int CompteurChemin=0;CompteurChemin<lesChemins.size();CompteurChemin++) {
 
-            //J'insere toutes les infos
-            infosChemins.put("TailleChemin", 3);
-            infosChemins.put("r", 255);
-            infosChemins.put("g", 255);
-            infosChemins.put("b", 255);
+                //J'insere toutes les infos
+                infosChemins.put("TailleChemin", lesChemins.get(0).getCouleurChemin());
+                infosChemins.put("r", 255);
+                infosChemins.put("g", 255);
+                infosChemins.put("b", 255);
 
-            //pour chaques cases
+                List<Case> lesCases = lesChemins.getCasesChemin();//pour chaques cases
+                for (int CompteurCase = 0; CompteurCase < lesCases.size(); CompteurCase++) {
 
-            infoCase.put("x", 3);
-            infoCase.put("y", 1);
+                    infoCase.put("x", lesCases.get(CompteurCase).getX());
+                    infoCase.put("y", lesCases.get(CompteurCase).getY());
 
-            listeCases.put(infoCase);
-            //fin chaques cases
+                    listeCases.put(infoCase);
+                }//fin chaques cases
 
-            infosChemins.put("Cases",listeCases);
+                infosChemins.put("Cases", listeCases);
 
-            listeChemins.put(infosChemins); //j'ajoute dans ma liste de chemin objet chemin avec toutes ses infos
-            listeChemins.put(infosChemins);
+                listeChemins.put(infosChemins); //j'ajoute dans ma liste de chemin objet chemin avec toutes ses infos
+            }
 
             jsonFinal.put("chemins",listeChemins); //J'ajoute a la fin l'objet "chemin" avec sa liste de chemins
 
@@ -216,11 +214,8 @@ public class Fichier {
                     int y = Integer.parseInt(jsonObj.optString("y").toString());
 
                     //Ajouter les valeurs dans le Chemin via le Manager ajouter chemin
-<<<<<<< HEAD
-+                    Terminaison t = new Terminaison(tailleChemin,x,y,r,g,b);
-=======
-                    Terminaison t = new Terminaison(tailleChemin,x,y,r,g,b);
->>>>>>> 790f73e80ef27bd951abd132e9046c594dd9b6ac
+                   Terminaison t = new Terminaison(tailleChemin,x,y,r,g,b);
+
 
                 }
             }
