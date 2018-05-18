@@ -1,6 +1,7 @@
 package brainitall.pixelly.controller;
 
 import brainitall.pixelly.model.metier.Grille;
+import brainitall.pixelly.view.PlayView;
 
 public class Manager {
     private static Manager instance = new Manager();

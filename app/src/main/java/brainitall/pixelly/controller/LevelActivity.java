@@ -53,6 +53,8 @@ public class LevelActivity extends AppCompatActivity {
         mNiveau1.setEnabled(false); // on désactive le bouton niveau 1
         mNiveau2.setEnabled(false); // on désactive le bouton niveau 2 qui sera debloqué lors d'un succés au niveau 1
 
+
+
         mNiveauTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,4 +82,6 @@ public class LevelActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }
