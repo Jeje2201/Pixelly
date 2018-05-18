@@ -23,12 +23,7 @@ public class LevelActivity extends AppCompatActivity {
      */
     private Fichier mLeFichier;
 
-<<<<<<< HEAD
     private Fichier mLeFichierSave;
-=======
-    //--------------- REFERENCEMENT DES DIFFERENTS OBJETS DE LA VUE -----------------
->>>>>>> 790f73e80ef27bd951abd132e9046c594dd9b6ac
-
     /**
      * bouton niveau test
      */
@@ -53,8 +48,7 @@ public class LevelActivity extends AppCompatActivity {
      * texte affiché sur la page de niveau
      */
     private TextView mListeNiveaux;
-
-
+    
     @Override
     /**
      * Permet d'initialiser l'activité
@@ -70,8 +64,6 @@ public class LevelActivity extends AppCompatActivity {
         mHelp = (Button) findViewById(R.id.activity_main_btn_aide);
         mNiveau1.setEnabled(false); // on désactive le bouton niveau 1
         mNiveau2.setEnabled(false); // on désactive le bouton niveau 2 qui sera debloqué lors d'un succés au niveau 1
-
-
 
         mNiveauTest.setOnClickListener(new View.OnClickListener() {
             @Override
