@@ -104,19 +104,19 @@ public class Fichier {
             JSONObject infoCase=new JSONObject();
 
             List<Chemin> lesChemins = Manager.getInstance().getLaGrille().getLesChemins();//pour chaque chemins
-            for(int CompteurChemin=0;CompteurChemin<lesChemins.size();CompteurChemin++) {
+            for(int compteurChemin=0;compteurChemin<lesChemins.size();compteurChemin++) {
 
                 //J'insere toutes les infos
-                infosChemins.put("TailleChemin", lesChemins.get(0).getCouleurChemin());
+                infosChemins.put("TailleChemin", lesChemins.get(compteurChemin).getCouleurChemin());
                 infosChemins.put("r", 255);
                 infosChemins.put("g", 255);
                 infosChemins.put("b", 255);
 
-                List<Case> lesCases = lesChemins.getCasesChemin();//pour chaques cases
-                for (int CompteurCase = 0; CompteurCase < lesCases.size(); CompteurCase++) {
+                List<Case> lesCases = lesChemins.get(compteurChemin).getCasesChemin();//pour chaques cases
+                for (int compteurCase = 0; compteurCase < lesCases.size(); compteurCase++) {
 
-                    infoCase.put("x", lesCases.get(CompteurCase).getX());
-                    infoCase.put("y", lesCases.get(CompteurCase).getY());
+                    infoCase.put("x", lesCases.get(compteurCase).getX());
+                    infoCase.put("y", lesCases.get(compteurCase).getY());
 
                     listeCases.put(infoCase);
                 }//fin chaques cases
