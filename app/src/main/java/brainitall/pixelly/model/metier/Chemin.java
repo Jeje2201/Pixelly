@@ -117,7 +117,23 @@ public class Chemin {
         return false;
     }
 
+    public int[] getCouleurChemin(){
+        int [] lesCouleurs = new int[3];
+        lesCouleurs[0] = mCasesChemin.get(0).getR();
+        lesCouleurs[1] = mCasesChemin.get(0).getG();
+        lesCouleurs[2] = mCasesChemin.get(0).getB();
+        return lesCouleurs;
+    }
+
     public List<Case> getCasesChemin() {
         return mCasesChemin;
+    }
+
+    public int getTailleMax() {
+        return mTailleMax;
+    }
+
+    public void setTailleMax(int tailleMax) {
+        mTailleMax = tailleMax;
     }
 }

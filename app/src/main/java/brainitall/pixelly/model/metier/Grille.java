@@ -136,6 +136,14 @@ public class Grille {
         mLesTerminaisons.add(t);
     }
 
+    /**
+     * Permet d'ajouter un chemin dans la grille
+     * @param c le chemin à ajouter
+     */
+    public void ajouterChemin(Chemin c){
+        mLesChemins.add(c);
+    }
+
     // ------------------------------------ Recherches -----------------------------------------------
 
     /**
