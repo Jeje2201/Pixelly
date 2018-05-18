@@ -12,11 +12,22 @@ import java.util.logging.Level;
 import brainitall.pixelly.R;
 import brainitall.pixelly.model.technique.Fichier;
 
+/**
+ * Classe représentant l'activité correspondant à la liste des niveaux
+ * @author Loïc Ezrati
+ */
 public class LevelActivity extends AppCompatActivity {
 
+    /**
+     * Le fichier permetttant de charger et sauvegarder le jeu
+     */
     private Fichier mLeFichier;
 
+<<<<<<< HEAD
     private Fichier mLeFichierSave;
+=======
+    //--------------- REFERENCEMENT DES DIFFERENTS OBJETS DE LA VUE -----------------
+>>>>>>> 790f73e80ef27bd951abd132e9046c594dd9b6ac
 
     /**
      * bouton niveau test
@@ -42,7 +53,12 @@ public class LevelActivity extends AppCompatActivity {
      * texte affiché sur la page de niveau
      */
     private TextView mListeNiveaux;
+
+
     @Override
+    /**
+     * Permet d'initialiser l'activité
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level);

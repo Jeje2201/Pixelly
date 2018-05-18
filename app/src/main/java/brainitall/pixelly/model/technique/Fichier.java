@@ -10,9 +10,14 @@ import java.io.UnsupportedEncodingException;
 import brainitall.pixelly.controller.Manager;
 import brainitall.pixelly.model.metier.Chemin;
 import brainitall.pixelly.model.metier.Terminaison;
+<<<<<<< HEAD
 import java.util.List;
+=======
+
+>>>>>>> 790f73e80ef27bd951abd132e9046c594dd9b6ac
 /**
  * Classe représentant un fichier
+ * @author Manon Brun, Jérémy Leriche
  */
 public class Fichier {
 
@@ -200,6 +205,8 @@ public class Fichier {
 
                 //Ajouter les valeurs dans le Chemin via le Manager
 
+
+
                 //Racine de l'objet cases
                 JSONArray cases = jsonRootObject.optJSONArray("cases");
 
@@ -209,7 +216,11 @@ public class Fichier {
                     int y = Integer.parseInt(jsonObj.optString("y").toString());
 
                     //Ajouter les valeurs dans le Chemin via le Manager ajouter chemin
+<<<<<<< HEAD
 +                    Terminaison t = new Terminaison(tailleChemin,x,y,r,g,b);
+=======
+                    Terminaison t = new Terminaison(tailleChemin,x,y,r,g,b);
+>>>>>>> 790f73e80ef27bd951abd132e9046c594dd9b6ac
 
                 }
             }

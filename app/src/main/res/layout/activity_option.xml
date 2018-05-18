@@ -5,14 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".controller.OptionActivity"
-    tools:ignore="ExtraText">
+    tools:ignore="ExtraText"
+    android:background="@color/bg_menu">
 
 
     <ToggleButton
         android:id="@+id/activity_option_btn_son"
         android:layout_width="142dp"
         android:layout_height="48dp"
-        android:background="#b5d2e6"
+        android:background="#E5E057"
         android:checked="true"
         android:text="ToggleButton"
         android:visibility="visible"
@@ -26,7 +27,7 @@
         android:id="@+id/activity_option_btn_reset"
         android:layout_width="143dp"
         android:layout_height="wrap_content"
-        android:background="#b5e6c2"
+        android:background="#7EE3F7"
         android:text="Reset"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -57,7 +58,7 @@
         android:text="\?"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="#cbb5e6" />
+        android:background="#6C4BA0" />
 
 
 </android.support.constraint.ConstraintLayout>

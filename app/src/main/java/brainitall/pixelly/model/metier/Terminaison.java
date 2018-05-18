@@ -1,5 +1,9 @@
 package brainitall.pixelly.model.metier;
 
+/**
+ * Classe représentant une Terminaison
+ * @author Loïc Ezrati
+ */
 public class Terminaison extends Case {
 
     /**
@@ -10,12 +14,12 @@ public class Terminaison extends Case {
 
     /**
      * constructeur de la classe Terminaison
-     * @param tailleChemin
-     * @param x
-     * @param y
-     * @param r
-     * @param g
-     * @param b
+     * @param tailleChemin la taille du chemin que porte la terminaison
+     * @param x l'abcisse de la terminaison
+     * @param y l'ordonnée de la terminaison
+     * @param r le code du rouge
+     * @param g le code du vert
+     * @param b le code du bleu
      */
     public Terminaison(int tailleChemin, int x, int y, int r, int g, int b) {
         super(x,y,r,g,b);
@@ -24,19 +28,11 @@ public class Terminaison extends Case {
     }
 
     /**
-     *  getter qui retourne la valeur de la taille du chemin
-     *  @return mTailleChemin
+     *  Permet d'obtenir la taille du chemin
+     *  @return mTailleChemin la taille du chemin
      */
     public int getTailleChemin() {
         return mTailleChemin;
-    }
-
-    /**
-     * setter qui permet de modifier la taille du chemin
-     * @param tailleChemin
-     */
-    public void setTailleChemin(int tailleChemin) {
-        mTailleChemin = tailleChemin;
     }
 
 }

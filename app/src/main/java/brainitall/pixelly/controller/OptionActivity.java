@@ -11,14 +11,30 @@ import android.view.View;
 
 import brainitall.pixelly.R;
 
+/**
+ * Classe représentant l'activité correspondant au menu des options
+ * @author Manon Brun
+ */
 public class OptionActivity extends AppCompatActivity {
 
-    // Référencement des différents éléments de la vue
+    //------------------------ REFERENCEMENT DES DIFFERENTS OBJETS DE LA VUE
+    /**
+     * Bouton permettant de gérer le son
+     */
     private ToggleButton mSon;
+    /**
+     * Bouton permettant de RESET les paramètres du jeu
+     */
     private Button mReset;
+    /**
+     * Bouton permettant d'avoir accès à l'aide du jeu
+     */
     private Button mAide;
 
     @Override
+    /**
+     * Permet d'initialiser l'activité
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_option);

@@ -4,6 +4,10 @@ import brainitall.pixelly.model.metier.Chemin;
 import brainitall.pixelly.model.metier.Grille;
 import brainitall.pixelly.view.PlayView;
 
+/**
+ * Classe représentant le Manager du jeu
+ * @author Mélodie Meissel
+ */
 public class Manager {
     /**
      * Singleton
@@ -44,9 +48,9 @@ public class Manager {
      * @param tailleChemin taille du chemin portée par la terminaison
      * @param x l'abcisse de la terminaison
      * @param y l'ordonnée de la terminaison
-     * @param r
-     * @param g
-     * @param b
+     * @param r le code du rouge
+     * @param g le code du vert
+     * @param b le code du bleu
      */
     public void ajouterTerminaison(int tailleChemin, int x, int y, int r, int g, int b){
         if(mLaGrille != null){
@@ -65,10 +69,18 @@ public class Manager {
     }
     // ----------------------------- GETTER & SETTER --------------------------------------
 
+    /**
+     * Permet d'obtenir le Singleton
+     * @return le singleton
+     */
     public static Manager getInstance() {
         return instance;
     }
 
+    /**
+     * Permet d'obtenir la grille
+     * @return la grille
+     */
     public Grille getLaGrille() {
         return mLaGrille;
     }

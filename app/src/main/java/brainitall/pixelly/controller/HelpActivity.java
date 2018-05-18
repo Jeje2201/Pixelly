@@ -12,6 +12,10 @@ import android.widget.TextView;
 
 import brainitall.pixelly.R;
 
+/**
+ * Classe représentant l'activité correspondant à l'Aide du jeu
+ * @author Loïc Ezrati
+ */
 public class HelpActivity extends AppCompatActivity {
 
     /**
@@ -50,13 +54,10 @@ public class HelpActivity extends AppCompatActivity {
      */
     private TextView mTexteAide3;
 
-
-
-
     @Override
-
-
-
+    /**
+     * Permet d'intialiser l'activité
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);

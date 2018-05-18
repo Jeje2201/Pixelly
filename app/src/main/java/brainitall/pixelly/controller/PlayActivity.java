@@ -10,11 +10,21 @@ import org.w3c.dom.Text;
 import brainitall.pixelly.R;
 import brainitall.pixelly.view.PlayView;
 
+/**
+ * Classe représentant l'activité permettant de gérer le jeu
+ * @author Mélodie Meissel
+ */
 public class PlayActivity extends AppCompatActivity {
 
+    /**
+     * La vue personnalisée
+     */
     private PlayView mVue;
 
     @Override
+    /**
+     * Permet d'intialiser l'activité
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Création du widget de la vue de la grille
@@ -27,6 +37,9 @@ public class PlayActivity extends AppCompatActivity {
     }
 
     @Override
+    /**
+     * Permet d'effectuer des actions spécifiques lorsque l'on retourne en arrière
+     */
     public void onBackPressed() {
         mVue.interruptedThread();
         finish();

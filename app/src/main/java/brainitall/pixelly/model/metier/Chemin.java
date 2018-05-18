@@ -4,6 +4,10 @@ package brainitall.pixelly.model.metier;
 import java.util.List;
 import java.util.Vector;
 
+/**
+ * Classe représentant un Chemin
+ * @author Loïc Ezrati, Mélodie Meissel
+ */
 public class Chemin {
 
     /**
@@ -17,8 +21,9 @@ public class Chemin {
     private List<Case> mCasesChemin;
 
     /**
-     * contructeur de la classe Chemin
+     * Contructeur de la classe Chemin
      * @param terminaison
+     * @author Loïc Ezrati
      */
     public Chemin(Terminaison terminaison){
         mTailleMax = terminaison.getTailleChemin();
@@ -30,9 +35,9 @@ public class Chemin {
 
 
     /**
-     * méthode qui ajoute une case dans le chemin si
-     * verifierTaille est vrai
-     * @param c
+     * Permet d'ajouter une case dans la liste des cases d'un chemin
+     * @param c la case à ajouter
+     * @author Loïc Ezrati
      */
     public void ajouterCase(Case c){
         if(verifierTaille()){
@@ -42,7 +47,8 @@ public class Chemin {
     }
 
     /**
-     * méthode qui supprime la dernière case du chemin
+     * Permet de supprimer la dernière case du chemin
+     * @author Loïc Ezrati
      */
     public void supprimerCase(){
         if(mCasesChemin.size()>0){
@@ -53,7 +59,8 @@ public class Chemin {
     }
 
     /**
-     * méthode qui supprime un chemin de case tout entier
+     * Méthode qui supprime un chemin de case tout entier
+     * @author Loïc Ezrati
      */
     public void supprimerTout(){
         if(mCasesChemin.size()>0){
@@ -67,7 +74,8 @@ public class Chemin {
     /**
      * booléen qui retourne vrai si le chemin de case est plus
      * petit que la taille maximale possible du chemin
-     * @return
+     * @return true si la liste des cases chemin est inférieure à la taille max du chemin
+     * @author Loïc Ezrati
      */
     public boolean verifierTaille(){
         return mTailleMax > mCasesChemin.size();
@@ -117,6 +125,13 @@ public class Chemin {
         return false;
     }
 
+    // ---------------------------------------------- GETTER & SETTER ----------------------------------------
+
+    /**
+     * Permet d'obtenir la couleur du chemin
+     * @return un tableau d'entier représentant la couleur sous forme de rgb
+     * @author Mélodie Meissel
+     */
     public int[] getCouleurChemin(){
         int [] lesCouleurs = new int[3];
         lesCouleurs[0] = mCasesChemin.get(0).getR();
@@ -125,15 +140,23 @@ public class Chemin {
         return lesCouleurs;
     }
 
+    /**
+     * Permet d'obtenir la liste des cases contenues dans le chemin
+     * @return la liste des cases contenues dans le chemin
+     * @author Loïc Ezrati
+     */
     public List<Case> getCasesChemin() {
         return mCasesChemin;
     }
 
+    /**
+     * Permet d'obtenir la taille maximale du chemin
+     * @return la taille maximale du chemin
+     * @author Loïc Ezrati
+     */
     public int getTailleMax() {
         return mTailleMax;
     }
 
-    public void setTailleMax(int tailleMax) {
-        mTailleMax = tailleMax;
-    }
+
 }
