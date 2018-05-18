@@ -16,6 +16,8 @@ public class LevelActivity extends AppCompatActivity {
 
     private Fichier mLeFichier;
 
+    private Fichier mLeFichierSave;
+
     /**
      * bouton niveau test
      */
@@ -64,6 +66,7 @@ public class LevelActivity extends AppCompatActivity {
                 //mLeFichier.lireFichier(LevelActivity.this);
 
                 mLeFichier.lireFichier(getApplicationContext());
+                mLeFichierSave.SaveFile();
                 startActivity(playActivity);
 
                 // ----------------------------il faudra activer les boutons lorsqu'un niveau sera finit -------------------------

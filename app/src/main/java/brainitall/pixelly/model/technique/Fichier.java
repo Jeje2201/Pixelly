@@ -8,8 +8,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import brainitall.pixelly.controller.Manager;
-import brainitall.pixelly.model.metier.CaseSimple;
-
+import brainitall.pixelly.model.metier.Chemin;
+import brainitall.pixelly.model.metier.Terminaison;
+import java.util.List;
 /**
  * Classe représentant un fichier
  */
@@ -26,8 +27,8 @@ public class Fichier {
      */
     public Fichier(String nomFichier){
         mNomFichier = nomFichier;
-
     }
+
 
     /**
      * Permet de lire un fichier Json contenant un niveau et stocke les valeurs dans la grille
@@ -83,6 +84,94 @@ public class Fichier {
         }
     }
 
+    /*
+    Permet de creer une sauvegarde
+     */
+    public void SaveFile(){
+
+        JSONObject jsonFinal = new JSONObject();
+
+        try {
+
+            jsonFinal.put("NomNiveau", Manager.getInstance().getLaGrille().getNumGrille());
+
+            JSONObject infosChemins=new JSONObject(); //Je créé un objet dans lequel j'insererais toutes les infos
+            JSONArray listeChemins = new JSONArray(); //Je créé une liste dans laquel je rentre tous mes objets a chaque fois
+
+            JSONArray listeCases = new JSONArray();
+            JSONObject infoCase=new JSONObject();
+
+            List<Chemin> lesChemins = Manager.getInstance().getLaGrille().getLesChemins();//pour chaque chemins
+            System.out.println("Dam son look at this: "+lesChemins);
+
+            //J'insere toutes les infos
+            infosChemins.put("TailleChemin", 3);
+            infosChemins.put("r", 255);
+            infosChemins.put("g", 255);
+            infosChemins.put("b", 255);
+
+            //pour chaques cases
+
+            infoCase.put("x", 3);
+            infoCase.put("y", 1);
+
+            listeCases.put(infoCase);
+            //fin chaques cases
+
+            infosChemins.put("Cases",listeCases);
+
+            listeChemins.put(infosChemins); //j'ajoute dans ma liste de chemin objet chemin avec toutes ses infos
+            listeChemins.put(infosChemins);
+
+            jsonFinal.put("chemins",listeChemins); //J'ajoute a la fin l'objet "chemin" avec sa liste de chemins
+
+
+            /*
+            Creation d'un format type json qui fonctionne comme il faut
+
+            int numgrille = Manager.getInstance().getLaGrille().getNumGrille();
+
+            jsonFinal.put("NomNiveau", numgrille);
+
+            JSONObject infosChemins=new JSONObject(); //Je créé un objet dans lequel j'insererais toutes les infos
+            JSONArray listeChemins = new JSONArray(); //Je créé une liste dans laquel je rentre tous mes objets a chaque fois
+
+            JSONArray listeCases = new JSONArray();
+            JSONObject infoCase=new JSONObject();
+
+            //pour chaque chemins
+
+            //J'insere toutes les infos
+            infosChemins.put("TailleChemin", 3);
+            infosChemins.put("r", 255);
+            infosChemins.put("g", 255);
+            infosChemins.put("b", 255);
+
+            //pour chaques cases
+
+            infoCase.put("x", 3);
+            infoCase.put("y", 1);
+
+            listeCases.put(infoCase);
+            listeCases.put(infoCase);
+
+            //fin chaques cases
+
+            infosChemins.put("Cases",listeCases);
+
+            listeChemins.put(infosChemins); //j'ajoute dans ma liste de chemin objet chemin avec toutes ses infos
+            listeChemins.put(infosChemins);
+
+            jsonFinal.put("chemins",listeChemins); //J'ajoute a la fin l'objet "chemin" avec sa liste de chemins
+
+             */
+        }
+        catch(JSONException e) {
+            e.printStackTrace();
+        }
+        System.out.println(jsonFinal);
+    }
+
     /**
      * Permet de lire un fichier Json de sauvegarde et stocke les valeurs
      */
@@ -119,7 +208,8 @@ public class Fichier {
                     int x = Integer.parseInt(jsonObj.optString("x").toString());
                     int y = Integer.parseInt(jsonObj.optString("y").toString());
 
-                    //Ajouter les valeurs dans le Chemin via le Manager
+                    //Ajouter les valeurs dans le Chemin via le Manager ajouter chemin
++                    Terminaison t = new Terminaison(tailleChemin,x,y,r,g,b);
 
                 }
             }
