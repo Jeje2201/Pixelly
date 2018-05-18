@@ -104,6 +104,7 @@ public class Fichier {
 
             for (int i = 0; i < chemins.length(); i++) {
                 JSONObject jsonObject = chemins.getJSONObject(i);
+                int tailleChemin = Integer.parseInt(jsonObject.optString("tailleChemin").toString());
                 int r = Integer.parseInt(jsonObject.optString("r").toString());
                 int g = Integer.parseInt(jsonObject.optString("g").toString());
                 int b = Integer.parseInt(jsonObject.optString("b").toString());
