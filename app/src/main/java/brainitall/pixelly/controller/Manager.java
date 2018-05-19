@@ -96,8 +96,8 @@ public class Manager {
         if(mLaGrille != null){
             for(Chemin c : mLaGrille.getLesChemins()){
                 c.supprimerTout();
-                mLaGrille.getLesChemins().remove(c);
             }
+            mLaGrille.getLesChemins().removeAll(mLaGrille.getLesChemins());
         }
     }
     // ----------------------------- GETTER & SETTER --------------------------------------
