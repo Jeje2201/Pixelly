@@ -69,7 +69,7 @@ public class LevelActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent playActivity = new Intent(LevelActivity.this, PlayActivity.class);
-                mLeFichier = new Fichier("n1.json");
+                mLeFichier = new Fichier("n2.json");
 
                 mLeFichierSave = new Fichier("DontTouchMe.json");
 
