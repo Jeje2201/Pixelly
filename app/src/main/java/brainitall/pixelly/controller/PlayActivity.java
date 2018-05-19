@@ -56,6 +56,13 @@ public class PlayActivity extends AppCompatActivity {
                 startActivity(helpActivity);
             }
         });
+
+        mReinit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Manager.getInstance().reinitialiserGrille();
+            }
+        });
     }
 
     @Override

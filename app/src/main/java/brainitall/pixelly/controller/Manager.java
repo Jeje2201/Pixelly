@@ -91,6 +91,15 @@ public class Manager {
             mLaGrille.supprimerChemin(x, y);
         }
     }
+
+    public void reinitialiserGrille(){
+        if(mLaGrille != null){
+            for(Chemin c : mLaGrille.getLesChemins()){
+                c.supprimerTout();
+                mLaGrille.getLesChemins().remove(c);
+            }
+        }
+    }
     // ----------------------------- GETTER & SETTER --------------------------------------
 
     /**
