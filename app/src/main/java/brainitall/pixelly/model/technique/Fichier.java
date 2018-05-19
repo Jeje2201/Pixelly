@@ -86,8 +86,8 @@ public class Fichier {
         }
     }
 
-    /*
-    Permet de creer une sauvegarde
+    /**
+     * Permet de creer une sauvegarde contenant des chemins
      */
     public void SaveFile(){
 
