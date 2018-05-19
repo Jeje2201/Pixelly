@@ -238,14 +238,6 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
             canvas.drawLine(0, i * mLargeurCellule, mLargeurCellule * mLargeurGrilleCases, i * mLargeurCellule, mPaint);
         }
 
-
-
-
-
-
-
-
-
     }
 
     @Override
@@ -319,6 +311,10 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
             }
             System.out.println();
         }
+
+
+
+
     }
 
     @Override

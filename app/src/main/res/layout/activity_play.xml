@@ -9,15 +9,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="#c6e2ff">
+        android:background="#c6e2ff"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/activity_play_nom_niveau"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textStyle="bold"
-            android:textSize="30sp"/>
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/activity_play_aide"
@@ -25,10 +25,10 @@
             android:layout_height="44dp"
             android:layout_marginBottom="16dp"
             android:layout_marginStart="16dp"
+            android:background="#181c36"
             android:text="\?"
             android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:background="#181c36" />
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/activity_play_rez"
@@ -36,10 +36,22 @@
             android:layout_height="44dp"
             android:layout_marginBottom="16dp"
             android:layout_marginStart="16dp"
+            android:background="#181c36"
             android:text="REZ"
             android:textColor="#FFFFFF"
-            android:textStyle="bold"
-            android:background="#181c36"/>
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/activity_play_save"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="16dp"
+            android:background="#181c36"
+            android:text="Save"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold" />
+
     </LinearLayout>
 
 

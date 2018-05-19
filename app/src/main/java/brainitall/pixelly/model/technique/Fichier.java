@@ -8,10 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import brainitall.pixelly.controller.Manager;
-import brainitall.pixelly.model.metier.Case;
-import brainitall.pixelly.model.metier.Chemin;
-import brainitall.pixelly.model.metier.Terminaison;
-import java.util.List;
 /**
  * Classe représentant un fichier
  * @author Manon Brun, Jérémy Leriche
@@ -86,63 +82,6 @@ public class Fichier {
         }
     }
 
-    /**
-     * Permet de creer une sauvegarde contenant des chemins
-     */
-    public void SaveFile(){
-
-        JSONObject jsonFinal = new JSONObject();
-
-        try {
-
-            jsonFinal.put("NomNiveau", Manager.getInstance().getLaGrille().getNumGrille());
-
-            JSONObject infosChemins=new JSONObject(); //Je créé un objet dans lequel j'insererais toutes les infos
-            JSONArray listeChemins = new JSONArray(); //Je créé une liste dans laquel je rentre tous mes objets a chaque fois
-
-            JSONArray listeCases = new JSONArray();
-            JSONObject infoCase=new JSONObject();
-
-            List<Chemin> lesChemins = Manager.getInstance().getLaGrille().getLesChemins();//pour chaque chemins
-
-            System.out.println("test1: "+lesChemins);
-            System.out.println("test2: "+lesChemins.size());
-
-            for(int compteurChemin=0;compteurChemin<lesChemins.size();compteurChemin++) {
-
-                //J'insere toutes les infos
-                infosChemins.put("TailleChemin", lesChemins.get(compteurChemin).getCouleurChemin());
-                infosChemins.put("r", 255);
-                infosChemins.put("g", 255);
-                infosChemins.put("b", 255);
-
-                List<Case> lesCases = lesChemins.get(compteurChemin).getCasesChemin();//pour chaques cases
-                System.out.println("test3: "+lesCases);
-                System.out.println("test4: "+lesCases.size());
-
-                for (int compteurCase = 0; compteurCase < lesCases.size(); compteurCase++) {
-
-                    infoCase.put("x", lesCases.get(compteurCase).getX());
-                    infoCase.put("y", lesCases.get(compteurCase).getY());
-
-                    listeCases.put(infoCase);
-
-                } //fin chaques cases
-
-                infosChemins.put("Cases", listeCases);
-
-                listeChemins.put(infosChemins); //j'ajoute dans ma liste de chemin objet chemin avec toutes ses infos
-            }
-
-            jsonFinal.put("chemins",listeChemins); //J'ajoute a la fin l'objet "chemin" avec sa liste de chemins
-
-            System.out.println(jsonFinal);
-        }
-        catch(JSONException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     /**
      * Permet de lire un fichier Json de sauvegarde et stocke les valeurs

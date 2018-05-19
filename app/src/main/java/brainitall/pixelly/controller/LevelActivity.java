@@ -23,10 +23,6 @@ public class LevelActivity extends AppCompatActivity {
      */
     private Fichier mLeFichier;
 
-    private Fichier mLeFichierSave;
-    /**
-     * bouton niveau test
-     */
     private Button mNiveauTest;
 
     /**
@@ -71,13 +67,9 @@ public class LevelActivity extends AppCompatActivity {
                 Intent playActivity = new Intent(LevelActivity.this, PlayActivity.class);
                 mLeFichier = new Fichier("n2.json");
 
-                mLeFichierSave = new Fichier("DontTouchMe.json");
-
-
                 //mLeFichier.lireFichier(LevelActivity.this);
 
                 mLeFichier.lireFichier(getApplicationContext());
-                mLeFichierSave.SaveFile();
                 startActivity(playActivity);
 
                 // ----------------------------il faudra activer les boutons lorsqu'un niveau sera finit -------------------------
