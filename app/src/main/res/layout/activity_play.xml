@@ -1,13 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".controller.PlayActivity">
 
-    <TextView
-        android:id="@+id/test"
-        android:text="Jeu !"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="#c6e2ff">
+
+        <TextView
+            android:id="@+id/activity_play_nom_niveau"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textStyle="bold"
+            android:textSize="30sp"/>
+
+        <Button
+            android:id="@+id/activity_play_aide"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="16dp"
+            android:text="\?"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:background="#181c36" />
+
+        <Button
+            android:id="@+id/activity_play_rez"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="16dp"
+            android:text="REZ"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:background="#181c36"/>
+    </LinearLayout>
+
+
+
+
+
+    <brainitall.pixelly.view.PlayView
+        android:id="@+id/activity_play_grille"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+
+</LinearLayout >

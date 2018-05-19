@@ -54,7 +54,6 @@ public class Chemin {
         if(mCasesChemin.size()>0){
             mCasesChemin.get(mCasesChemin.size()-1).setDansChemin(false);
             mCasesChemin.remove(mCasesChemin.size()-1);
-
         }
     }
 
@@ -149,7 +148,8 @@ public class Chemin {
      * @param x
      * @param y
      */
-    public void isExistant(int xStart, int yStart, int x, int y){
+    public boolean isTermine(){
+        return isComplet() && mCasesChemin.get(mCasesChemin.size()-1).isTerminaison();
 
     }
 

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PixelFormat;
+import android.graphics.PorterDuff;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
@@ -15,15 +17,14 @@ import brainitall.pixelly.controller.Manager;
 
 import static android.graphics.Color.rgb;
 
+
 public class PlayView extends SurfaceView implements SurfaceHolder.Callback, GestureDetector.OnGestureListener{
 
     // Elements Techniques
     private DrawingThread mThread;
 
 
-
     // Elements graphiques
-    private static final float TOUCH_TOLERANCE = 4;
     private SurfaceHolder mSurfaceHolder;
     private GestureDetector mDetector;
     private Paint mPaint;
@@ -32,18 +33,15 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
     private float mTailleSeparateur;
     private float mLargeurCellule;
 
-    // Elements Positionnement
-    private float mX;
-    private float mY;
-
+    // Elements évènements CASES
+    int mXInter, mYInter;       // Coord de la case intermédiaire
+    int mNbChangementsCases;
 
 
     public PlayView(Context context) {
         super(context);
         mDetector = new GestureDetector(getContext(),this);
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-
-
         mSurfaceHolder = getHolder();
         mSurfaceHolder.addCallback(this);
         mThread = new DrawingThread();
@@ -60,6 +58,8 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
 
     public PlayView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        setZOrderOnTop(true);
+        getHolder().setFormat(PixelFormat.TRANSLUCENT);
         mDetector = new GestureDetector(getContext(),this);
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mSurfaceHolder = getHolder();
@@ -72,6 +72,7 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
         mPaint.setStrokeWidth(2);
         mPaint.setColor(Color.WHITE);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
+
     }
 
     // ----------------------- METHODES LIEES A LA SURFACEVIEW -------------------------
@@ -90,14 +91,90 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
-        /* CREATION DE LA GRILLE ------------------------- */
+
+        // Nettoie le canvas
+        canvas.drawColor(0, PorterDuff.Mode.CLEAR);
+
+
+        /* TRACE DES CHEMINS ==================================================================== */
+        // Tracer à partir des coord du modele
+
+        //Pour chaque chemin
+        if(!Manager.getInstance().getLaGrille().getLesChemins().isEmpty())
+        {
+            for (int i = 0; i < Manager.getInstance().getLaGrille().getLesChemins().size(); i++) {
+
+                //Pour chaque case
+                for (int j = 0; j < Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().size() - 1; j++) {
+
+                    //Case début trait
+                    int x1 = Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getX();
+                    int y1 = Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getY();
+                    //Case fin trait
+                    int x2 = Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j + 1).getX();
+                    int y2 = Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j + 1).getY();
+
+
+                    //Tracé du trait du centre de la case 1 vers celui de la case 2
+                    float cX1 = (y1 + 1) * mLargeurCellule - mLargeurCellule / 2;
+                    float cY1 = (x1 + 1) * mLargeurCellule - mLargeurCellule / 2;
+                    float cX2 = (y2 + 1) * mLargeurCellule - mLargeurCellule / 2;
+                    float cY2 = (x2 + 1) * mLargeurCellule - mLargeurCellule / 2;
+
+
+                    // Dessin du trait
+                    if (j == 0) {
+                        int r = Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getR();
+                        int g = Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getG();
+                        int b = Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getB();
+                        mPaint.setColor(rgb(r, g, b));
+                    }
+
+                    mPaint.setStrokeWidth(50f);
+                    canvas.drawLine(cX1, cY1, cX2, cY2, mPaint);
+                }
+
+
+                // Dessin d'un chemin complet
+                if(Manager.getInstance().getLaGrille().getLesChemins().get(i).isComplet()){
+
+                    for(int j=0; j<Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().size(); j++)
+                    {
+                        if (j == 0) {
+                            int r = Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getR();
+                            int g = Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getG();
+                            int b = Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getB();
+                            mPaint.setColor(rgb(r, g, b));
+                        }
+
+                        //Coordonnes case
+                        int xCase = Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getX();
+                        int yCase = Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getY();
+
+                        //Dessin du rectangle
+                        canvas.drawRect(yCase * mLargeurCellule,
+                                xCase * mLargeurCellule,
+                                (yCase + 1) * mLargeurCellule,
+                                (xCase + 1) * mLargeurCellule,
+                                mPaint);
+                    }
+                }
+            }
+        }
+
+
+
+
+
+
+        /* CREATION DE LA GRILLE (initiale) ===================================================== */
         float rayonCercle = mLargeurCellule / 2 - mLargeurCellule / 10;
 
         for (int y = 0; y < mLargeurGrilleCases; y++) {
             for (int x = 0; x < mLargeurGrilleCases; x++) {
 
 
-                // Positionnement des terminaisons : chiffre + couleur
+                // POSITIONNEMENT DES TERMINAISONS (chiffre + couleur) --------------------------------
 
                 // Si la case courante est une terminaison
                 if (Manager.getInstance().getLaGrille().getCase(y, x).isTerminaison()) {
@@ -105,13 +182,11 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
                     // Recherche de l'indice dans la liste des terminaisons
                     int indice = Manager.getInstance().getLaGrille().donneIndiceTerminaison(y,x);
 
-
                     // Couleur de la case
                     int r = Manager.getInstance().getLaGrille().getLesTerminaisons().get(indice).getR();
                     int g = Manager.getInstance().getLaGrille().getLesTerminaisons().get(indice).getG();
                     int b = Manager.getInstance().getLaGrille().getLesTerminaisons().get(indice).getB();
                     mPaint.setColor(rgb(r, g, b));
-
 
                     // CERCLE si taille de la terminaison != 1
                     if( Manager.getInstance().getLaGrille().getLesTerminaisons().get(indice).getTailleChemin() != 1) {
@@ -127,7 +202,7 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
                                 mPaint);
                     }
 
-                    // Chiffre terminaison
+                    // Chiffre de la case
                     mPaint.setColor(Color.BLACK);
                     mPaint.setTextAlign(Paint.Align.CENTER);
                     mPaint.setTextSize(mLargeurCellule * 0.7f);
@@ -137,13 +212,17 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
                 }
 
 
+
+                // SI SAUVEGARDE EXISTE -------------------------
+
+
             }
         }
 
-        // Création des bordures
+        /* CREATION DES BORDURES ----------------------------------------- */
         for(int i=0; i<= mLargeurGrilleCases; i++ )
         {
-            // Bordures épaisses = extremités de la grilles
+            // Bordures épaisses aux extremités de la grilles
             if(i==0 || i== mLargeurGrilleCases) {
                 mPaint.setColor(Color.BLACK);
                 mPaint.setStrokeWidth(mTailleSeparateur);
@@ -154,9 +233,18 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
             }
             // Bordures verticales
             canvas.drawLine(i * mLargeurCellule, 0, i * mLargeurCellule, mLargeurCellule * mLargeurGrilleCases, mPaint);
+
             // Bordures horizontales
             canvas.drawLine(0, i * mLargeurCellule, mLargeurCellule * mLargeurGrilleCases, i * mLargeurCellule, mPaint);
         }
+
+
+
+
+
+
+
+
 
     }
 
@@ -184,35 +272,53 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
         }
     }
 
+
+
+
+
     // -------------------------------- METHODES LIEES AU TACTIL -----------------------
 
-    private void touchStart(float x, float y) {
-        //mPath = new Path();
-        //Trace ligne = new Trace(Color.RED, 10, mPath);
-        // mLignes.add(ligne);
+    private void touchStart(int x, int y) {
 
-        //mPath.reset();
-        //mPath.moveTo(x, y);
+        //Compteur du nb de changement de coord
+        mNbChangementsCases = 0;
 
+        //Initialisation des coord
+        mXInter = x;
+        mYInter = y;
 
-        mX = x;
-        mY = y;
     }
 
-    private void touchMove(float x, float y) {
-        float dx = Math.abs(x - mX);
-        float dy = Math.abs(y - mY);
+    private void touchMove(int x, int y) {
 
-        if (dx >= TOUCH_TOLERANCE || dy >= TOUCH_TOLERANCE) {
-            //mPath.quadTo(mX, mY, (x + mX) / 2, (y + mY) / 2);
-            //mPath.lineTo(x,y);
-            mX = x;
-            mY = y;
+        // Si détectection d'un changement de coordonnées
+        if(x != mXInter || y != mYInter)
+        {
+            System.out.println(" ============> IF CHANGEMENT ");
+            System.out.println("CHEMIN : " + mXInter + "," + mYInter +"    "+ x + "," + y);
+            mNbChangementsCases++;
+            //Manager.getInstance().getLaGrille().ajouterCaseChemin(mXInter, mYInter, x, y);
+            Manager.getInstance().getLaGrille().modifierChemins(mXInter, mYInter, x, y);
+
+            //MAJ coord
+            mXInter = x;
+            mYInter = y;
+
+            System.out.println("nb changement : "+ mNbChangementsCases);
         }
     }
 
-    private void touchUp() {
-        //mPath.lineTo(mX, mY);
+    private void touchUp(int x, int y) {
+
+        System.out.println("Nb de chemins : "+Manager.getInstance().getLaGrille().getLesChemins().size());
+        //Vérif affichage
+        for(int i=0; i<Manager.getInstance().getLaGrille().getLesChemins().size(); i++){
+            System.out.println("Chemin "+ (i+1) + ": ");
+            for(int j=0; j<Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().size(); j++){
+                System.out.print("("+Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getX() + "," + Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getY()+")    ");
+            }
+            System.out.println();
+        }
     }
 
     @Override
@@ -221,15 +327,25 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
         float x = event.getX();
         float y = event.getY();
 
-        switch(event.getAction()) {
+        // Convertir en coordonnées Grille
+        int numColonne = (int)(x / mLargeurCellule);
+        int numLigne = (int)(y / mLargeurCellule);
+
+
+        switch(event.getAction())
+        {
             case MotionEvent.ACTION_DOWN :
-                touchStart(x, y);
+                touchStart(numLigne, numColonne);
                 break;
+
+            // Vérification dépassement de la grille
             case MotionEvent.ACTION_MOVE :
-                touchMove(x, y);
+                if(!(numLigne > mLargeurGrilleCases-1))
+                    touchMove(numLigne, numColonne);
                 break;
+
             case MotionEvent.ACTION_UP :
-                touchUp();
+                touchUp(numLigne, numColonne);
                 break;
         }
 
@@ -249,7 +365,18 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
 
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
+        // Supprime entièrement un chemin si
+        // - appui sur l'une des cases du chemin non terminé (et non sur la dernière case !!)
+        //      OU sur la terminaison commencent le chemin
+        // - appui sur n'importe quelles cases (terminaisons comprises) du chemin terminé
+        float x = e.getX();
+        float y = e.getY();
 
+        // Convertir en coordonnées Grille
+        int numColonne = (int)(x / mLargeurCellule);
+        int numLigne = (int)(y / mLargeurCellule);
+
+        Manager.getInstance().supprimerChemin(numLigne, numColonne);
         return true;
     }
 
@@ -267,6 +394,9 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         return false;
     }
+
+
+
 
     public void interruptedThread(){
         mThread.interrupt();

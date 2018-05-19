@@ -103,7 +103,7 @@ public class Grille {
                 if(isChemin(x,y)){
                     // Cas où les deux cases sont toutes deux dans un même chemin => Suppression
                     if(isDansMemeChemin(xStart, yStart, x, y)) {
-                        supprimerCaseChemin(donneIndiceChemin(x, y));
+                        supprimerCaseChemin(donneIndiceChemin(xStart, yStart));
                     }
                     else{
                         // Cas où les deux cases permettent la fusion ==> Fusion des deux cases
@@ -115,12 +115,13 @@ public class Grille {
                 // Cas où la case d'arrivée n'est pas déjà dans un chemin ==> Ajout de case
                 else{
                     // Ajout de la case
-                    ajouterCaseChemin(xStart, yStart, x, y);
+                    if(!isTerminaison(mLesCases[xStart][yStart]))
+                        ajouterCaseChemin(xStart, yStart, x, y);
                 }
             }
             // Cas où la case de départ n'est pas déjà dans un chemin => Creation du chemin + ajout que si la case de départ est une terminaison
             else{
-                if(isTerminaison(mLesCases[xStart][yStart])){
+                if(isTerminaison(mLesCases[xStart][yStart]) && !isTerminaison(mLesCases[x][y]) && !isChemin(x,y)){
                     creerChemin(xStart, yStart, x, y);
                 }
 
@@ -174,6 +175,11 @@ public class Grille {
      */
     public void supprimerCaseChemin(int index){
         mLesChemins.get(index).supprimerCase();
+
+        if(mLesChemins.get(index).getCasesChemin().size() < 2){
+            mLesChemins.get(index).getCasesChemin().get(0).setDansChemin(false);
+            mLesChemins.remove(index);
+        }
     }
 
     /**
@@ -207,10 +213,13 @@ public class Grille {
      * @param c2 le deuxième chemin
      */
     public void fusionnerChemins(Chemin c1, Chemin c2){
-        // Ajout de toutes les cases du deuxième chemin dans le premier
-        for(Case c : c2.getCasesChemin()){
-            c1.ajouterCase(c);
+        // Ajout de toutes les cases du deuxième chemin dans le premier dans l'ordre inverse
+        for(int i = c2.getCasesChemin().size()-1; i >= 0; i--){
+            c1.ajouterCase(c2.getCasesChemin().get(i));
         }
+//        for(Case c : c2.getCasesChemin()){
+//            c1.ajouterCase(c);
+//        }
         // Suppression du deuxième chemin
         c2.supprimerTout();
         mLesChemins.remove(c2);
@@ -323,15 +332,21 @@ public class Grille {
      * @return true si les coordonnées sont possibles, false sinon
      */
     public boolean verifierCoordonnees(int xStart, int yStart, int x, int y){
-        if(x == xStart+1 && y == yStart+1)
+        if(x == xStart+1 && y == yStart+1){
             return false;
-        if(x == xStart+1 && y == yStart-1)
+        }
+        else if (x == xStart+1 && y == yStart-1){
             return false;
-        if(x == xStart-1 && y == yStart-1)
+        }
+        else if(x == xStart-1 && y == yStart-1){
             return false;
-        if(x == xStart-1 && y == yStart+1)
+        }
+        else if(x == xStart-1 && y == yStart+1){
             return false;
-        return true;
+        }
+        else{
+            return true;
+        }
     }
 
     /**
@@ -374,7 +389,7 @@ public class Grille {
                 cpt++;
             }
         }
-        return cpt == 3;
+        return cpt > 2;
     }
 
     /**
@@ -394,7 +409,7 @@ public class Grille {
      * @return true si la fusion est possible, false sinon
      */
     public boolean verifierTailleFusion(Chemin c1, Chemin c2){
-        return (c1.getCasesChemin().size()+c2.getCasesChemin().size() < c1.getTailleMax());
+        return (c1.getCasesChemin().size()+c2.getCasesChemin().size() == c1.getTailleMax());
     }
 
 
