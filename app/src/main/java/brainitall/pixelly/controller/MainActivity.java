@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import brainitall.pixelly.R;
 
@@ -20,11 +21,12 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Bouton permettant de jouer
      */
-    private Button mJouer;
+    private ImageView mJouer;
+
     /**
      * Bouton permettant d'avoir accès aux différentes options du jeu
      */
-    private Button mOption;
+    private ImageView mOption;
     /**
      * Bouton permettant de quitter l'application
      */
@@ -32,13 +34,12 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Bouton permettant d'avoir accès à l'aide du jeu
      */
-    private Button mAide;
+    private ImageView mAide;
 
     /**
      * Lecteur audio
      */
     private static MediaPlayer mp;
-
 
 
     @Override
@@ -50,10 +51,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Branchements entre Vue et Controlleur
-        mJouer = (Button) findViewById(R.id.activity_main_btn_jouer);
-        mOption = (Button) findViewById(R.id.activity_main_btn_option);
+        mJouer = (ImageView) findViewById(R.id.imageView_play);
+        mOption = (ImageView) findViewById(R.id.imageView_option);
         mQuitter = (Button) findViewById(R.id.activity_main_btn_quitter);
-        mAide = (Button) findViewById(R.id.activity_main_btn_aide);
+        mAide = (ImageView) findViewById(R.id.imageView_aide);
 
         //Si le média pour la musique n'existe pas (donc au premier lancement), le créer
         if( mp == null) {
@@ -76,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(levelActivity);
             }
         });
+
         /*
             Action lorsque le joueur clique sur le bouton 'Option'
          */
