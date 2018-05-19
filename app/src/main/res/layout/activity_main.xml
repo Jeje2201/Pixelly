@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.MainActivity"
-    android:background="@color/bg_menu">
+    tools:context=".controller.MainActivity">
 
     <Button
         android:id="@+id/activity_main_btn_jouer"

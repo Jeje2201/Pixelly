@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".controller.OptionActivity"
-    tools:ignore="ExtraText"
-    android:background="@color/bg_menu">
+    tools:ignore="ExtraText">
 
 
     <ToggleButton
