@@ -7,7 +7,6 @@
     tools:context=".controller.OptionActivity"
     tools:ignore="ExtraText">
 
-
     <ToggleButton
         android:id="@+id/activity_option_btn_son"
         android:layout_width="142dp"
