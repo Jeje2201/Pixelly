@@ -121,10 +121,16 @@ public class Grille {
             }
             // Cas où la case de départ n'est pas déjà dans un chemin => Creation du chemin + ajout que si la case de départ est une terminaison
             else{
-                if(isTerminaison(mLesCases[xStart][yStart]) && !isTerminaison(mLesCases[x][y]) && !isChemin(x,y)){
-                    creerChemin(xStart, yStart, x, y);
+                if(isTerminaison(mLesCases[xStart][yStart]) && !isChemin(x,y)){
+                    if(mLesCases[x][y].isTerminaison()){
+                        if(mLesTerminaisons.get(donneIndiceTerminaison(x,y)).getTailleChemin() == 2){
+                            creerChemin(xStart, yStart, x, y);
+                        }
+                    }
+                    else {
+                        creerChemin(xStart, yStart, x, y);
+                    }
                 }
-
             }
         }
     }
