@@ -67,6 +67,30 @@ public class Manager {
             mLaGrille.ajouterChemin(c);
         }
     }
+
+    /**
+     * Permet de modifier les chemins de la grille (ajout et suppression de case, fusion de chemin)
+     * @param xStart l'abcisse de la case de départ
+     * @param yStart l'ordonnée de la case de départ
+     * @param x l'abcisse de la case d'arrivée
+     * @param y l'ordonnée de la case d'arrivée
+     */
+    public void modifierChemins(int xStart, int yStart, int x, int y){
+        if(mLaGrille != null){
+            mLaGrille.modifierChemins(xStart, yStart, x, y);
+        }
+    }
+
+    /**
+     * Permet de supprimer un chemin à partir d'une case
+     * @param x l'abcisse de la case
+     * @param y l'ordonnée de la case
+     */
+    public void supprimerChemin(int x, int y){
+        if(mLaGrille != null){
+            mLaGrille.supprimerChemin(x, y);
+        }
+    }
     // ----------------------------- GETTER & SETTER --------------------------------------
 
     /**

@@ -85,48 +85,95 @@ public class Grille {
         mLesTerminaisons = new Vector<>();
     }
 
-    // ---------------------------------------- Ajouts / Suppressions --------------------------------
+    // --------------------------------------- Gestion du jeu ----------------------------------------
+
+    /**
+     * Permet de modifier un chemin : soit ajouter, soit supprimer des cases
+     * @param xStart l'abcisse de la case de départ
+     * @param yStart l'ordonnée de la case de départ
+     * @param x l'abcisse de la case d'arrivée
+     * @param y l'abcisse de la case d'arrivée
+     */
+    public void modifierChemins(int xStart, int yStart, int x, int y){
+        // Verification de coordonnées compatibles
+        if(verifierCoordonnees(xStart, yStart, x, y)){
+            // Cas où la case de départ est déjà dans un chemin
+            if(isChemin(xStart,yStart)){
+                // Cas où la case d'arrivée est déjà dans un chemin ==> Fusion des chemins ou Suppression de la case d'arrivée du chemin
+                if(isChemin(x,y)){
+                    // Cas où les deux cases sont toutes deux dans un même chemin => Suppression
+                    if(isDansMemeChemin(xStart, yStart, x, y)) {
+                        supprimerCaseChemin(donneIndiceChemin(x, y));
+                    }
+                    else{
+                        // Cas où les deux cases permettent la fusion ==> Fusion des deux cases
+                        if(verifierFusion(xStart,yStart,x,y)){
+                            fusionnerChemins(mLesChemins.get(donneIndiceChemin(xStart,yStart)), mLesChemins.get(donneIndiceChemin(x, y)));
+                        }
+                    }
+                }
+                // Cas où la case d'arrivée n'est pas déjà dans un chemin ==> Ajout de case
+                else{
+                    // Ajout de la case
+                    ajouterCaseChemin(xStart, yStart, x, y);
+                }
+            }
+            // Cas où la case de départ n'est pas déjà dans un chemin => Creation du chemin + ajout que si la case de départ est une terminaison
+            else{
+                if(isTerminaison(mLesCases[xStart][yStart])){
+                    creerChemin(xStart, yStart, x, y);
+                }
+
+            }
+        }
+    }
+
 
 
     /**
-     * Permet d'ajouter une case à un chemin
+     * Permet de créer un nouveau chemin contenant deux cases
+     * @param xStart l'abcisse de la case terminaison créant le chemin
+     * @param yStart l'ordonnée de la case terminaison créant le chemin
+     * @param x l'abcisse de la deuxième case
+     * @param y l'ordonnée de la deuxième case
+     */
+    public void creerChemin(int xStart, int yStart, int x, int y){
+        // Création du chemin
+        Terminaison t = (Terminaison) mLesCases[xStart][yStart];
+        Chemin c = new Chemin(t);
+        // Ajout du chemin à la liste des chemins connus par la grille
+        mLesChemins.add(c);
+        // Ajout de la deuxième case contenue dans le chemin
+        mLesChemins.get(donneIndiceChemin(xStart,yStart)).ajouterCase(mLesCases[x][y]);
+
+    }
+
+    /**
+     * Permet d'ajouter une case à un chemin déjà existant
      * @param xStart abcisse de la case départ
      * @param yStart ordonnée de la case de départ
      * @param x abcisse de la case d'arrivée
      * @param y ordonnée de la case d'arrivée
      */
     public void ajouterCaseChemin(int xStart, int yStart, int x, int y){
-        // Si la case de départ ne se trouve pas déjà dans un chemin
-        if(!isChemin(xStart,yStart)){
-            // Si la case de départ est une terminaison
-            if(mLesCases[xStart][yStart].isTerminaison()){
-                // Création du chemin
-                Terminaison t = (Terminaison) mLesCases[xStart][yStart];
-                Chemin c = new Chemin(t);
-                // Ajout du chemin à la liste des chemins connus par la grille
-                mLesChemins.add(c);
-                // Verifcation des coordonées de la case avant ajout + Ajout de la case au chemin
-                if(verifierCoordonnees(xStart,yStart,x,y)){
-                    mLesChemins.get(donneIndiceChemin(xStart,yStart)).getCasesChemin().add(mLesCases[x][y]);
-                }
+        // Dans le cas où l'on souhaite rallier une terminaison ==> verification de sa compatibilité avant ajout
+        if(isTerminaison(mLesCases[x][y])){
+            // on verifie que la terminaison soit compatible
+            if(verifierTerminaison(donneIndiceChemin(xStart,yStart),x,y)){
+                mLesChemins.get(donneIndiceChemin(xStart,yStart)).ajouterCase(mLesCases[x][y]);
             }
         }
         else{
-            // Verifcation des coordonées de la case avant ajout + Ajout de la case au chemin
-            if(verifierCoordonnees(xStart,yStart,x,y)){
-                mLesChemins.get(donneIndiceChemin(xStart,yStart)).getCasesChemin().add(mLesCases[x][y]);
-            }
+            mLesChemins.get(donneIndiceChemin(xStart,yStart)).ajouterCase(mLesCases[x][y]);
         }
-
     }
 
     /**
-     * Permet de supprimer la Case d'un chemin
-     * @param x l'abcisse de la case
-     * @param y l'ordonnée de la case
+     * Permet de supprimer une case d'un chemin
+     * @param index l'indice du chemin où la case doit être supprimée
      */
-    public void supprimerCaseChemin(int x, int y){
-
+    public void supprimerCaseChemin(int index){
+        mLesChemins.get(index).supprimerCase();
     }
 
     /**
@@ -135,18 +182,44 @@ public class Grille {
      * @param y ordonnée de l'une des terminaison du chemin
      */
     public void supprimerChemin(int x, int y){
-        // Recherche l'index du chemin dans la liste des chemins connus par la grille
-        int index = donneIndiceChemin(x,y);
-        // Si le chemin existe :
-        if(index != -1 ){
-            // Si les coordonnées correspondent à une terminaison, alors on supprime tout le chemin
-            if(isTerminaison(mLesChemins.get(index).getCaseChemin(x,y))){
+        // On vérifie que la case est dans un chemin
+        if(isChemin(x,y)){
+            int index = donneIndiceChemin(x,y);
+            // Cas où le chemin est entièrement terminé : appuie sur n'importe case => suppression totale du chemin
+            if(mLesChemins.get(index).isComplet()){
                 mLesChemins.get(index).supprimerTout();
-                // On supprime le chemin vide de la liste des chemins connus par la grille
                 mLesChemins.remove(index);
+            }
+            // Cas où le chemin n'est pas terminé :
+            else{
+                // nécéssité d'appuyer sur la terminaison initiale ==> suppression totale du chemin
+                if(isTerminaison(mLesChemins.get(index).getCaseChemin(x,y))){
+                    mLesChemins.get(index).supprimerTout();
+                    mLesChemins.remove(index);
+                }
             }
         }
     }
+
+    /**
+     * Permet de fusionner deux chemins
+     * @param c1 le premier chemin
+     * @param c2 le deuxième chemin
+     */
+    public void fusionnerChemins(Chemin c1, Chemin c2){
+        // Ajout de toutes les cases du deuxième chemin dans le premier
+        for(Case c : c2.getCasesChemin()){
+            c1.ajouterCase(c);
+        }
+        // Suppression du deuxième chemin
+        c2.supprimerTout();
+        mLesChemins.remove(c2);
+
+
+
+    }
+
+    //---------------------------------------- Ajouts / Suppressions ---------------------------------
 
     // Methode à utiliser pour ajouter les terminaisons lues dans le fichier Json
     public void ajouterTerminaison(int tailleChemin, int x, int y, int r, int g, int b){
@@ -215,7 +288,30 @@ public class Grille {
      * @return true si la case est dans un chemin, false sinon
      */
     public boolean isChemin(int x,int y){
-        return donneIndiceChemin(x,y) != -1;
+        return mLesCases[x][y].isDansChemin();
+    }
+
+    /**
+     * Permet de savoir si deux cases se trouvent dans le même chemin
+     * @param x1 l'abcisse de la case 1
+     * @param y1 l'ordonnée de la case 1
+     * @param x2 l'abcisse de la case 2
+     * @param y2 l'ordonnée de la case 2
+     * @return true s'ils se trouvent dans le même chemin, false sinon
+     */
+    public boolean isDansMemeChemin(int x1, int y1, int x2, int y2){
+        return(donneIndiceChemin(x1,y1) == donneIndiceChemin(x2,y2));
+    }
+
+    /**
+     * Permet de savoir si deux terminaisons ont le même type
+     * @param c1 chemin contenant la première terminaison
+     * @param c2 chemin contenant la deuxième terminaison
+     * @return true si les deux terminaisons sont de même type
+     */
+    public boolean isMemeTypeTerminaison(Chemin c1, Chemin c2){
+        return(c1.getPremiereTerminaison().getTailleChemin() == c2.getPremiereTerminaison().getTailleChemin() && verifierCouleur(c1.getCouleurChemin(),c2.getCouleurChemin()));
+
     }
 
     /**
@@ -236,6 +332,85 @@ public class Grille {
         if(x == xStart-1 && y == yStart+1)
             return false;
         return true;
+    }
+
+    /**
+     * Permet de vérifier si la case de départ et la terminaison d'arrivée sont compatibles pour un ajout de case dans un chemin
+     * ie : même couleur, même taille de chemin initiale et qu'il ne reste plus qu'une place pour la terminaison dans le chemin
+     * @param index l'indice du chemin concerné
+     * @param x l'abcisse de la terminaison d'arrivée
+     * @param y l'ordonnée de la terminaison d'arrivée
+     * @return
+     */
+    public boolean verifierTerminaison(int index, int x, int y){
+        Terminaison t = (Terminaison) mLesCases[x][y];
+        Chemin chemin = mLesChemins.get(index);
+        // Verification de la taille adéquate && Vérification de la couleur adéquate
+        return (verifierTailleChemin(chemin.getTailleMax(), t.getTailleChemin()) && verifierCouleur(chemin.getCouleurChemin(),t.getR(),t.getG(),t.getB()) && chemin.getCasesChemin().size() == chemin.getTailleMax()-1);
+    }
+
+    /**
+     * Permet de vérifier la couleur de deux cases
+     * @param couleurChemin la couleur du chemin
+     * @param r le code rouge de la terminaison
+     * @param g le code vert de la terminaison
+     * @param b le code bleu de la terminaison
+     * @return true si la couleur est la meme, false sinon
+     */
+    public boolean verifierCouleur(int[] couleurChemin, int r, int g, int b){
+        return(couleurChemin[0] == r && couleurChemin[1] == g && couleurChemin[2] == b);
+    }
+
+    /**
+     * Permet de vérifier la couleur de deux chemins;
+     * @param couleurChemin1 tableau des codes r,g,b du chemin 1
+     * @param couleurChemin2 tableau des codes r,g,b du chemin 2
+     * @return true si ce sont les mêmes couleurs, false sinon
+     */
+    public boolean verifierCouleur(int[] couleurChemin1, int[] couleurChemin2){
+        int cpt = 0;
+        for(int i = 0; i < couleurChemin1.length; i++){
+            if(couleurChemin1[i] == couleurChemin2[i]){
+                cpt++;
+            }
+        }
+        return cpt == 3;
+    }
+
+    /**
+     * Permet de verifier que la taille maximale d'un chemin et la taille chemin indiqué par la terminaison soit la meme
+     * @param tailleChemin la taille maximale supportée par le chemin
+     * @param tailleTerminaison la taille du chemin portée par la terminaison
+     * @return true si les tailles sont identiques, false sinon
+     */
+    public boolean verifierTailleChemin(int tailleChemin, int tailleTerminaison){
+        return tailleChemin == tailleTerminaison;
+    }
+
+    /**
+     * Permet de verifier que la taille des chemins permet une fusion de deux chemins de même type
+     * @param c1 le premier chemin
+     * @param c2 le deuxième chemin
+     * @return true si la fusion est possible, false sinon
+     */
+    public boolean verifierTailleFusion(Chemin c1, Chemin c2){
+        return (c1.getCasesChemin().size()+c2.getCasesChemin().size() < c1.getTailleMax());
+    }
+
+
+
+    /**
+     * Permet de vérifier si la fusion est possible
+     * @param xStart
+     * @param yStart
+     * @param x
+     * @param y
+     * @return
+     */
+    public boolean verifierFusion(int xStart, int yStart, int x, int y) {
+        Chemin c1 = mLesChemins.get(donneIndiceChemin(xStart,yStart));
+        Chemin c2 = mLesChemins.get(donneIndiceChemin(x,y));
+        return isMemeTypeTerminaison(c1,c2) && verifierTailleFusion(c1,c2) ;
     }
     // --------------------------------------- GETTER & SETTER ---------------------------------------
 
