@@ -1,6 +1,4 @@
 <resources>
     <string name="app_name">Pixelly</string>
-    <string name="btn_menu_jouer">Jouer</string>
-    <string name="btn_menu_Option">Option</string>
-    <string name="btn_menu_Quitter">Quitter</string>
+    <string name="txt_creditautre">- Développeurs -\n\n@Loic \n@Manon \n@Aurélia \n@Mélodie \n@Jérémy</string>
 </resources>

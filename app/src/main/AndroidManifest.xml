@@ -19,6 +19,7 @@
         <activity android:name=".controller.PlayActivity" android:screenOrientation="portrait"/>
         <activity android:name=".controller.OptionActivity" android:screenOrientation="portrait"/>
         <activity android:name=".controller.LevelActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".controller.CreditActivity" android:screenOrientation="portrait"/>
         <activity android:name=".controller.HelpActivity" android:screenOrientation="portrait"></activity>
     </application>
 
