@@ -1,6 +1,7 @@
 {
   "infoGrille": [
      {
+        "nomGrille": "Green Lantern",
 		"numGrille" : 2,
         "hauteur": 5,
         "largeur": 5

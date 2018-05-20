@@ -20,6 +20,11 @@ public class Grille {
      * Hauteur de la grille
      */
     private int mHauteurGrille;
+
+    /**
+     * Nom de la grille une fois résolue
+     */
+    private String mNomGrille;
     /**
      * Tableau de cases représentant la grille
      */
@@ -52,6 +57,17 @@ public class Grille {
         mNumGrille = numGrille;
         mLargeurGrille = largeurGrille;
         mHauteurGrille = hauteurGrille;
+        initCases();
+        initLesChemins();
+        initLesTerminaisons();
+    }
+
+    // Constructeur à appeler pour créer la grille après lecture des 3 premières lignes du fichier JSon
+    public Grille(int numGrille, int largeurGrille, int hauteurGrille, String nomGrille) {
+        mNumGrille = numGrille;
+        mLargeurGrille = largeurGrille;
+        mHauteurGrille = hauteurGrille;
+        mNomGrille = nomGrille;
         initCases();
         initLesChemins();
         initLesTerminaisons();
