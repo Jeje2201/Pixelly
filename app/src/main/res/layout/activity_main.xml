@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.MainActivity">
+    tools:context=".controller.MainActivity"
+    android:background="@color/bg_menu">
 
     <ImageView
         android:id="@+id/imageView_option"
-        android:layout_width="252dp"
-        android:layout_height="56dp"
+        android:layout_width="240dp"
+        android:layout_height="45dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -18,8 +19,9 @@
 
     <ImageView
         android:id="@+id/imageView_play"
-        android:layout_width="284dp"
-        android:layout_height="70dp"
+        android:layout_width="240dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_titre"
@@ -27,8 +29,8 @@
 
     <ImageView
         android:id="@+id/imageView_aide"
-        android:layout_width="252dp"
-        android:layout_height="56dp"
+        android:layout_width="240dp"
+        android:layout_height="45dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -48,18 +50,21 @@
 
     <ImageView
         android:id="@+id/imageView_quitter"
-        android:layout_width="252dp"
-        android:layout_height="56dp"
+        android:layout_width="240dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_credit"
+        app:layout_constraintVertical_bias="0.026"
         app:srcCompat="@drawable/menu_quitter" />
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="252dp"
-        android:layout_height="56dp"
+        android:id="@+id/imageView_credit"
+        android:layout_width="240dp"
+        android:layout_height="45dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

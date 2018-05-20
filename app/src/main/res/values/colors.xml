@@ -3,6 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="bg_menu">#303874</color>
     <color name="btn_menu_jouer">#E5E057</color>
     <color name="btn_menu_options">#7EE3F7</color>
     <color name="btn_menu_quitter">#0BD804</color>
