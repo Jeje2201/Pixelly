@@ -6,22 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".controller.MainActivity">
 
-    <Button
-        android:id="@+id/activity_main_btn_quitter"
-        android:layout_width="143dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:background="@color/btn_menu_quitter"
-        android:text="@string/btn_menu_Quitter"
-        app:layout_constraintTop_toBottomOf="@+id/imageView_aide"
-        tools:layout_editor_absoluteX="0dp"
-        tools:text="@string/btn_menu_Quitter" />
-
     <ImageView
         android:id="@+id/imageView_option"
         android:layout_width="252dp"
-        android:layout_height="67dp"
-        android:layout_marginTop="24dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_play"
         app:srcCompat="@drawable/menu_option" />
@@ -30,27 +20,50 @@
         android:id="@+id/imageView_play"
         android:layout_width="284dp"
         android:layout_height="70dp"
-        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_titre"
         app:srcCompat="@drawable/menu_play" />
 
     <ImageView
         android:id="@+id/imageView_aide"
-        android:layout_width="199dp"
-        android:layout_height="66dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="252dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_option"
         app:srcCompat="@drawable/menu_aide" />
 
     <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="311dp"
-        android:layout_height="106dp"
-        android:layout_marginTop="40dp"
+        android:id="@+id/imageView_titre"
+        android:layout_width="342dp"
+        android:layout_height="99dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/menu_titre" />
+
+    <ImageView
+        android:id="@+id/imageView_quitter"
+        android:layout_width="252dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:srcCompat="@drawable/menu_quitter" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="252dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_aide"
+        app:srcCompat="@drawable/menu_credit" />
 
 </android.support.constraint.ConstraintLayout>

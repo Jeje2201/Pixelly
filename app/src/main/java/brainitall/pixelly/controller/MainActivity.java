@@ -19,20 +19,20 @@ public class MainActivity extends AppCompatActivity {
 
     //---------------------------REFERENCEMENT DES DIFFERENTS OBJETS DE LA VUE ------------------------------
     /**
-     * Bouton permettant de jouer
+     * Image qui sert de bouton permettant de jouer
      */
     private ImageView mJouer;
 
     /**
-     * Bouton permettant d'avoir accès aux différentes options du jeu
+     * Image qui sert de bouton permettant d'avoir accès aux différentes options du jeu
      */
     private ImageView mOption;
     /**
-     * Bouton permettant de quitter l'application
+     * Image qui sert de bouton permettant de quitter l'application
      */
-    private Button mQuitter;
+    private ImageView mQuitter;
     /**
-     * Bouton permettant d'avoir accès à l'aide du jeu
+     * Image qui sert de bouton permettant d'avoir accès à l'aide du jeu
      */
     private ImageView mAide;
 
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         // Branchements entre Vue et Controlleur
         mJouer = (ImageView) findViewById(R.id.imageView_play);
         mOption = (ImageView) findViewById(R.id.imageView_option);
-        mQuitter = (Button) findViewById(R.id.activity_main_btn_quitter);
+        mQuitter = (ImageView) findViewById(R.id.imageView_quitter);
         mAide = (ImageView) findViewById(R.id.imageView_aide);
 
         //Si le média pour la musique n'existe pas (donc au premier lancement), le créer
