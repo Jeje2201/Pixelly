@@ -81,6 +81,16 @@ public class Chemin {
     }
 
     /**
+     * Permet de vérifier que la case est bien la dernière du chemin
+     * @param x l'abcisse de la case dans la grille
+     * @param y l'ordonnée de la case dans la grille
+     * @return true si la case est en dernière position, false sinon
+     */
+    public boolean verifierDerniereCase(int x, int y){
+        return (getIndexCase(x,y) == mCasesChemin.size()-1);
+    }
+
+    /**
      * Permet d'obtenir la case contenue dans le chemin
      * @param x l'abcisse de la case dans la grille
      * @param y l'ordonnée de la case dans la grille
@@ -142,11 +152,8 @@ public class Chemin {
     }
 
     /**
-     * Permet de savoir si un t
-     * @param xStart
-     * @param yStart
-     * @param x
-     * @param y
+     * Permet de savoir si un chemin est complet et que sa dernière case est une terminaison
+     * @return true s'il est terminé, false sinon
      */
     public boolean isTermine(){
         return isComplet() && mCasesChemin.get(mCasesChemin.size()-1).isTerminaison();
