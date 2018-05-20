@@ -20,6 +20,11 @@ public class Grille {
      * Hauteur de la grille
      */
     private int mHauteurGrille;
+
+    /**
+     * Nom de la grille une fois résolue
+     */
+    private String mNomGrille;
     /**
      * Tableau de cases représentant la grille
      */
@@ -52,6 +57,17 @@ public class Grille {
         mNumGrille = numGrille;
         mLargeurGrille = largeurGrille;
         mHauteurGrille = hauteurGrille;
+        initCases();
+        initLesChemins();
+        initLesTerminaisons();
+    }
+
+    // Constructeur à appeler pour créer la grille après lecture des 3 premières lignes du fichier JSon
+    public Grille(int numGrille, int largeurGrille, int hauteurGrille, String nomGrille) {
+        mNumGrille = numGrille;
+        mLargeurGrille = largeurGrille;
+        mHauteurGrille = hauteurGrille;
+        mNomGrille = nomGrille;
         initCases();
         initLesChemins();
         initLesTerminaisons();
@@ -114,7 +130,7 @@ public class Grille {
                 }
                 // Cas où la case d'arrivée n'est pas déjà dans un chemin ==> Ajout de case
                 else{
-                    // Ajout de la case
+                    // Ajout de la case => si la case n'est pas une terminaison et qu'elle ne se trouve pas en plein milieu d'un chemin
                     if(!isTerminaison(mLesCases[xStart][yStart]))
                         ajouterCaseChemin(xStart, yStart, x, y);
                 }
@@ -163,16 +179,19 @@ public class Grille {
      * @param y ordonnée de la case d'arrivée
      */
     public void ajouterCaseChemin(int xStart, int yStart, int x, int y){
-        // Dans le cas où l'on souhaite rallier une terminaison ==> verification de sa compatibilité avant ajout
-        if(isTerminaison(mLesCases[x][y])){
-            // on verifie que la terminaison soit compatible
-            if(verifierTerminaison(donneIndiceChemin(xStart,yStart),x,y)){
+        if(mLesChemins.get(donneIndiceChemin(xStart,yStart)).verifierDerniereCase(xStart,yStart)){
+            // Dans le cas où l'on souhaite rallier une terminaison ==> verification de sa compatibilité avant ajout
+            if(isTerminaison(mLesCases[x][y])){
+                // on verifie que la terminaison soit compatible
+                if(verifierTerminaison(donneIndiceChemin(xStart,yStart),x,y)){
+                    mLesChemins.get(donneIndiceChemin(xStart,yStart)).ajouterCase(mLesCases[x][y]);
+                }
+            }
+            else{
                 mLesChemins.get(donneIndiceChemin(xStart,yStart)).ajouterCase(mLesCases[x][y]);
             }
         }
-        else{
-            mLesChemins.get(donneIndiceChemin(xStart,yStart)).ajouterCase(mLesCases[x][y]);
-        }
+
     }
 
     /**
@@ -422,17 +441,19 @@ public class Grille {
 
     /**
      * Permet de vérifier si la fusion est possible
-     * @param xStart
-     * @param yStart
-     * @param x
-     * @param y
-     * @return
+     * @param xStart l'abcisse de la case de départ
+     * @param yStart l'ordonnée de la case de départ
+     * @param x l'abcisse de la case d'arrivée
+     * @param y l'ordonnée de la case d'arrivée
+     * @return true si la fusion est possible, false sinon
      */
     public boolean verifierFusion(int xStart, int yStart, int x, int y) {
         Chemin c1 = mLesChemins.get(donneIndiceChemin(xStart,yStart));
         Chemin c2 = mLesChemins.get(donneIndiceChemin(x,y));
         return isMemeTypeTerminaison(c1,c2) && verifierTailleFusion(c1,c2) ;
     }
+
+
     // --------------------------------------- GETTER & SETTER ---------------------------------------
 
     /**

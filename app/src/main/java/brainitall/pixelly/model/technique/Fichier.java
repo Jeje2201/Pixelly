@@ -49,12 +49,14 @@ public class Fichier {
 
             for(int i = 0; i < infoGrille.length(); i++){
                 JSONObject jsonObject = infoGrille.getJSONObject(i);
+                String nomGrille = jsonObject.optString("nomGrille").toString();
                 int numGrille = Integer.parseInt(jsonObject.optString("numGrille").toString());
                 int hauteur = Integer.parseInt(jsonObject.optString("hauteur").toString());
                 int largeur = Integer.parseInt(jsonObject.optString("largeur").toString());
 
                 //Ajouter les valeurs dans la grille via le Manager
-                Manager.getInstance().ajouterGrille(numGrille,largeur,hauteur);
+                //Manager.getInstance().ajouterGrille(numGrille,largeur,hauteur);
+                Manager.getInstance().ajouterGrille(numGrille,hauteur,largeur,nomGrille);
             }
 
             //Racine de l'objet terminaison

@@ -37,6 +37,17 @@ public class Manager {
     }
 
     /**
+     * Permet d'associer une grille
+     * @param numGrille numéro de la grille
+     * @param hauteur hauteur de la grille
+     * @param largeur largeur de la grille
+     * @param nomGrille nom de la grille
+     */
+    public void ajouterGrille(int numGrille, int hauteur, int largeur, String nomGrille){
+        mLaGrille = new Grille(numGrille,hauteur,largeur,nomGrille);
+    }
+
+    /**
      * Permet de dissocier la grille
      */
     public void dissocierGrille(){
