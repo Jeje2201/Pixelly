@@ -372,7 +372,9 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
         int numColonne = (int)(x / mLargeurCellule);
         int numLigne = (int)(y / mLargeurCellule);
 
-        Manager.getInstance().supprimerChemin(numLigne, numColonne);
+        // Vérification dépassement de la grille
+        if(!(numLigne > mLargeurGrilleCases-1))
+            Manager.getInstance().supprimerChemin(numLigne, numColonne);
         return true;
     }
 
