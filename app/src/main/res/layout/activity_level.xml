@@ -4,21 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".controller.LevelActivity"
-
-    >
-
-    <!-- mettre une couleur en fond ou pas !? -->
-
-    <TextView
-        android:text="Liste des niveaux :"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="25dp"
-        android:textColor="#000000"
-        android:gravity="center_horizontal"
-        android:textStyle="italic"
-        />
+    tools:context=".controller.LevelActivity">
 
     <!-- bouton niveau 2 de couleur rouge pour la difficultée -->
     <Button
@@ -33,36 +19,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
 
-    />
+        app:layout_constraintVertical_bias="0.466" />
 
     <!-- bouton bleu du niveau 1 qui se trouve après le niveau de test -->
     <Button
         android:id="@+id/activity_level_btn_niveau1"
-        android:text="Niveau 1"
-        android:textSize="16dp"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:background="@color/btn_menu_options"
+        android:text="Niveau 1"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/activity_level_btn_niveau2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/activity_level_btn_niveauTest"
-         />
+        app:layout_constraintTop_toTopOf="@+id/activity_level_btn_niveauTest" />
 
 
     <!-- bouton niveau test -->
     <Button
         android:id="@+id/activity_level_btn_niveauTest"
-        android:text="Niveau Test"
-        android:textSize="16dp"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:background="#00FF00"
+        android:text="Niveau Test"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/activity_level_btn_niveau1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-         />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- bouton d'aide  -->
     <Button
@@ -75,4 +59,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:background="#6C4BA0" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="300dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/listeniveau_titre" />
 </android.support.constraint.ConstraintLayout>
