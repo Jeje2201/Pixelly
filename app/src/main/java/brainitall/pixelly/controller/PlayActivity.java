@@ -110,10 +110,12 @@ public class PlayActivity extends AppCompatActivity {
                         //J'insere toutes les infos
                         infosChemins.put("CheminNumero",compteurChemin);
                         infosChemins.put("TailleMax", lesChemins.get(compteurChemin).getTailleMax());
-                        infosChemins.put("couleur", lesChemins.get(compteurChemin).getCouleurChemin());
-                        infosChemins.put("r", 255);
-                        infosChemins.put("g", 255);
-                        infosChemins.put("b", 255);
+
+                        int [] couleurs = lesChemins.get(compteurChemin).getCouleurChemin();
+
+                        infosChemins.put("r", couleurs[0]);
+                        infosChemins.put("g", couleurs[1]);
+                        infosChemins.put("b", couleurs[2]);
 
                         JSONArray listeCases = new JSONArray();
                         List<Case> lesCases = lesChemins.get(compteurChemin).getCasesChemin();//pour chaques cases
