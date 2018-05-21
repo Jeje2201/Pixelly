@@ -60,7 +60,7 @@ public class PlayActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String str = intent.getStringExtra("nomFichier");
         // Chargement du fichier et donc création de la grille
-        mLeFichier = new Fichier(str);
+        mLeFichier = new Fichier(str,this);
         mLeFichier.lireFichier(getApplicationContext(),this);
         // Création du widget de la vue de la grille
         mVue = new PlayView(this);
@@ -93,56 +93,7 @@ public class PlayActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                JSONObject jsonFinal = new JSONObject();
-
-                try {
-
-                    jsonFinal.put("NomNiveau", mLaGrille.getNumGrille());
-                    jsonFinal.put("NombreChemins", mLaGrille.getLesChemins().size());
-
-                    //Je créé un objet dans lequel j'insererais toutes les infos
-                    JSONArray listeChemins = new JSONArray(); //Je créé une liste dans laquel je rentre tous mes objets a chaque fois
-
-                    List<Chemin> lesChemins = mLaGrille.getLesChemins();//pour chaque chemins
-
-                    for(int compteurChemin=0;compteurChemin<lesChemins.size();compteurChemin++) {
-                        JSONObject infosChemins=new JSONObject();
-                        //J'insere toutes les infos
-                        infosChemins.put("CheminNumero",compteurChemin);
-                        infosChemins.put("TailleMax", lesChemins.get(compteurChemin).getTailleMax());
-
-                        int [] couleurs = lesChemins.get(compteurChemin).getCouleurChemin();
-
-                        infosChemins.put("r", couleurs[0]);
-                        infosChemins.put("g", couleurs[1]);
-                        infosChemins.put("b", couleurs[2]);
-
-                        JSONArray listeCases = new JSONArray();
-                        List<Case> lesCases = lesChemins.get(compteurChemin).getCasesChemin();//pour chaques cases
-
-                        for (int compteurCase = 0; compteurCase < lesChemins.get(compteurChemin).getTailleMax(); compteurCase++) {
-
-                            JSONObject infoCase=new JSONObject();
-
-                            infoCase.put("x", mLaGrille.getLesChemins().get(compteurChemin).getCasesChemin().get(compteurCase).getY());
-                            infoCase.put("y", mLaGrille.getLesChemins().get(compteurChemin).getCasesChemin().get(compteurCase).getX());
-
-                            listeCases.put(infoCase);
-
-                        } //fin chaques cases
-
-                        infosChemins.put("Cases", listeCases);
-
-                        listeChemins.put(infosChemins); //j'ajoute dans ma liste de chemin objet chemin avec toutes ses infos
-                    }
-
-                    jsonFinal.put("chemins",listeChemins); //J'ajoute a la fin l'objet "chemin" avec sa liste de chemins
-
-                    System.out.println(jsonFinal);
-                }
-                catch(JSONException e) {
-                    e.printStackTrace();
-                }
+                mLeFichier.ecrireSave(getApplicationContext(),"save1.json");
             }
         });
 
@@ -240,6 +191,16 @@ public class PlayActivity extends AppCompatActivity {
             }
             mLaGrille.getLesChemins().removeAll(mLaGrille.getLesChemins());
         }
+    }
+
+    public boolean isTerminaison(int x, int y){
+        if(mLaGrille != null){
+            Case c = mLaGrille.getCase(x,y);
+            if(c.isTerminaison()){
+                return true;
+            }
+        }
+        return false;
     }
 
     // --------------------------- GESTION DE L'ACTIVITE --------------------------

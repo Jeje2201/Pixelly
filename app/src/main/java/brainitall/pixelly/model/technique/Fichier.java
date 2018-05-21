@@ -7,11 +7,18 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
+
 import brainitall.pixelly.controller.Manager;
 import brainitall.pixelly.controller.PlayActivity;
+import brainitall.pixelly.model.metier.Case;
+import brainitall.pixelly.model.metier.CaseSimple;
+import brainitall.pixelly.model.metier.Chemin;
+import brainitall.pixelly.model.metier.Terminaison;
 
 /**
  * Classe représentant un fichier
@@ -24,11 +31,15 @@ public class Fichier {
      */
     private String mNomFichier;
 
+    private PlayActivity mPlayActivity;
+
     /**
      * Constructeur
      * @param nomFichier le nom du fichier donné en paramètre
      */
-    public Fichier(String nomFichier){
+    public Fichier(String nomFichier, Context context){
+
+        mPlayActivity= (PlayActivity)context;
         mNomFichier = nomFichier;
     }
 
@@ -86,6 +97,7 @@ public class Fichier {
 
             }
             System.out.println("Le num de la grille : "+ playActivity.getLaGrille().getNumGrille());
+            lireSave(context,"save"+mPlayActivity.getLaGrille().getNumGrille()+".json");
 
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -96,8 +108,7 @@ public class Fichier {
         }
     }
 
-    public void lireSave(Context context, Context activity, String nomSauvegarde){
-        PlayActivity playActivity = (PlayActivity) activity;
+    public void lireSave(Context context,String nomSauvegarde){
         try {
             File f = new File(context.getFilesDir(),nomSauvegarde);
             FileInputStream is = new FileInputStream(f);
@@ -105,11 +116,44 @@ public class Fichier {
             byte[] buffer = new byte[size];
             is.read(buffer);
             is.close();
-            String lecture = new String(buffer);
-            JSONObject jsonRootObject = new JSONObject(lecture);
+            String json = new String(buffer);
+            System.out.println("Chaine dans la sauvegarde :"+json);
 
             // Récupération des données
-            
+            JSONObject jsonRootObject = new JSONObject(json);
+            //Racine de l'objet chemins
+            JSONArray chemins = jsonRootObject.optJSONArray("chemins");
+            Chemin c = null;
+            for (int i = 0; i < chemins.length(); i++) {
+                JSONObject jsonObject = chemins.getJSONObject(i);
+                int cheminNumero = Integer.parseInt(jsonObject.optString("CheminNumero").toString());
+                int tailleMax = Integer.parseInt(jsonObject.optString("TailleMax").toString());
+                int r = Integer.parseInt(jsonObject.optString("r").toString());
+                int g = Integer.parseInt(jsonObject.optString("g").toString());
+                int b = Integer.parseInt(jsonObject.optString("b").toString());
+
+
+
+
+                //Racine de l'objet cases
+                JSONArray cases = jsonObject.optJSONArray("Cases");
+
+                for (int j = 0; j < cases.length(); j++) {
+                    JSONObject jsonObj = cases.getJSONObject(j);
+                    int x = Integer.parseInt(jsonObj.optString("x").toString());
+                    int y = Integer.parseInt(jsonObj.optString("y").toString());
+                    if(j==0){
+                        Terminaison t = new Terminaison(tailleMax,y,x,r,g,b);
+                        c = new Chemin(t);
+                        mPlayActivity.getLaGrille().getLesChemins().add(c);
+                    }
+                    else{
+                        c.ajouterCase(mPlayActivity.getLaGrille().getCase(y,x));
+                    }
+
+
+
+                }}
 
 
 
@@ -117,6 +161,68 @@ public class Fichier {
             // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void ecrireSave(Context context, String nomSauvegarde){
+
+
+        JSONObject jsonFinal = new JSONObject();
+
+        try {
+
+            jsonFinal.put("NomNiveau", mPlayActivity.getLaGrille().getNumGrille());
+            jsonFinal.put("NombreChemins", mPlayActivity.getLaGrille().getLesChemins().size());
+
+            //Je créé un objet dans lequel j'insererais toutes les infos
+            JSONArray listeChemins = new JSONArray(); //Je créé une liste dans laquel je rentre tous mes objets a chaque fois
+
+            List<Chemin> lesChemins = mPlayActivity.getLaGrille().getLesChemins();//pour chaque chemins
+
+            for(int compteurChemin=0;compteurChemin<lesChemins.size();compteurChemin++) {
+                JSONObject infosChemins=new JSONObject();
+                //J'insere toutes les infos
+                infosChemins.put("CheminNumero",compteurChemin);
+                infosChemins.put("TailleMax", lesChemins.get(compteurChemin).getTailleMax());
+
+                int [] couleurs = lesChemins.get(compteurChemin).getCouleurChemin();
+
+                infosChemins.put("r", couleurs[0]);
+                infosChemins.put("g", couleurs[1]);
+                infosChemins.put("b", couleurs[2]);
+
+                JSONArray listeCases = new JSONArray();
+                List<Case> lesCases = lesChemins.get(compteurChemin).getCasesChemin();//pour chaques cases
+
+                for (int compteurCase = 0; compteurCase < lesChemins.get(compteurChemin).getTailleMax(); compteurCase++) {
+
+                    JSONObject infoCase=new JSONObject();
+
+                    infoCase.put("x",mPlayActivity.getLaGrille().getLesChemins().get(compteurChemin).getCasesChemin().get(compteurCase).getY());
+                    infoCase.put("y", mPlayActivity.getLaGrille().getLesChemins().get(compteurChemin).getCasesChemin().get(compteurCase).getX());
+
+                    listeCases.put(infoCase);
+
+                } //fin chaques cases
+
+                infosChemins.put("Cases", listeCases);
+
+                listeChemins.put(infosChemins); //j'ajoute dans ma liste de chemin objet chemin avec toutes ses infos
+            }
+
+            jsonFinal.put("chemins",listeChemins); //J'ajoute a la fin l'objet "chemin" avec sa liste de chemins
+
+            System.out.println(jsonFinal.toString());
+
+            FileWriter file = new FileWriter(context.getFilesDir()+"/"+nomSauvegarde);
+            file.write(jsonFinal.toString());
+            file.flush();
+            file.close();
+        }
+        catch(JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
