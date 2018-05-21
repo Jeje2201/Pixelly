@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".controller.OptionActivity"
-    tools:ignore="ExtraText">
+    tools:ignore="ExtraText"
+    android:background="@color/bg_menu">
 
     <ToggleButton
         android:id="@+id/activity_option_btn_son"
@@ -62,10 +63,12 @@
         android:id="@+id/imageView2"
         android:layout_width="318dp"
         android:layout_height="62dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/option_titre"
-        tools:layout_editor_absoluteY="47dp" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.111"
+        app:srcCompat="@drawable/option_titre" />
 
 
 </android.support.constraint.ConstraintLayout>
