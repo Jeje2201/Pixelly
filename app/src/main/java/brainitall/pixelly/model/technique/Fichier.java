@@ -4,6 +4,9 @@ import android.content.Context;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -87,6 +90,31 @@ public class Fichier {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void lireSave(Context context, Context activity, String nomSauvegarde){
+        PlayActivity playActivity = (PlayActivity) activity;
+        try {
+            File f = new File(context.getFilesDir(),nomSauvegarde);
+            FileInputStream is = new FileInputStream(f);
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            is.close();
+            String lecture = new String(buffer);
+            JSONObject jsonRootObject = new JSONObject(lecture);
+
+            // Récupération des données
+            
+
+
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();

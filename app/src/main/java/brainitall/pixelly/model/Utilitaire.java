@@ -42,6 +42,7 @@ public class Utilitaire {
         return state;
     }
 
+
     /**
      * Permet d'écrire sur un fichier de mémoire interne l'état du jeu
      * @param context contexte de l'application

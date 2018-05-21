@@ -97,13 +97,13 @@ public class PlayActivity extends AppCompatActivity {
 
                 try {
 
-                    jsonFinal.put("NomNiveau", Manager.getInstance().getLaGrille().getNumGrille());
-                    jsonFinal.put("NombreChemins", Manager.getInstance().getLaGrille().getLesChemins().size());
+                    jsonFinal.put("NomNiveau", mLaGrille.getNumGrille());
+                    jsonFinal.put("NombreChemins", mLaGrille.getLesChemins().size());
 
                     //Je créé un objet dans lequel j'insererais toutes les infos
                     JSONArray listeChemins = new JSONArray(); //Je créé une liste dans laquel je rentre tous mes objets a chaque fois
 
-                    List<Chemin> lesChemins = Manager.getInstance().getLaGrille().getLesChemins();//pour chaque chemins
+                    List<Chemin> lesChemins = mLaGrille.getLesChemins();//pour chaque chemins
 
                     for(int compteurChemin=0;compteurChemin<lesChemins.size();compteurChemin++) {
                         JSONObject infosChemins=new JSONObject();
@@ -124,8 +124,8 @@ public class PlayActivity extends AppCompatActivity {
 
                             JSONObject infoCase=new JSONObject();
 
-                            infoCase.put("x", Manager.getInstance().getLaGrille().getLesChemins().get(compteurChemin).getCasesChemin().get(compteurCase).getY());
-                            infoCase.put("y", Manager.getInstance().getLaGrille().getLesChemins().get(compteurChemin).getCasesChemin().get(compteurCase).getX());
+                            infoCase.put("x", mLaGrille.getLesChemins().get(compteurChemin).getCasesChemin().get(compteurCase).getY());
+                            infoCase.put("y", mLaGrille.getLesChemins().get(compteurChemin).getCasesChemin().get(compteurCase).getX());
 
                             listeCases.put(infoCase);
 
