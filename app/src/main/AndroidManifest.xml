@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="brainitall.pixelly">
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -16,7 +18,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".controller.PlayActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".controller.PlayActivity" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".controller.OptionActivity" android:screenOrientation="portrait"/>
         <activity android:name=".controller.LevelActivity" android:screenOrientation="portrait"/>
         <activity android:name=".controller.CreditActivity" android:screenOrientation="portrait"/>

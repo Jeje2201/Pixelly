@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import brainitall.pixelly.controller.Manager;
+import brainitall.pixelly.controller.PlayActivity;
+
 /**
  * Classe représentant un fichier
  * @author Manon Brun, Jérémy Leriche
@@ -31,7 +33,9 @@ public class Fichier {
     /**
      * Permet de lire un fichier Json contenant un niveau et stocke les valeurs dans la grille
      */
-    public void lireFichier(Context context) {
+    public void lireFichier(Context context, Context activity) {
+        PlayActivity playActivity = (PlayActivity) activity;
+        System.out.println("On tente le chargement du fichier");
 
         String json = null;
         try {
@@ -56,7 +60,8 @@ public class Fichier {
 
                 //Ajouter les valeurs dans la grille via le Manager
                 //Manager.getInstance().ajouterGrille(numGrille,largeur,hauteur);
-                Manager.getInstance().ajouterGrille(numGrille,hauteur,largeur,nomGrille);
+                //Manager.getInstance().ajouterGrille(numGrille,hauteur,largeur,nomGrille);
+                playActivity.ajouterGrille(numGrille,hauteur,largeur,nomGrille);
             }
 
             //Racine de l'objet terminaison
@@ -72,8 +77,12 @@ public class Fichier {
                 int b = Integer.parseInt(jsonObject.optString("b").toString());
 
                 //Ajouter les valeurs dans la grille via le Manager
-                Manager.getInstance().ajouterTerminaison(tailleChemin,x,y,r,g,b);
+                //Manager.getInstance().ajouterTerminaison(tailleChemin,x,y,r,g,b);
+                playActivity.ajouterTerminaison(tailleChemin,x,y,r,g,b);
+
+
             }
+            System.out.println("Le num de la grille : "+ playActivity.getLaGrille().getNumGrille());
 
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

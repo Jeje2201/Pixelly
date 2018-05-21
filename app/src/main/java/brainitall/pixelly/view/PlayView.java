@@ -16,11 +16,17 @@ import android.widget.TextView;
 
 import brainitall.pixelly.R;
 import brainitall.pixelly.controller.Manager;
+import brainitall.pixelly.controller.PlayActivity;
 
 import static android.graphics.Color.rgb;
 
 
 public class PlayView extends SurfaceView implements SurfaceHolder.Callback, GestureDetector.OnGestureListener{
+
+    /**
+     * Référence vers le controleur de cette vue (PlayActivity)
+     */
+    PlayActivity mController;
 
     // Elements Techniques
     private DrawingThread mThread;
@@ -52,6 +58,7 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
 
     public PlayView(Context context) {
         super(context);
+        mController = (PlayActivity) context;
         mDetector = new GestureDetector(getContext(),this);
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mSurfaceHolder = getHolder();
@@ -72,6 +79,7 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
 
     public PlayView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        mController = (PlayActivity) context;
         setZOrderOnTop(true);
         getHolder().setFormat(PixelFormat.TRANSLUCENT);
         mDetector = new GestureDetector(getContext(),this);
@@ -96,7 +104,7 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         // Calculs des différentes tailles
-        mLargeurGrilleCases = Manager.getInstance().getLaGrille().getLargeurGrille();
+        mLargeurGrilleCases = mController.getLaGrille().getLargeurGrille();
         mTailleSeparateur = (w /9f) / 20f;
         mLargeurGrille = w;
         mLargeurCellule = mLargeurGrille / mLargeurGrilleCases;
@@ -120,19 +128,19 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
         // Tracer à partir des coord du modele
 
         //Pour chaque chemin
-        if(!Manager.getInstance().getLaGrille().getLesChemins().isEmpty())
+        if(!mController.getLaGrille().getLesChemins().isEmpty())
         {
-            for (int i = 0; i < Manager.getInstance().getLaGrille().getLesChemins().size(); i++) {
+            for (int i = 0; i < mController.getLaGrille().getLesChemins().size(); i++) {
 
                 //Pour chaque case
-                for (int j = 0; j < Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().size() - 1; j++) {
+                for (int j = 0; j < mController.getLaGrille().getLesChemins().get(i).getCasesChemin().size() - 1; j++) {
 
                     //Case début trait
-                    int x1 = Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getX();
-                    int y1 = Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getY();
+                    int x1 = mController.getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getX();
+                    int y1 = mController.getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getY();
                     //Case fin trait
-                    int x2 = Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j + 1).getX();
-                    int y2 = Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j + 1).getY();
+                    int x2 = mController.getLaGrille().getLesChemins().get(i).getCasesChemin().get(j + 1).getX();
+                    int y2 = mController.getLaGrille().getLesChemins().get(i).getCasesChemin().get(j + 1).getY();
 
 
                     //Tracé du trait du centre de la case 1 vers celui de la case 2
@@ -144,9 +152,9 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
 
                     // Dessin du trait
                     if (j == 0) {
-                        int r = Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getR();
-                        int g = Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getG();
-                        int b = Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getB();
+                        int r = mController.getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getR();
+                        int g = mController.getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getG();
+                        int b = mController.getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getB();
                         mPaint.setColor(rgb(r, g, b));
                     }
 
@@ -159,14 +167,14 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
 
 
                 // Dessin des chemins complets
-                if(Manager.getInstance().getLaGrille().getLesChemins().get(i).isTermine()){
+                if(mController.getLaGrille().getLesChemins().get(i).isTermine()){
 
-                    for(int j=0; j<Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().size(); j++)
+                    for(int j=0; j<mController.getLaGrille().getLesChemins().get(i).getCasesChemin().size(); j++)
                     {
 
                         //Coordonnes case
-                        int xCase = Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getX();
-                        int yCase = Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getY();
+                        int xCase = mController.getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getX();
+                        int yCase = mController.getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getY();
 
                         //Dessin du rectangle
                         canvas.drawRect(yCase * mLargeurCellule,
@@ -179,10 +187,10 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
             }
 
             /* GESTION DE LA FIN DU NIVEAU ------------------------------------- */
-            if(Manager.getInstance().getLaGrille().niveauFini())
+            if(mController.getLaGrille().niveauFini())
             {
                 System.out.println(" ==========> FINI");
-                mNomImageNiv = Manager.getInstance().getLaGrille().getNomGrille();
+                mNomImageNiv = mController.getLaGrille().getNomGrille();
                 mTexteNextNiv = "Nouveau niveau débloqué !";
 
             }
@@ -219,19 +227,19 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
                 // POSITIONNEMENT DES TERMINAISONS (chiffre + couleur) --------------------------------
 
                 // Si la case courante est une terminaison
-                if (Manager.getInstance().getLaGrille().getCase(y, x).isTerminaison()) {
+                if (mController.getLaGrille().getCase(y, x).isTerminaison()) {
 
                     // Recherche de l'indice dans la liste des terminaisons
-                    int indice = Manager.getInstance().getLaGrille().donneIndiceTerminaison(y,x);
+                    int indice = mController.getLaGrille().donneIndiceTerminaison(y,x);
 
                     // Couleur de la case
-                    int r = Manager.getInstance().getLaGrille().getLesTerminaisons().get(indice).getR();
-                    int g = Manager.getInstance().getLaGrille().getLesTerminaisons().get(indice).getG();
-                    int b = Manager.getInstance().getLaGrille().getLesTerminaisons().get(indice).getB();
+                    int r = mController.getLaGrille().getLesTerminaisons().get(indice).getR();
+                    int g = mController.getLaGrille().getLesTerminaisons().get(indice).getG();
+                    int b = mController.getLaGrille().getLesTerminaisons().get(indice).getB();
                     mPaint.setColor(rgb(r, g, b));
 
                     // CERCLE si taille de la terminaison != 1
-                    if( Manager.getInstance().getLaGrille().getLesTerminaisons().get(indice).getTailleChemin() != 1) {
+                    if( mController.getLaGrille().getLesTerminaisons().get(indice).getTailleChemin() != 1) {
                         canvas.drawCircle((x + 1) * mLargeurCellule - mLargeurCellule/2,
                                 (y +1) * mLargeurCellule - mLargeurCellule/2,
                                 rayonCercle,
@@ -250,8 +258,8 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
                     mPaint.setTextSize(mLargeurCellule * 0.7f);
 
                     // Disparaissent à la fin du niveau
-                    if(!Manager.getInstance().getLaGrille().niveauFini()) {
-                        canvas.drawText("" + Manager.getInstance().getLaGrille().getLesTerminaisons().get(indice).getTailleChemin(),
+                    if(!mController.getLaGrille().niveauFini()) {
+                        canvas.drawText("" + mController.getLaGrille().getLesTerminaisons().get(indice).getTailleChemin(),
                                 x * mLargeurCellule + mLargeurCellule / 2,
                                 y * mLargeurCellule + mLargeurCellule * 0.75f, mPaint);
                     }
@@ -341,7 +349,7 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
             System.out.println("CHEMIN : " + mXInter + "," + mYInter +"    "+ x + "," + y);
 
             //Manager.getInstance().getLaGrille().ajouterCaseChemin(mXInter, mYInter, x, y);
-            Manager.getInstance().getLaGrille().modifierChemins(mXInter, mYInter, x, y);
+            mController.getLaGrille().modifierChemins(mXInter, mYInter, x, y);
 
             //MAJ coord
             mXInter = x;
@@ -352,12 +360,12 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
 
     private void touchUp(int x, int y) {
 
-        System.out.println("Nb de chemins : "+Manager.getInstance().getLaGrille().getLesChemins().size());
+        System.out.println("Nb de chemins : "+mController.getLaGrille().getLesChemins().size());
         //Vérif affichage
-        for(int i=0; i<Manager.getInstance().getLaGrille().getLesChemins().size(); i++){
+        for(int i=0; i<mController.getLaGrille().getLesChemins().size(); i++){
             System.out.println("Chemin "+ (i+1) + ": ");
-            for(int j=0; j<Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().size(); j++){
-                System.out.print("("+Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getX() + "," + Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getY()+")    ");
+            for(int j=0; j<mController.getLaGrille().getLesChemins().get(i).getCasesChemin().size(); j++){
+                System.out.print("("+mController.getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getX() + "," + mController.getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getY()+")    ");
             }
             System.out.println();
         }
@@ -423,7 +431,7 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
 
         // Vérification dépassement de la grille
         if(!(numLigne > mLargeurGrilleCases-1))
-            Manager.getInstance().supprimerChemin(numLigne, numColonne);
+            mController.supprimerChemin(numLigne, numColonne);
         return true;
     }
 
