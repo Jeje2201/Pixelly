@@ -40,13 +40,16 @@
 
     <ImageView
         android:id="@+id/imageView_titre"
-        android:layout_width="342dp"
-        android:layout_height="99dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="330dp"
+        android:layout_height="88dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/menu_titre" />
+
 
     <ImageView
         android:id="@+id/imageView_quitter"

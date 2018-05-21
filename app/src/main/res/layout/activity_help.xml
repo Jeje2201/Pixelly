@@ -16,11 +16,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintTop_toTopOf="parent">
 
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.546" />
     <!-- relativeLayout qui est caché tant que l'utilisateur n'a pas cliqué sur
     plus de détail -->
 
@@ -67,15 +64,11 @@
                 android:layout_width="220dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="  1. Un chemin ne peut relier que deux terminaisons\n
-    2. La longueur des chemins
-    doit correspondre au nombre
-    de points indiqués dans les terminaisons
-        "
+                android:text="@string/texte1_aide"
                 android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="16dp"
-                android:textStyle="italic" />
+                android:textStyle="italic"/>
             <!-- image 2 d'aide du jeu -->
 
             <ImageView
@@ -97,7 +90,7 @@
                 android:layout_width="220dp"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="3. Un chemin ne peut pas croiser d'autres chemins ou passer au travers des terminaisons."
+                android:text="@string/texte2_aide"
                 android:textAlignment="center"
                 android:textColor="#000000"
                 android:textSize="16dp"
