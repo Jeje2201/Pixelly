@@ -46,4 +46,11 @@ app/src/main/AndroidManifest.xml
 .idea/assetWizardSettings.xml
 .idea/caches/build_file_checksums.ser
 .idea/codeStyles/codeStyleConfig.xml
+<<<<<<< HEAD
 .idea/misc.xml
+=======
+.idea/gradle.xml
+.idea/misc.xml
+.idea/runConfigurations.xml
+.idea/vcs.xml
+>>>>>>> 545d5ba1c12c92c6fc12330e9a0297f7f44e564c
