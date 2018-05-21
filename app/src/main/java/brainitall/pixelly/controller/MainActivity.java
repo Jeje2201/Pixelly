@@ -2,6 +2,7 @@ package brainitall.pixelly.controller;
 
 
 import android.content.Intent;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
     private ImageView mAide;
 
     /**
+     * Image qui sert de bouton permettant d'avoir accès au crédit du jeu
+     */
+    private ImageView mCredit;
+
+    /**
      * Lecteur audio
      */
     private static MediaPlayer mp;
@@ -54,14 +60,15 @@ public class MainActivity extends AppCompatActivity {
         mJouer = (ImageView) findViewById(R.id.imageView_play);
         mOption = (ImageView) findViewById(R.id.imageView_option);
         mQuitter = (ImageView) findViewById(R.id.imageView_quitter);
+        mCredit = (ImageView) findViewById(R.id.imageView_credit);
         mAide = (ImageView) findViewById(R.id.imageView_aide);
 
         //Si le média pour la musique n'existe pas (donc au premier lancement), le créer
-        if( mp == null) {
+        if (mp == null) {
             mp = MediaPlayer.create(this, R.raw.background_music);
         }
         //Si la musique n'est pas lancer, alors la lancer
-        if(!mp.isPlaying()) {
+        if (!mp.isPlaying()) {
             mp.setLooping(true);
             mp.start();
         }
@@ -93,13 +100,13 @@ public class MainActivity extends AppCompatActivity {
             Action lorsque le joueur clique sur le bouton 'Quitter'
          */
 
-         mQuitter.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 finish();
-                 System.exit(0);
-             }
-         });
+        mQuitter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                System.exit(0);
+            }
+        });
         /*
             Action lorsque le joueur clique sur le bouton 'Aide'
          */
@@ -108,6 +115,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent helpActivity = new Intent(MainActivity.this, HelpActivity.class);
                 startActivity(helpActivity);
+            }
+        });
+
+        mCredit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent creditActivity = new Intent(MainActivity.this, CreditActivity.class);
+                startActivity(creditActivity);
             }
         });
     }
