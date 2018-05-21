@@ -25,11 +25,11 @@ public class LevelActivity extends AppCompatActivity {
 
     // -------------------- MODELE -----------------------------
 
-    public static int CODE = 15248;
+
     /**
      * Nombre total de Niveau
      */
-    private static int NBLEVEL = 3;
+    public static int NBLEVEL = 3;
 
     /**
      * Le fichier permetttant de charger et sauvegarder le jeu
@@ -72,6 +72,7 @@ public class LevelActivity extends AppCompatActivity {
         setContentView(R.layout.activity_level);
 
         // Initialisation des boutons
+        System.out.println("ON RENTRE DANS LE LEVEL ACTIVITY");
         mNumDernierNiveau = Utilitaire.lireEtatJeu(getApplicationContext());
         mNumNiveauCourant = 0;
         mLesBoutonsNiveau = new Vector<>();
@@ -119,32 +120,29 @@ public class LevelActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    /**
-     * Action à effectuer quand on retourne sur l'activité avec un code de retour
-     */
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //super.onActivityResult(requestCode,resultCode,data);
-        System.out.println("Intent "+ data+" ResultCde "+ resultCode+"  --  RequestCode "+ requestCode);
-        if(requestCode == CODE){
-            if(data != null){
-                boolean fini = data.getBooleanExtra("fini",false);
-                if(fini){
-                    System.out.println("On débloque un niveau (si possible)");
-                    if(mNumDernierNiveau < NBLEVEL && mNumNiveauCourant >= mNumDernierNiveau){
-                        mNumDernierNiveau++;
-                        mLesBoutonsNiveau.get(mNumDernierNiveau).setEnabled(true);
-                    }
-                }
-            }
+    public void debloquerNiveau(){
+        System.out.println(mNumDernierNiveau);
+        for(int i = 0 ; i < mNumDernierNiveau+1; i++){
+            mLesBoutonsNiveau.get(i).setEnabled(true);
         }
-
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mNumDernierNiveau = Utilitaire.lireEtatJeu(getApplicationContext());
+        System.out.println(mNumDernierNiveau);
+        debloquerNiveau();
+    }
+
+
+
+
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Utilitaire.ecrireEtatJeu(getApplicationContext(),this);
+        Utilitaire.ecrireEtatJeu(getApplicationContext(), mNumDernierNiveau);
         System.out.println("On quitte l'activité et on écrit l'état du jeu");
         finish();
     }
@@ -163,8 +161,6 @@ public class LevelActivity extends AppCompatActivity {
     public int getNumDernierNiveau() {
         return mNumDernierNiveau;
     }
-
-
 
 
 }

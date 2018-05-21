@@ -1,8 +1,6 @@
 package brainitall.pixelly.controller;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.PixelFormat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.SurfaceView;
@@ -10,20 +8,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import java.util.List;
-
 import brainitall.pixelly.R;
+import brainitall.pixelly.model.Utilitaire;
 import brainitall.pixelly.model.metier.Case;
 import brainitall.pixelly.model.metier.Chemin;
 import brainitall.pixelly.model.metier.Grille;
 import brainitall.pixelly.model.technique.Fichier;
 import brainitall.pixelly.view.PlayView;
 
+/**
+ * Classe représentant l'activité correspondante à la grille du niveau courant
+ */
 public class PlayActivity extends AppCompatActivity {
 
     // --------------------- MODELE ----------------------------
@@ -36,22 +31,45 @@ public class PlayActivity extends AppCompatActivity {
      * Fichier du jeu
      */
     private Fichier mLeFichier;
+    /**
+     * Nom du niveau le plus haut débloqué
+     */
+    private int mNumDernierNiveau;
+
+
 
     // -------------------- VUE ---------------------------------
-
+    /**
+     * Notre widget
+     */
     private PlayView mVue;
 
     //Options
+    /**
+     * Zone de texte affichant le numéro du niveau
+     */
     private TextView mNomNiv;
+    /**
+     * Bouton associé à l'aide du jeu
+     */
     private Button mAide;
+    /**
+     * Bouton réinitialisant la grille
+     */
     private Button mReinit;
-    private Button mSave;
-    //Grille
+
+    /**
+     * Notre wiget Grille
+     */
     private SurfaceView mGrilleNiv;
 
 
 
     @Override
+    /**
+     * Permet d'initialiser l'activité
+     * savedInstanceState le bundle
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Initialisation de la grille
@@ -59,16 +77,15 @@ public class PlayActivity extends AppCompatActivity {
         // On récupère le nom du fichier à charger
         Intent intent = getIntent();
         String str = intent.getStringExtra("nomFichier");
+        mNumDernierNiveau = intent.getIntExtra("numDernierNiveau",0);
         // Chargement du fichier et donc création de la grille
         mLeFichier = new Fichier(str,this);
         mLeFichier.lireFichier(getApplicationContext(),this);
         // Création du widget de la vue de la grille
         mVue = new PlayView(this);
-//        mVue.setZOrderOnTop(true);
-//        mVue.getHolder().setFormat(PixelFormat.TRANSLUCENT);
+
 
         // Définition de la grille comme contentView
-        //setContentView(mVue);
         setContentView(R.layout.activity_play);
 
 
@@ -77,7 +94,6 @@ public class PlayActivity extends AppCompatActivity {
         mNomNiv.setText("Niveau "+mLaGrille.getNumGrille());
         mAide = (Button) findViewById(R.id.activity_play_aide);
         mReinit = (Button) findViewById(R.id.activity_play_rez);
-        mSave = (Button) findViewById(R.id.activity_play_save);
         mGrilleNiv = (SurfaceView) findViewById(R.id.activity_play_grille);
 
 
@@ -89,13 +105,6 @@ public class PlayActivity extends AppCompatActivity {
             }
         });
 
-        mSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                mLeFichier.ecrireSave(getApplicationContext(),"save1.json");
-            }
-        });
 
         mReinit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -212,19 +221,22 @@ public class PlayActivity extends AppCompatActivity {
     public void onBackPressed() {
         mVue.interruptedThread();
         super.onBackPressed();
-        boolean fini = false;
         if(mLaGrille.niveauFini()){
-            fini = true;
+            if(mNumDernierNiveau < LevelActivity.NBLEVEL-1 && mLaGrille.getNumGrille()-1 >= mNumDernierNiveau){
+                mNumDernierNiveau += 1;
+                Utilitaire.ecrireEtatJeu(getApplicationContext(),mNumDernierNiveau);
+                System.out.println(Utilitaire.lireEtatJeu(getApplicationContext()));
+            }
         }
-        Intent data =getIntent();
-        data.putExtra("fini",fini);
-        setResult(RESULT_OK,data);
-
+        mLeFichier.ecrireSave(getApplicationContext(),"save"+mLaGrille.getNumGrille()+".json");
         finish();
     }
 
-
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mLeFichier.ecrireSave(getApplicationContext(),"save"+mLaGrille.getNumGrille()+".json");
+    }
 
     // ----------------------------- GETTER & SETTER --------------------------------------
 

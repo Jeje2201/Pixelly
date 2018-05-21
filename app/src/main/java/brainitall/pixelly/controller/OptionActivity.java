@@ -1,5 +1,6 @@
 package brainitall.pixelly.controller;
 
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -9,7 +10,10 @@ import android.widget.ToggleButton;
 import android.content.Intent;
 import android.view.View;
 
+import java.io.File;
+
 import brainitall.pixelly.R;
+import brainitall.pixelly.model.Utilitaire;
 
 /**
  * Classe représentant l'activité correspondant au menu des options
@@ -73,7 +77,18 @@ public class OptionActivity extends AppCompatActivity {
         /*
             Action lorsque le joueur clique sur le bouton 'Reset'
          */
-
+        mReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int numDernierNiveau= Utilitaire.lireEtatJeu(getApplicationContext());
+                for(int i=0; i<=numDernierNiveau;i++){
+                    File dir = getFilesDir();
+                    File file = new File(dir,"save"+(i+1)+".json");
+                    file.delete();
+                }
+                Utilitaire.ecrireEtatJeu(getApplicationContext(),0);
+            }
+        });
 
 
         /*

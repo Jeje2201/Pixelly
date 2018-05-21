@@ -132,9 +132,6 @@ public class Fichier {
                 int g = Integer.parseInt(jsonObject.optString("g").toString());
                 int b = Integer.parseInt(jsonObject.optString("b").toString());
 
-
-
-
                 //Racine de l'objet cases
                 JSONArray cases = jsonObject.optJSONArray("Cases");
 
@@ -195,7 +192,7 @@ public class Fichier {
                 JSONArray listeCases = new JSONArray();
                 List<Case> lesCases = lesChemins.get(compteurChemin).getCasesChemin();//pour chaques cases
 
-                for (int compteurCase = 0; compteurCase < lesChemins.get(compteurChemin).getTailleMax(); compteurCase++) {
+                for (int compteurCase = 0; compteurCase < lesChemins.get(compteurChemin).getCasesChemin().size(); compteurCase++) {
 
                     JSONObject infoCase=new JSONObject();
 
@@ -226,57 +223,4 @@ public class Fichier {
             e.printStackTrace();
         }
     }
-
-
-    /**
-     * Permet de lire un fichier Json de sauvegarde et stocke les valeurs
-     */
-    /*
-    public void lireFichierSave(Context context) {
-
-        String json = null;
-        try {
-            InputStream is = context.getAssets().open(mNomFichier);
-            int size = is.available();
-            byte[] buffer = new byte[size];
-            is.read(buffer);
-            is.close();
-            json = new String(buffer, "UTF-8");
-
-            JSONObject jsonRootObject = new JSONObject(json);
-            //Racine de l'objet chemins
-            JSONArray chemins = jsonRootObject.optJSONArray("chemins");
-
-            for (int i = 0; i < chemins.length(); i++) {
-                JSONObject jsonObject = chemins.getJSONObject(i);
-                int tailleChemin = Integer.parseInt(jsonObject.optString("tailleChemin").toString());
-                int r = Integer.parseInt(jsonObject.optString("r").toString());
-                int g = Integer.parseInt(jsonObject.optString("g").toString());
-                int b = Integer.parseInt(jsonObject.optString("b").toString());
-
-                //Ajouter les valeurs dans le Chemin via le Manager
-
-
-
-                //Racine de l'objet cases
-                JSONArray cases = jsonRootObject.optJSONArray("cases");
-
-                for (int j = 0; j < cases.length(); j++) {
-                    JSONObject jsonObj = cases.getJSONObject(j);
-                    int x = Integer.parseInt(jsonObj.optString("x").toString());
-                    int y = Integer.parseInt(jsonObj.optString("y").toString());
-
-                    //Ajouter les valeurs dans le Chemin via le Manager ajouter chemin
-                   Terminaison t = new Terminaison(tailleChemin,x,y,r,g,b);
-
-                }
-            }
-        }catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }*/
 }
