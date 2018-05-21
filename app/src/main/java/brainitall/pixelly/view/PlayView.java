@@ -12,50 +12,116 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.widget.TextView;
 
-import brainitall.pixelly.R;
-import brainitall.pixelly.controller.Manager;
 import brainitall.pixelly.controller.PlayActivity;
 
 import static android.graphics.Color.rgb;
 
 
+/**
+ * Android widget
+ */
 public class PlayView extends SurfaceView implements SurfaceHolder.Callback, GestureDetector.OnGestureListener{
+
+
+    /* ATTRIBUTS D'INSTANCE ============================================================ */
 
     /**
      * Référence vers le controleur de cette vue (PlayActivity)
      */
     PlayActivity mController;
 
-    // Elements Techniques
+    // Elements Techniques ----------------------------------------------------------
+    /**
+     * Thread dans lequel le dessin se fera
+     */
     private DrawingThread mThread;
 
 
-    // Elements graphiques
+    // Elements graphiques ---------------------------------------------------------
+    /**
+     * Couche d'abstraction pour dessiner
+     */
     private SurfaceHolder mSurfaceHolder;
-    private GestureDetector mDetector;
+    /**
+     * Le pinceau
+     */
     private Paint mPaint;
+
+    /**
+     * Capture des évenements touch
+     */
+    private GestureDetector mDetector;
+
+
+    // Eléments dimensions réelles Grille ---------------------------------------
+    /**
+     * Largeur de la grille en cases
+     */
     private int mLargeurGrilleCases;
+    /**
+     * Largeur réelle de la grille
+     */
     private float mLargeurGrille;
+    /**
+     * Largeur du trait
+     */
     private float mTailleSeparateur;
+    /**
+     * Largeur réelle d'une case
+     */
     private float mLargeurCellule;
 
     // Elements évènements CASES
-    int mXInter, mYInter;       // Coord de la case intermédiaire
+    /**
+     * Coordonnées x de la case intermédiaire
+     */
+    private int mXInter;
+    /**
+     * Coordonnées y de la case intermédiaire
+     */
+    private int mYInter;
 
 
-    //Message fin niveau
+    //Elements fin niveau --------------------------------------------------------
+    /**
+     * Indique si le niveau est terminé
+     */
+    private boolean estFini;
+
+    /**
+     * Nom de l'image pixel associée au niveau
+     */
     private String mNomImageNiv;
+    /**
+     * Texte associé à la fin du niveau
+     */
     private String mTexteNextNiv;
-
+    /**
+     * Positionnemnent réel en x du texte (nom de l'image)
+     */
     private float mXNomImg;
+    /**
+     * Positionnemnent réel en y du texte (nom de l'image)
+     */
     private float mYNomImg;
+    /**
+     * Positionnemnent réel en x du texte (débloquage niveau)
+     */
     private float mXNextNiv;
+    /**
+     * Positionnemnent réel en y du texte (débloquage niveau)
+     */
     private float mYNextNiv;
 
 
 
+
+    /* CONSTRUCTEUR ================================++++++============================ */
+    /**
+     * Constructeur de PlayView utilisé pour construire la vue en Java
+     * @param context contexte hébergeant la vue
+     */
     public PlayView(Context context) {
         super(context);
         mController = (PlayActivity) context;
@@ -73,10 +139,16 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
         mPaint.setStrokeCap(Paint.Cap.ROUND);
 
         //Init texte fin
+        estFini = false;
         mNomImageNiv = "";
         mTexteNextNiv = "";
     }
 
+    /**
+     * Controleur de PlayView pour construire la vue depuis XML sans style
+     * @param context le contexte qui héberge la vue
+     * @param attrs les attributs définis en xml
+     */
     public PlayView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         mController = (PlayActivity) context;
@@ -97,10 +169,23 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
 
     }
 
+
+
+
+
+    /* METHODES ======================================================================== */
+
     // ----------------------- METHODES LIEES A LA SURFACEVIEW -------------------------
 
 
     @Override
+    /**
+     * Appelée quand la taille de la vue change
+     * @param w largeur de l'écran
+     * @param h hauteur de l'écran
+     * @param oldw ancienne largeur
+     * @param oldh ancienne hauteur
+     */
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         // Calculs des différentes tailles
@@ -117,6 +202,9 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
     }
 
     @Override
+    /**
+     * Dessine chaque élement graphique sur le canvas avec le pinceau
+     */
     public void draw(Canvas canvas) {
         super.draw(canvas);
 
@@ -124,7 +212,7 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
         canvas.drawColor(0, PorterDuff.Mode.CLEAR);
 
 
-        /* TRACE DES CHEMINS ==================================================================== */
+        /* TRACE DES CHEMINS -------------------------------------------------------------------- */
         // Tracer à partir des coord du modele
 
         //Pour chaque chemin
@@ -189,6 +277,7 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
             /* GESTION DE LA FIN DU NIVEAU ------------------------------------- */
             if(mController.getLaGrille().niveauFini())
             {
+                estFini = true;
                 System.out.println(" ==========> FINI");
                 mNomImageNiv = mController.getLaGrille().getNomGrille();
                 mTexteNextNiv = "Nouveau niveau débloqué !";
@@ -217,7 +306,7 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
 
 
 
-        /* CREATION DE LA GRILLE (initiale) ===================================================== */
+        /* CREATION DE LA GRILLE (initiale) ------------------------------------------------------*/
         float rayonCercle = mLargeurCellule / 2 - mLargeurCellule / 10;
 
         for (int y = 0; y < mLargeurGrilleCases; y++) {
@@ -300,21 +389,33 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
 
     }
 
-
-
-
     @Override
+    /**
+     * Appelée à la création de la surface et permet de commencer à dessiner
+     * @param holder la surface sur laquelle on dessine
+     */
     public void surfaceCreated(SurfaceHolder holder) {
         mThread.setKeepDrawing(true);
         mThread.start();
     }
 
     @Override
+    /**
+     * Appelé quand la surface change - maj l'image (ex si on tourne le téléphone)
+     * @param holder la surface sur laquelle on dessine
+     * @param format le format PixelFormat
+     * @param width largeur
+     * @param heigh hauteur
+     */
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-        // A utiliser si on change l'orientation du téléphone
+
     }
 
     @Override
+    /**
+     * Appelée dès que la surface est détruite (utile pour quand arreter le thread) et bloque la surface
+     * @param holder la surface sur laquelle on dessine
+     */
     public void surfaceDestroyed(SurfaceHolder holder) {
         mThread.keepDrawing = false;
         boolean joined = false;
@@ -333,6 +434,50 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
 
     // -------------------------------- METHODES LIEES AU TACTIL -----------------------
 
+    @Override
+    /**
+     * Détecte les actions utilisateur quand qui intéragit avec l'écran
+     * @param event évenement touch
+     */
+    public boolean onTouchEvent(MotionEvent event) {
+
+        //Coord réelles
+        float x = event.getX();
+        float y = event.getY();
+
+        // Convertir en coordonnées Grille
+        int numColonne = (int)(x / mLargeurCellule);
+        int numLigne = (int)(y / mLargeurCellule);
+
+
+        switch(event.getAction())
+        {
+            // Premier appui
+            case MotionEvent.ACTION_DOWN :
+                touchStart(numLigne, numColonne);
+                break;
+
+            // Slide
+            case MotionEvent.ACTION_MOVE :
+                // Vérification dépassement de la grille
+                if(!(numLigne > mLargeurGrilleCases-1))
+                    touchMove(numLigne, numColonne);
+                break;
+
+            // Fin
+            case MotionEvent.ACTION_UP :
+                break;
+        }
+
+        return mDetector.onTouchEvent(event);
+    }
+
+
+    /**
+     * Initialise les coordonnées grille de la case courante détectée
+     * @param x coordonnée x
+     * @param y coordonnée y
+     */
     private void touchStart(int x, int y) {
 
         //Initialisation des coord
@@ -340,6 +485,11 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
         mYInter = y;
     }
 
+    /**
+     * Met à jour les coordonnées de la case courante détectée lors d'un changement de coordonnées grille
+     * @param x coordonnée x
+     * @param y coordonnée y
+     */
     private void touchMove(int x, int y) {
 
         // Si détectection d'un changement de coordonnées
@@ -354,115 +504,114 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
             //MAJ coord
             mXInter = x;
             mYInter = y;
-
         }
     }
 
-    private void touchUp(int x, int y) {
-
-        System.out.println("Nb de chemins : "+mController.getLaGrille().getLesChemins().size());
-        //Vérif affichage
-        for(int i=0; i<mController.getLaGrille().getLesChemins().size(); i++){
-            System.out.println("Chemin "+ (i+1) + ": ");
-            for(int j=0; j<mController.getLaGrille().getLesChemins().get(i).getCasesChemin().size(); j++){
-                System.out.print("("+mController.getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getX() + "," + mController.getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getY()+")    ");
-            }
-            System.out.println();
-        }
 
 
 
 
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-
-        //Coord réelles
-        float x = event.getX();
-        float y = event.getY();
-
-        // Convertir en coordonnées Grille
-        int numColonne = (int)(x / mLargeurCellule);
-        int numLigne = (int)(y / mLargeurCellule);
-
-
-        switch(event.getAction())
-        {
-            case MotionEvent.ACTION_DOWN :
-                touchStart(numLigne, numColonne);
-                break;
-
-            // Vérification dépassement de la grille
-            case MotionEvent.ACTION_MOVE :
-                if(!(numLigne > mLargeurGrilleCases-1))
-                    touchMove(numLigne, numColonne);
-                break;
-
-            case MotionEvent.ACTION_UP :
-                touchUp(numLigne, numColonne);
-                break;
-        }
-
-        return mDetector.onTouchEvent(event);
-    }
 
 
     @Override
+    /**
+     * Détecte un appui
+     * @param e event
+     */
     public boolean onDown(MotionEvent e) {
         return true;
     }
 
     @Override
+    /**
+     * Détecte un appui sans avoir bougé ni enlévé son doigt
+     * @param e event
+     */
     public void onShowPress(MotionEvent e) {
 
     }
 
     @Override
+    /**
+     * Détecte un seul appui (down puis up)
+     * @param e event
+     */
     public boolean onSingleTapUp(MotionEvent e) {
 
-        //Coord réelles
-        float x = e.getX();
-        float y = e.getY();
+        // On bloque le tactil si le niveau est terminé
+        if(!estFini) {
+            //Coord réelles
+            float x = e.getX();
+            float y = e.getY();
 
-        // Converties en coordonnées Grille
-        int numColonne = (int)(x / mLargeurCellule);
-        int numLigne = (int)(y / mLargeurCellule);
+            // Converties en coordonnées Grille
+            int numColonne = (int) (x / mLargeurCellule);
+            int numLigne = (int) (y / mLargeurCellule);
 
-        // Vérification dépassement de la grille
-        if(!(numLigne > mLargeurGrilleCases-1))
-            mController.supprimerChemin(numLigne, numColonne);
+            // Vérification dépassement de la grille
+            if (!(numLigne > mLargeurGrilleCases - 1))
+                mController.supprimerChemin(numLigne, numColonne);
+        }
+
         return true;
     }
 
     @Override
+    /**
+     * Détecte le mouvement de l'évenement initiale et l'evement courant
+     * @param e1 evenement initiale
+     * @param e2 evenement courant
+     * @param distanceX distance en X parcourue
+     * @param distanceY distance en Y parcourue
+     */
     public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
         return false;
     }
 
     @Override
+    /**
+     * Détecte une longue pression
+     * @param e evenement
+     */
     public void onLongPress(MotionEvent e) {
 
     }
 
     @Override
+    /**
+     * Détecte un mouvement de 'lancé'
+     * @param e evenement
+     */
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         return false;
     }
 
 
-
-
+    /**
+     * Interrompt le thread
+     */
     public void interruptedThread(){
         mThread.interrupt();
     }
 
+
+
+
+
+
     // ---------------------------------- CLASSE INTERNE : THREAD -----------------------
 
+    /**
+     * Permet d'arrêter le dessin quand il le faut
+     */
     public class DrawingThread extends Thread {
+
         private boolean keepDrawing = true;
 
         @Override
+        /**
+         *
+         */
         public void run() {
             while(keepDrawing){
                 Canvas canvas = null;
@@ -488,25 +637,18 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
             }
         }
 
-        // ---------------------------------------- GETTER & SETTER -----------------------------------------------
 
-
-
-        public boolean isKeepDrawing() {
-            return keepDrawing;
-        }
-
+        /**
+         * Modifier
+         * @param keepDrawing boolean
+         */
         public void setKeepDrawing(boolean keepDrawing) {
             this.keepDrawing = keepDrawing;
         }
     }
 
-    public String getNomImageNiv() {
-        return mNomImageNiv;
-    }
 
-    public String getTexteNextNiv() {
-        return mTexteNextNiv;
-    }
+
+
 }
 
