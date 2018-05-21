@@ -454,6 +454,71 @@ public class Grille {
     }
 
 
+
+
+// --------------------------------------- Fin Niveau ----------------------------------------
+    /**
+     * Vérifie si le niveau est terminé
+     * @return boolean
+     */
+    public boolean niveauFini()
+    {
+        //Nb terminaisons sans les 1
+        int vraisTerminaisons =  nbTerminaisonsChemins();
+
+        //Nombre de chemins du niveau
+        int nbCheminsNiv =  vraisTerminaisons / 2;
+
+
+        if((mLesChemins.size() == nbCheminsNiv) && cheminsTousComplets(nbCheminsNiv) )
+            return true;
+
+        return false;
+    }
+
+    /**
+     * Vérifie que chaque chemin tracé est bien terminé
+     * @param taille nombre de chemins du niveau
+     * @return boolean
+     */
+    private boolean cheminsTousComplets(int taille)
+    {
+        for(int i=0; i < taille; i++)
+        {
+            if(!mLesChemins.get(i).isTermine()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
+    /**
+     * Donne le nombre de terminaisons du niveau sans les 1
+     * @return compteur de terminaisons
+     */
+    private int nbTerminaisonsChemins()
+    {
+        int compteur = 0;
+
+        for(Terminaison term : mLesTerminaisons)
+        {
+            if(term.getTailleChemin() != 1)
+                compteur++;
+        }
+
+        return compteur;
+    }
+
+
+
+
+
+
+
+
+
     // --------------------------------------- GETTER & SETTER ---------------------------------------
 
     /**
@@ -512,5 +577,9 @@ public class Grille {
      */
     public List<Terminaison> getLesTerminaisons() {
         return mLesTerminaisons;
+    }
+
+    public String getNomGrille() {
+        return mNomGrille;
     }
 }

@@ -12,7 +12,9 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.TextView;
 
+import brainitall.pixelly.R;
 import brainitall.pixelly.controller.Manager;
 
 import static android.graphics.Color.rgb;
@@ -35,7 +37,17 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
 
     // Elements évènements CASES
     int mXInter, mYInter;       // Coord de la case intermédiaire
-    int mNbChangementsCases;
+
+
+    //Message fin niveau
+    private String mNomImageNiv;
+    private String mTexteNextNiv;
+
+    private float mXNomImg;
+    private float mYNomImg;
+    private float mXNextNiv;
+    private float mYNextNiv;
+
 
 
     public PlayView(Context context) {
@@ -53,7 +65,9 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
         mPaint.setColor(Color.WHITE);
         mPaint.setStrokeCap(Paint.Cap.ROUND);
 
-
+        //Init texte fin
+        mNomImageNiv = "";
+        mTexteNextNiv = "";
     }
 
     public PlayView(Context context, @Nullable AttributeSet attrs) {
@@ -86,6 +100,12 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
         mTailleSeparateur = (w /9f) / 20f;
         mLargeurGrille = w;
         mLargeurCellule = mLargeurGrille / mLargeurGrilleCases;
+
+        //Position du texte fin niveau
+        mXNomImg = w / 2;
+        mYNomImg = h - 80;
+        mXNextNiv = w /2;
+        mYNextNiv = h - 30;
     }
 
     @Override
@@ -130,22 +150,19 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
                         mPaint.setColor(rgb(r, g, b));
                     }
 
+
                     mPaint.setStrokeWidth(50f);
                     canvas.drawLine(cX1, cY1, cX2, cY2, mPaint);
+
+
                 }
 
 
-                // Dessin d'un chemin complet
-                if(Manager.getInstance().getLaGrille().getLesChemins().get(i).isComplet()){
+                // Dessin des chemins complets
+                if(Manager.getInstance().getLaGrille().getLesChemins().get(i).isTermine()){
 
                     for(int j=0; j<Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().size(); j++)
                     {
-                        if (j == 0) {
-                            int r = Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getR();
-                            int g = Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getG();
-                            int b = Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getB();
-                            mPaint.setColor(rgb(r, g, b));
-                        }
 
                         //Coordonnes case
                         int xCase = Manager.getInstance().getLaGrille().getLesChemins().get(i).getCasesChemin().get(j).getX();
@@ -160,6 +177,31 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
                     }
                 }
             }
+
+            /* GESTION DE LA FIN DU NIVEAU ------------------------------------- */
+            if(Manager.getInstance().getLaGrille().niveauFini())
+            {
+                System.out.println(" ==========> FINI");
+                mNomImageNiv = Manager.getInstance().getLaGrille().getNomGrille();
+                mTexteNextNiv = "Nouveau niveau débloqué !";
+
+            }
+            else
+            {
+                mNomImageNiv = "";
+                mTexteNextNiv = "";
+
+            }
+
+            mPaint.setTextSize(50);
+            mPaint.setColor(Color.BLACK);
+            canvas.drawText(mNomImageNiv, mXNomImg, mYNomImg, mPaint);
+            mPaint.setTextSize(50);
+            mPaint.setColor(Color.GREEN);
+            canvas.drawText(mTexteNextNiv, mXNextNiv, mYNextNiv, mPaint);
+
+            System.out.println(mNomImageNiv);
+            System.out.println(mTexteNextNiv);
         }
 
 
@@ -206,9 +248,18 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
                     mPaint.setColor(Color.BLACK);
                     mPaint.setTextAlign(Paint.Align.CENTER);
                     mPaint.setTextSize(mLargeurCellule * 0.7f);
-                    canvas.drawText("" + Manager.getInstance().getLaGrille().getLesTerminaisons().get(indice).getTailleChemin(),
-                            x * mLargeurCellule + mLargeurCellule / 2,
-                            y * mLargeurCellule + mLargeurCellule * 0.75f, mPaint);
+
+                    // Disparaissent à la fin du niveau
+                    if(!Manager.getInstance().getLaGrille().niveauFini()) {
+                        canvas.drawText("" + Manager.getInstance().getLaGrille().getLesTerminaisons().get(indice).getTailleChemin(),
+                                x * mLargeurCellule + mLargeurCellule / 2,
+                                y * mLargeurCellule + mLargeurCellule * 0.75f, mPaint);
+                    }
+                    else{
+                        canvas.drawText("",
+                                x * mLargeurCellule + mLargeurCellule / 2,
+                                y * mLargeurCellule + mLargeurCellule * 0.75f, mPaint);
+                    }
                 }
 
 
@@ -238,7 +289,11 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
             canvas.drawLine(0, i * mLargeurCellule, mLargeurCellule * mLargeurGrilleCases, i * mLargeurCellule, mPaint);
         }
 
+
     }
+
+
+
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
@@ -260,7 +315,7 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
                 mThread.join();
                 joined = true;
             } catch (InterruptedException e) {}
-                // Gestion Exception
+            // Gestion Exception
         }
     }
 
@@ -272,13 +327,9 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
 
     private void touchStart(int x, int y) {
 
-        //Compteur du nb de changement de coord
-        mNbChangementsCases = 0;
-
         //Initialisation des coord
         mXInter = x;
         mYInter = y;
-
     }
 
     private void touchMove(int x, int y) {
@@ -288,7 +339,7 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
         {
             System.out.println(" ============> IF CHANGEMENT ");
             System.out.println("CHEMIN : " + mXInter + "," + mYInter +"    "+ x + "," + y);
-            mNbChangementsCases++;
+
             //Manager.getInstance().getLaGrille().ajouterCaseChemin(mXInter, mYInter, x, y);
             Manager.getInstance().getLaGrille().modifierChemins(mXInter, mYInter, x, y);
 
@@ -296,7 +347,6 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
             mXInter = x;
             mYInter = y;
 
-            System.out.println("nb changement : "+ mNbChangementsCases);
         }
     }
 
@@ -320,6 +370,7 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
+        //Coord réelles
         float x = event.getX();
         float y = event.getY();
 
@@ -361,14 +412,12 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
 
     @Override
     public boolean onSingleTapUp(MotionEvent e) {
-        // Supprime entièrement un chemin si
-        // - appui sur l'une des cases du chemin non terminé (et non sur la dernière case !!)
-        //      OU sur la terminaison commencent le chemin
-        // - appui sur n'importe quelles cases (terminaisons comprises) du chemin terminé
+
+        //Coord réelles
         float x = e.getX();
         float y = e.getY();
 
-        // Convertir en coordonnées Grille
+        // Converties en coordonnées Grille
         int numColonne = (int)(x / mLargeurCellule);
         int numLigne = (int)(y / mLargeurCellule);
 
@@ -444,6 +493,12 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
         }
     }
 
+    public String getNomImageNiv() {
+        return mNomImageNiv;
+    }
 
+    public String getTexteNextNiv() {
+        return mTexteNextNiv;
+    }
 }
 
