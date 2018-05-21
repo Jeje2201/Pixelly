@@ -46,13 +46,13 @@ public class Utilitaire {
     /**
      * Permet d'écrire sur un fichier de mémoire interne l'état du jeu
      * @param context contexte de l'application
-     * @param activity activité où le modele est contenu
      */
-    public static void ecrireEtatJeu(Context context, Context activity){
-        LevelActivity levelActivity = (LevelActivity) activity;
+    public static void ecrireEtatJeu(Context context, int numDernierNiveau){
+        //LevelActivity levelActivity = (LevelActivity) activity;
+        //Activity mActivity = (Activity) activity;
         JSONObject jsonFinal = new JSONObject();
         try {
-            jsonFinal.put("etatJeu", levelActivity.getNumDernierNiveau());
+            jsonFinal.put("etatJeu", numDernierNiveau);
             String mJsonResponse = jsonFinal.toString();
             System.out.println("Json a sauvegarder :"+mJsonResponse);
             FileWriter file = new FileWriter(context.getFilesDir()+"/state.json");

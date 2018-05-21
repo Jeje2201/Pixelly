@@ -42,7 +42,8 @@ public class LevelListener implements OnClickListener {
     public void onClick(View v) {
         Intent playActivity = new Intent(mLevelActivity, PlayActivity.class);
         playActivity.putExtra("nomFichier",mNomFichier);
+        playActivity.putExtra("numDernierNiveau",mLevelActivity.getNumDernierNiveau());
         mLevelActivity.setNumNiveauCourant(mNumLance);
-        mLevelActivity.startActivityForResult(playActivity,LevelActivity.CODE);
+        mLevelActivity.startActivity(playActivity);
     }
 }

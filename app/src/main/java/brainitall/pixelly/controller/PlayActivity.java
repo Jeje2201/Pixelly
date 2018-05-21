@@ -18,6 +18,7 @@ import org.w3c.dom.Text;
 import java.util.List;
 
 import brainitall.pixelly.R;
+import brainitall.pixelly.model.Utilitaire;
 import brainitall.pixelly.model.metier.Case;
 import brainitall.pixelly.model.metier.Chemin;
 import brainitall.pixelly.model.metier.Grille;
@@ -36,6 +37,10 @@ public class PlayActivity extends AppCompatActivity {
      * Fichier du jeu
      */
     private Fichier mLeFichier;
+
+    private int mNumDernierNiveau;
+
+
 
     // -------------------- VUE ---------------------------------
 
@@ -59,6 +64,7 @@ public class PlayActivity extends AppCompatActivity {
         // On récupère le nom du fichier à charger
         Intent intent = getIntent();
         String str = intent.getStringExtra("nomFichier");
+        mNumDernierNiveau = intent.getIntExtra("numDernierNiveau",0);
         // Chargement du fichier et donc création de la grille
         mLeFichier = new Fichier(str,this);
         mLeFichier.lireFichier(getApplicationContext(),this);
@@ -93,7 +99,7 @@ public class PlayActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                mLeFichier.ecrireSave(getApplicationContext(),"save1.json");
+                mLeFichier.ecrireSave(getApplicationContext(),"save"+mLaGrille.getNumGrille()+".json");
             }
         });
 
@@ -212,19 +218,22 @@ public class PlayActivity extends AppCompatActivity {
     public void onBackPressed() {
         mVue.interruptedThread();
         super.onBackPressed();
-        boolean fini = false;
         if(mLaGrille.niveauFini()){
-            fini = true;
+            if(mNumDernierNiveau < LevelActivity.NBLEVEL-1 && mLaGrille.getNumGrille()-1 >= mNumDernierNiveau){
+                mNumDernierNiveau += 1;
+                Utilitaire.ecrireEtatJeu(getApplicationContext(),mNumDernierNiveau);
+                System.out.println(Utilitaire.lireEtatJeu(getApplicationContext()));
+            }
         }
-        Intent data =getIntent();
-        data.putExtra("fini",fini);
-        setResult(RESULT_OK,data);
-
+        mLeFichier.ecrireSave(getApplicationContext(),"save"+mLaGrille.getNumGrille()+".json");
         finish();
     }
 
-
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mLeFichier.ecrireSave(getApplicationContext(),"save"+mLaGrille.getNumGrille()+".json");
+    }
 
     // ----------------------------- GETTER & SETTER --------------------------------------
 
