@@ -4,6 +4,6 @@
     <string name="texte1_aide"> 1. Un chemin ne peut relier que deux terminaisons\n
     2. La longueur des chemins
     doit correspondre au nombre
-    de points indiqués dans les terminaisons</string>
+    de points indiqués dans les terminaisons\n</string>
     <string name="texte2_aide"> 3. Un chemin ne peut pas croiser d\'autres chemins ou passer au travers des terminaisons.</string>
 </resources>
