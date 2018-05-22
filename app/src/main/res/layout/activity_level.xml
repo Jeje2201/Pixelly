@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         >
 
-       
+
     <!-- bouton niveau 2 de couleur rouge pour la difficultée -->
     <Button
         android:id="@+id/activity_level_btn_niveau2"
