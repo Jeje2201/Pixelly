@@ -16,6 +16,13 @@
         app:layout_constraintTop_toTopOf="parent"
         >
 
+        <LinearLayout
+            android:id="@+id/activity_level_MiseEnPage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            ></LinearLayout>
 
     <!-- bouton niveau 2 de couleur rouge pour la difficultée -->
     <Button

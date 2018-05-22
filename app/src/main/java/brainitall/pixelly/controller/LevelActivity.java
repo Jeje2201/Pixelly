@@ -71,7 +71,7 @@ public class LevelActivity extends AppCompatActivity {
      */
     private ScrollView mDefilement;
 
-
+    private LinearLayout mMiseEnPage;
 
 
 
@@ -93,7 +93,8 @@ public class LevelActivity extends AppCompatActivity {
         mLesBoutonsNiveau = new Vector<>();
         initBoutonsNiveau();
         mHelp = (Button) findViewById(R.id.activity_main_btn_aide);
-        mDefilement = (ScrollView) findViewById(R.id.activity_help_defilement); // réferencement de la barre de défilement
+        mDefilement = (ScrollView) findViewById(R.id.activity_level_defilement); // réferencement de la barre de défilement
+        mMiseEnPage = (LinearLayout) findViewById(R.id.activity_level_MiseEnPage);
         initListenerLevel();
         /*ouverture de l'activitée aide lorsque l'utilisateur cliquera sur le bouton d'aide */
         mHelp.setOnClickListener(new View.OnClickListener() {
