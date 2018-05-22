@@ -39,7 +39,13 @@
 
                 />
 
-
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/activity_level_MiseEnPage2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
             <!-- bouton niveau test -->
             <Button
                 android:id="@+id/activity_level_btn_niveauTest"
@@ -53,7 +59,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/activity_level_MiseEnPage3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
             <Button
                 android:id="@+id/activity_level_btn_niveau1"
                 android:layout_width="150dp"
@@ -67,7 +79,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/activity_level_btn_niveauTest" />
 
+        </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/activity_level_MiseEnPage4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
             <!-- bouton d'aide  -->
             <Button
                 android:id="@+id/activity_level_btn_niveau2"
@@ -84,6 +103,14 @@
 
                 />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_level_MiseEnPage5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
             <Button
                 android:id="@+id/activity_level_btn_niveau3"
                 android:layout_width="150dp"
@@ -97,7 +124,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+        </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/activity_level_MiseEnPage6"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
             <Button
                 android:id="@+id/activity_level_btn_niveau4"
                 android:layout_width="150dp"
@@ -111,6 +145,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_level_MiseEnPage7"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
             <Button
                 android:id="@+id/activity_level_btn_niveau5"
                 android:layout_width="150dp"
@@ -123,7 +165,15 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/activity_level_MiseEnPage8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/activity_level_btn_aide"
@@ -137,8 +187,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                />
+                app:layout_constraintTop_toTopOf="parent" />
 
 
         </LinearLayout>
