@@ -125,24 +125,24 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-
+            <Button
+                android:id="@+id/activity_level_btn_aide"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:background="#6C4BA0"
+                android:text="\?"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
 
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/activity_level_btn_aide"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginStart="16dp"
-            android:background="#6C4BA0"
-            android:text="\?"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+
     </ScrollView>
 </android.support.constraint.ConstraintLayout>

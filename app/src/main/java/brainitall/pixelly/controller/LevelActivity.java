@@ -94,7 +94,7 @@ public class LevelActivity extends AppCompatActivity {
         mNumNiveauCourant = 0;
         mLesBoutonsNiveau = new Vector<>();
         initBoutonsNiveau();
-        mHelp = (Button) findViewById(R.id.activity_main_btn_aide);
+        mHelp = (Button) findViewById(R.id.activity_level_btn_aide);
         if(mHelp == null){
             System.out.println("c'est nul !!");
         }
