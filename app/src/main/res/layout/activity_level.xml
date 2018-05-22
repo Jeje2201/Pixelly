@@ -16,13 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         >
 
-        <LinearLayout
-            android:id="@+id/activity_level_miseEnPage"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:orientation="vertical"
-            >
+       
     <!-- bouton niveau 2 de couleur rouge pour la difficultée -->
     <Button
         android:id="@+id/activity_level_btn_niveau2"
@@ -89,7 +83,7 @@
         app:srcCompat="@drawable/listeniveau_titre"
 
         />
-        </LinearLayout>
+
 
     </ScrollView>
 </android.support.constraint.ConstraintLayout>
