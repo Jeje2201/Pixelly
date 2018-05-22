@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -63,6 +65,22 @@ public class LevelActivity extends AppCompatActivity {
      */
     private TextView mListeNiveaux;
 
+
+    /**
+     * barre de défilement de l'activitée
+     */
+    private ScrollView mDefilement;
+
+
+    /**
+     * mise en page de l'activitée
+     */
+    private LinearLayout mMiseEnPage;
+
+
+
+
+
     @Override
     /**
      * Permet d'initialiser l'activité
@@ -78,6 +96,8 @@ public class LevelActivity extends AppCompatActivity {
         mLesBoutonsNiveau = new Vector<>();
         initBoutonsNiveau();
         mHelp = (Button) findViewById(R.id.activity_main_btn_aide);
+        mDefilement = (ScrollView) findViewById(R.id.activity_help_defilement); // réferencement de la barre de défilement
+        mMiseEnPage = (LinearLayout) findViewById(R.id.activity_help_mise_en_page); // réferencement de la mise en page du scrollview (barre de défilement)
         initListenerLevel();
         /*ouverture de l'activitée aide lorsque l'utilisateur cliquera sur le bouton d'aide */
         mHelp.setOnClickListener(new View.OnClickListener() {
@@ -97,6 +117,7 @@ public class LevelActivity extends AppCompatActivity {
         Button nTest = (Button) findViewById(R.id.activity_level_btn_niveauTest); //on réference l'element graphique mNiveauTest
         Button n1 = (Button) findViewById(R.id.activity_level_btn_niveau1);
         Button n2 = (Button) findViewById(R.id.activity_level_btn_niveau2);
+
         // Ajout à la liste de boutons
         mLesBoutonsNiveau.add(nTest);
         mLesBoutonsNiveau.add(n1);

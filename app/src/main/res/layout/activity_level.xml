@@ -6,6 +6,23 @@
     android:layout_height="match_parent"
     tools:context=".controller.LevelActivity">
 
+    <ScrollView
+        android:id="@+id/activity_level_defilement"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
+
+        <LinearLayout
+            android:id="@+id/activity_level_miseEnPage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            >
     <!-- bouton niveau 2 de couleur rouge pour la difficultée -->
     <Button
         android:id="@+id/activity_level_btn_niveau2"
@@ -43,6 +60,7 @@
         android:background="#00FF00"
         android:text="Niveau Test"
         android:textSize="16dp"
+        android:layout_marginTop="35dp"
         app:layout_constraintBottom_toBottomOf="@+id/activity_level_btn_niveau1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,5 +86,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/listeniveau_titre" />
+        app:srcCompat="@drawable/listeniveau_titre"
+
+        />
+        </LinearLayout>
+
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>
