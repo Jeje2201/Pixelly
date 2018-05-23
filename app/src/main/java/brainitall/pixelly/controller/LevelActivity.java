@@ -64,7 +64,7 @@ public class LevelActivity extends AppCompatActivity {
      * texte affiché sur la page de niveau
      */
     private TextView mListeNiveaux;
-    
+
 
 
 
