@@ -31,7 +31,7 @@ public class LevelActivity extends AppCompatActivity {
     /**
      * Nombre total de Niveau
      */
-    public static int NBLEVEL = 6;
+    public static int NBLEVEL = 4;
 
     /**
      * Le fichier permetttant de charger et sauvegarder le jeu
@@ -64,17 +64,7 @@ public class LevelActivity extends AppCompatActivity {
      * texte affiché sur la page de niveau
      */
     private TextView mListeNiveaux;
-
-
-    /**
-     * barre de défilement de l'activitée
-     */
-    private ScrollView mDefilement;
-
-    /**
-     * mise en page de l'activitée
-     */
-    private LinearLayout mMiseEnPage;
+    
 
 
 
@@ -98,8 +88,7 @@ public class LevelActivity extends AppCompatActivity {
         if(mHelp == null){
             System.out.println("c'est nul !!");
         }
-        mDefilement = (ScrollView) findViewById(R.id.activity_level_defilement); // réferencement de la barre de défilement
-        mMiseEnPage = (LinearLayout) findViewById(R.id.activity_level_MiseEnPage);
+
         initListenerLevel();
         /*ouverture de l'activitée aide lorsque l'utilisateur cliquera sur le bouton d'aide */
         mHelp.setOnClickListener(new View.OnClickListener() {
@@ -121,16 +110,14 @@ public class LevelActivity extends AppCompatActivity {
         Button n1 = (Button) findViewById(R.id.activity_level_btn_niveau1);
         Button n2 = (Button) findViewById(R.id.activity_level_btn_niveau2);
         Button n3 =(Button) findViewById(R.id.activity_level_btn_niveau3);
-        Button n4 =(Button) findViewById(R.id.activity_level_btn_niveau4);
-        Button n5 =(Button) findViewById(R.id.activity_level_btn_niveau5);
+
 
         // Ajout à la liste de boutons
         mLesBoutonsNiveau.add(nTest);
         mLesBoutonsNiveau.add(n1);
         mLesBoutonsNiveau.add(n2);
         mLesBoutonsNiveau.add(n3);
-        mLesBoutonsNiveau.add(n4);
-        mLesBoutonsNiveau.add(n5);
+
         // On bloque les niveaux non débloqué encore par l'utilisateur
         if(mNumDernierNiveau < NBLEVEL){
             for(int i = mNumDernierNiveau+1; i < mLesBoutonsNiveau.size(); i++){
