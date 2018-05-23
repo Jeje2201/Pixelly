@@ -12,6 +12,7 @@
             <!-- bouton niveau 2 de couleur rouge pour la difficultée -->
             <!--  -->
             <!-- bouton bleu du niveau 1 qui se trouve après le niveau de test -->
+<<<<<<< HEAD
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="300dp"
@@ -23,6 +24,18 @@
 
 
                 />
+=======
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="300dp"
+        android:layout_height="61dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.035"
+        app:srcCompat="@drawable/listeniveau_titre" />
+>>>>>>> 531a057b58b6737cc506fb925d11c4dd2a76498a
 
 
             <!-- bouton niveau test -->
@@ -71,6 +84,7 @@
                 />
 
 
+<<<<<<< HEAD
             <!-- bouton niveau 3 -->
             <Button
                 android:id="@+id/activity_level_btn_niveau3"
@@ -83,8 +97,23 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/activity_level_btn_niveau2"
+=======
+    <Button
+        android:id="@+id/activity_level_btn_niveau3"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
 
-            />
+
+        android:background="#8E3557"
+        android:text="Niveau 3"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_level_btn_aide"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/activity_level_btn_niveau2"
+>>>>>>> 531a057b58b6737cc506fb925d11c4dd2a76498a
+
+        />
 
 
     <!-- bouton aide -->
