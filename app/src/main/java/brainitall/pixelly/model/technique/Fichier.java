@@ -47,7 +47,6 @@ public class Fichier {
         mNomFichier = nomFichier;
     }
 
-
     /**
      * Permet de lire un fichier Json contenant un niveau et stocke les valeurs dans la grille
      * @param context contexte de l'application
@@ -68,7 +67,6 @@ public class Fichier {
             JSONObject jsonRootObject = new JSONObject(json);
             //Racine de l'objet infoGrille
             JSONArray infoGrille = jsonRootObject.optJSONArray("infoGrille");
-
 
             for(int i = 0; i < infoGrille.length(); i++){
                 JSONObject jsonObject = infoGrille.getJSONObject(i);
