@@ -460,6 +460,7 @@ public class Grille {
     /**
      * Vérifie si le niveau est terminé
      * @return boolean
+     * @author Aurélia
      */
     public boolean niveauFini()
     {
@@ -480,6 +481,7 @@ public class Grille {
      * Vérifie que chaque chemin tracé est bien terminé
      * @param taille nombre de chemins du niveau
      * @return boolean
+     * @author Aurélia
      */
     private boolean cheminsTousComplets(int taille)
     {
@@ -497,6 +499,7 @@ public class Grille {
     /**
      * Donne le nombre de terminaisons du niveau sans les 1
      * @return compteur de terminaisons
+     * @author Aurélia
      */
     private int nbTerminaisonsChemins()
     {
