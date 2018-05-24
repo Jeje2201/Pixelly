@@ -80,7 +80,7 @@ public class PlayActivity extends AppCompatActivity {
         mNumDernierNiveau = intent.getIntExtra("numDernierNiveau",0);
         // Chargement du fichier et donc création de la grille
         mLeFichier = new Fichier(str,this);
-        mLeFichier.lireFichier(getApplicationContext(),this);
+        mLeFichier.lireFichier(getApplicationContext());
         // Création du widget de la vue de la grille
         mVue = new PlayView(this);
 
@@ -116,15 +116,6 @@ public class PlayActivity extends AppCompatActivity {
 
     // ---------------------------------- GESTION DU JEU ----------------------
 
-    /**
-     * Permet d'associer une grille
-     * @param numGrille numéro de la grille
-     * @param hauteur hauteur de la grille
-     * @param largeur largeur de la grille
-     */
-    public void ajouterGrille(int numGrille, int hauteur, int largeur ){
-        mLaGrille = new Grille(numGrille,hauteur,largeur);
-    }
 
     /**
      * Permet d'associer une grille
@@ -137,12 +128,7 @@ public class PlayActivity extends AppCompatActivity {
         mLaGrille = new Grille(numGrille,hauteur,largeur,nomGrille);
     }
 
-    /**
-     * Permet de dissocier la grille
-     */
-    public void dissocierGrille(){
-        mLaGrille = null;
-    }
+
 
     /**
      * Permet d'ajouter une terminaison dans la grille
@@ -193,6 +179,9 @@ public class PlayActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Permet de réinitialiser la grille
+     */
     public void reinitialiserGrille(){
         if(mLaGrille != null){
             for(Chemin c : mLaGrille.getLesChemins()){
@@ -202,6 +191,12 @@ public class PlayActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Permet de savoir si la case aux coordonnées (x,y) est une terminaison
+     * @param x l'abcisse de la case
+     * @param y l'ordonnée de la case
+     * @return true si c'est une terminaison, false sinon
+     */
     public boolean isTerminaison(int x, int y){
         if(mLaGrille != null){
             Case c = mLaGrille.getCase(x,y);
@@ -233,6 +228,9 @@ public class PlayActivity extends AppCompatActivity {
     }
 
     @Override
+    /**
+     * Action lorsque l'on met l'activité sur pause
+     */
     protected void onPause() {
         super.onPause();
         mLeFichier.ecrireSave(getApplicationContext(),"save"+mLaGrille.getNumGrille()+".json");

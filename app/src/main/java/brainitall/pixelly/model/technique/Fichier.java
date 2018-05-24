@@ -31,11 +31,15 @@ public class Fichier {
      */
     private String mNomFichier;
 
+    /**
+     * Le controleur
+     */
     private PlayActivity mPlayActivity;
 
     /**
      * Constructeur
      * @param nomFichier le nom du fichier donné en paramètre
+     * @param context le contexte représentant l'activité
      */
     public Fichier(String nomFichier, Context context){
 
@@ -43,13 +47,13 @@ public class Fichier {
         mNomFichier = nomFichier;
     }
 
-
     /**
      * Permet de lire un fichier Json contenant un niveau et stocke les valeurs dans la grille
+     * @param context contexte de l'application
+     * @author Manon
      */
-    public void lireFichier(Context context, Context activity) {
-        PlayActivity playActivity = (PlayActivity) activity;
-        System.out.println("On tente le chargement du fichier");
+    public void lireFichier(Context context) {
+
 
         String json = null;
         try {
@@ -64,7 +68,6 @@ public class Fichier {
             //Racine de l'objet infoGrille
             JSONArray infoGrille = jsonRootObject.optJSONArray("infoGrille");
 
-
             for(int i = 0; i < infoGrille.length(); i++){
                 JSONObject jsonObject = infoGrille.getJSONObject(i);
                 String nomGrille = jsonObject.optString("nomGrille").toString();
@@ -73,9 +76,7 @@ public class Fichier {
                 int largeur = Integer.parseInt(jsonObject.optString("largeur").toString());
 
                 //Ajouter les valeurs dans la grille via le Manager
-                //Manager.getInstance().ajouterGrille(numGrille,largeur,hauteur);
-                //Manager.getInstance().ajouterGrille(numGrille,hauteur,largeur,nomGrille);
-                playActivity.ajouterGrille(numGrille,hauteur,largeur,nomGrille);
+                mPlayActivity.ajouterGrille(numGrille,hauteur,largeur,nomGrille);
             }
 
             //Racine de l'objet terminaison
@@ -91,12 +92,11 @@ public class Fichier {
                 int b = Integer.parseInt(jsonObject.optString("b").toString());
 
                 //Ajouter les valeurs dans la grille via le Manager
-                //Manager.getInstance().ajouterTerminaison(tailleChemin,x,y,r,g,b);
-                playActivity.ajouterTerminaison(tailleChemin,x,y,r,g,b);
+                mPlayActivity.ajouterTerminaison(tailleChemin,x,y,r,g,b);
 
 
             }
-            System.out.println("Le num de la grille : "+ playActivity.getLaGrille().getNumGrille());
+
             lireSave(context,"save"+mPlayActivity.getLaGrille().getNumGrille()+".json");
 
         } catch (UnsupportedEncodingException e) {
@@ -108,6 +108,12 @@ public class Fichier {
         }
     }
 
+    /**
+     * Permet de lire un fichier de sauvegarde
+     * @param context contexte de l'application
+     * @param nomSauvegarde nom de la sauvegarde
+     * @author Manon
+     */
     public void lireSave(Context context,String nomSauvegarde){
         try {
             File f = new File(context.getFilesDir(),nomSauvegarde);
@@ -117,7 +123,6 @@ public class Fichier {
             is.read(buffer);
             is.close();
             String json = new String(buffer);
-            System.out.println("Chaine dans la sauvegarde :"+json);
 
             // Récupération des données
             JSONObject jsonRootObject = new JSONObject(json);
@@ -162,6 +167,12 @@ public class Fichier {
         }
     }
 
+    /**
+     * Permet d'écrire un fichier de sauvegarde
+     * @param context contexte de l'application
+     * @param nomSauvegarde nom du fichier de sauvegarde
+     * @author Jérémy
+     */
     public void ecrireSave(Context context, String nomSauvegarde){
 
 
