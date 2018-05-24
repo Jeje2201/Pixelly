@@ -37,7 +37,7 @@
             android:layout_marginBottom="16dp"
             android:layout_marginStart="16dp"
             android:background="#181c36"
-            android:text="REZ"
+            android:text="RAZ"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
 
