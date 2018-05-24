@@ -1,6 +1,5 @@
 package brainitall.pixelly.controller;
 
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -9,9 +8,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 import android.content.Intent;
 import android.view.View;
-
 import java.io.File;
-
 import brainitall.pixelly.R;
 import brainitall.pixelly.model.Utilitaire;
 

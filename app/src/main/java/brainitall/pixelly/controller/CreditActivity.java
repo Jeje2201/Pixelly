@@ -3,7 +3,6 @@ package brainitall.pixelly.controller;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
-
 import brainitall.pixelly.R;
 
 public class CreditActivity extends AppCompatActivity {
