@@ -600,11 +600,14 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
      */
     public class DrawingThread extends Thread {
 
+        /**
+         * Permet de savoir s'il l'on doit continuer à dessiner ou non
+         */
         private boolean keepDrawing = true;
 
         @Override
         /**
-         *
+         * action a exéctuer pendant le Thread
          */
         public void run() {
             while(keepDrawing){
