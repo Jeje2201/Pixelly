@@ -7,7 +7,6 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
 import brainitall.pixelly.R;
 import brainitall.pixelly.model.Utilitaire;
 import brainitall.pixelly.model.metier.Case;
