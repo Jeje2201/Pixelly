@@ -206,7 +206,6 @@ public class Fichier {
 
             jsonFinal.put("chemins",listeChemins); //J'ajoute a la fin l'objet "chemin" avec sa liste de chemins
 
-            System.out.println(jsonFinal.toString());
 
             FileWriter file = new FileWriter(context.getFilesDir()+"/"+nomSauvegarde);
             file.write(jsonFinal.toString());

@@ -79,9 +79,6 @@ public class LevelActivity extends AppCompatActivity {
         mLesBoutonsNiveau = new Vector<>();
         initBoutonsNiveau();
         mHelp = (Button) findViewById(R.id.activity_level_btn_aide);
-        if(mHelp == null){
-            System.out.println("c'est nul !!");
-        }
 
         initListenerLevel();
         /*ouverture de l'activitée aide lorsque l'utilisateur cliquera sur le bouton d'aide */
@@ -132,7 +129,6 @@ public class LevelActivity extends AppCompatActivity {
     }
 
     public void debloquerNiveau(){
-        System.out.println(mNumDernierNiveau);
         for(int i = 0 ; i < mNumDernierNiveau+1; i++){
             mLesBoutonsNiveau.get(i).setEnabled(true);
         }
@@ -142,7 +138,6 @@ public class LevelActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         mNumDernierNiveau = Utilitaire.lireEtatJeu(getApplicationContext());
-        System.out.println(mNumDernierNiveau);
         debloquerNiveau();
     }
 
@@ -154,7 +149,6 @@ public class LevelActivity extends AppCompatActivity {
     public void onBackPressed() {
         super.onBackPressed();
         Utilitaire.ecrireEtatJeu(getApplicationContext(), mNumDernierNiveau);
-        System.out.println("On quitte l'activité et on écrit l'état du jeu");
         finish();
     }
 

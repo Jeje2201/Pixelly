@@ -50,7 +50,6 @@ public class Utilitaire {
         try {
             jsonFinal.put("etatJeu", numDernierNiveau);
             String mJsonResponse = jsonFinal.toString();
-            System.out.println("Json a sauvegarder :"+mJsonResponse);
             FileWriter file = new FileWriter(context.getFilesDir()+"/state.json");
             file.write(mJsonResponse);
             file.flush();

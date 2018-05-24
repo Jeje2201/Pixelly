@@ -219,7 +219,6 @@ public class PlayActivity extends AppCompatActivity {
             if(mNumDernierNiveau < LevelActivity.NBLEVEL-1 && mLaGrille.getNumGrille()-1 >= mNumDernierNiveau){
                 mNumDernierNiveau += 1;
                 Utilitaire.ecrireEtatJeu(getApplicationContext(),mNumDernierNiveau);
-                System.out.println(Utilitaire.lireEtatJeu(getApplicationContext()));
             }
         }
         mLeFichier.ecrireSave(getApplicationContext(),"save"+mLaGrille.getNumGrille()+".json");
