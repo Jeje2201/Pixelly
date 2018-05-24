@@ -4,7 +4,6 @@ import android.content.Context;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
@@ -12,11 +11,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
-
-import brainitall.pixelly.controller.Manager;
 import brainitall.pixelly.controller.PlayActivity;
 import brainitall.pixelly.model.metier.Case;
-import brainitall.pixelly.model.metier.CaseSimple;
 import brainitall.pixelly.model.metier.Chemin;
 import brainitall.pixelly.model.metier.Terminaison;
 
@@ -47,14 +43,12 @@ public class Fichier {
         mNomFichier = nomFichier;
     }
 
-
     /**
      * Permet de lire un fichier Json contenant un niveau et stocke les valeurs dans la grille
      * @param context contexte de l'application
      * @author Manon
      */
     public void lireFichier(Context context) {
-
 
         String json = null;
         try {
@@ -68,7 +62,6 @@ public class Fichier {
             JSONObject jsonRootObject = new JSONObject(json);
             //Racine de l'objet infoGrille
             JSONArray infoGrille = jsonRootObject.optJSONArray("infoGrille");
-
 
             for(int i = 0; i < infoGrille.length(); i++){
                 JSONObject jsonObject = infoGrille.getJSONObject(i);
@@ -95,10 +88,7 @@ public class Fichier {
 
                 //Ajouter les valeurs dans la grille via le Manager
                 mPlayActivity.ajouterTerminaison(tailleChemin,x,y,r,g,b);
-
-
             }
-
             lireSave(context,"save"+mPlayActivity.getLaGrille().getNumGrille()+".json");
 
         } catch (UnsupportedEncodingException e) {
@@ -154,12 +144,7 @@ public class Fichier {
                     else{
                         c.ajouterCase(mPlayActivity.getLaGrille().getCase(y,x));
                     }
-
-
-
                 }}
-
-
 
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -177,11 +162,9 @@ public class Fichier {
      */
     public void ecrireSave(Context context, String nomSauvegarde){
 
-
         JSONObject jsonFinal = new JSONObject();
 
         try {
-
             jsonFinal.put("NomNiveau", mPlayActivity.getLaGrille().getNumGrille());
             jsonFinal.put("NombreChemins", mPlayActivity.getLaGrille().getLesChemins().size());
 
@@ -223,7 +206,6 @@ public class Fichier {
 
             jsonFinal.put("chemins",listeChemins); //J'ajoute a la fin l'objet "chemin" avec sa liste de chemins
 
-            System.out.println(jsonFinal.toString());
 
             FileWriter file = new FileWriter(context.getFilesDir()+"/"+nomSauvegarde);
             file.write(jsonFinal.toString());

@@ -1,16 +1,12 @@
 package brainitall.pixelly.model;
 
 import android.content.Context;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import brainitall.pixelly.controller.LevelActivity;
 
 /**
  * Classe Utilitaire
@@ -54,7 +50,6 @@ public class Utilitaire {
         try {
             jsonFinal.put("etatJeu", numDernierNiveau);
             String mJsonResponse = jsonFinal.toString();
-            System.out.println("Json a sauvegarder :"+mJsonResponse);
             FileWriter file = new FileWriter(context.getFilesDir()+"/state.json");
             file.write(mJsonResponse);
             file.flush();

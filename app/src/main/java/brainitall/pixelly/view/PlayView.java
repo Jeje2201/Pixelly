@@ -278,7 +278,6 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
             if(mController.getLaGrille().niveauFini())
             {
                 estFini = true;
-                System.out.println(" ==========> FINI");
                 mNomImageNiv = mController.getLaGrille().getNomGrille();
                 mTexteNextNiv = "Nouveau niveau débloqué !";
 
@@ -297,8 +296,6 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
             mPaint.setColor(Color.GREEN);
             canvas.drawText(mTexteNextNiv, mXNextNiv, mYNextNiv, mPaint);
 
-            System.out.println(mNomImageNiv);
-            System.out.println(mTexteNextNiv);
         }
 
 
@@ -495,9 +492,6 @@ public class PlayView extends SurfaceView implements SurfaceHolder.Callback, Ges
         // Si détectection d'un changement de coordonnées
         if(x != mXInter || y != mYInter)
         {
-            System.out.println(" ============> IF CHANGEMENT ");
-            System.out.println("CHEMIN : " + mXInter + "," + mYInter +"    "+ x + "," + y);
-
             //Manager.getInstance().getLaGrille().ajouterCaseChemin(mXInter, mYInter, x, y);
             mController.getLaGrille().modifierChemins(mXInter, mYInter, x, y);
 

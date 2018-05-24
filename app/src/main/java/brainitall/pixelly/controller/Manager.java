@@ -2,7 +2,6 @@ package brainitall.pixelly.controller;
 
 import brainitall.pixelly.model.metier.Chemin;
 import brainitall.pixelly.model.metier.Grille;
-import brainitall.pixelly.view.PlayView;
 
 /**
  * Classe représentant le Manager du jeu
