@@ -25,7 +25,7 @@ public class LevelActivity extends AppCompatActivity {
     /**
      * Nombre total de Niveau
      */
-    public static int NBLEVEL = 4;
+    public static int NBLEVEL = 3;
 
     /**
      * Le fichier permetttant de charger et sauvegarder le jeu
