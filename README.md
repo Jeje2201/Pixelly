@@ -24,7 +24,7 @@ terminaisons par lesquelles ils doivent commencer ou finir.
 <h1 align="center"> <img src="https://image.prntscr.com/image/vrT2bmk3RPKmiV42mati4g.png" /></h1>
 
 ## 💾 Installation
-Le fichier d'installation de l'application se trouve [ici](https://github.com/Jeje2201/Pixelly/raw/master/Document/applicationfinal/release/Pixelly.apk)
+Le fichier d'installation de l'application se trouve [ici](https://github.com/Jeje2201/Pixelly/raw/master/Documents/applicationfinal/release/Pixelly.apk)
 
 ## 📱 Support Mobile
 | <img src="https://www.apple.com/ac/structured-data/images/knowledge_graph_logo.png?201606271147" alt="Apple" width="16px" height="16px" /> Apple | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Android_robot.svg/2000px-Android_robot.svg.png" alt="Android" width="16px" height="16px" /> Android | <img src="http://cdn1.knowyourmobile.com/sites/knowyourmobilecom/files/styles/gallery_wide/public/Windows_logo_-_2012.png?itok=kmL-Qz99" alt="Windows10" width="16px" height="16px" /> Windows10 | 
