@@ -42,7 +42,7 @@ Le fichier d'installation de l'application se trouve <a href="https://github.com
   </tr>
 </table>
 
-## 💛 Team
+<h2>💛 Team</h2>
 <table>
   <tr>
     <th><img src="https://avatars3.githubusercontent.com/u/38455237?s=400&v=4"  width="120px" height="120px" /></th>
