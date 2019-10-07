@@ -23,7 +23,7 @@ BrainItAll est une mini-entreprise française qui a vu le jour au sein de l’Un
 terminaisons par lesquelles ils doivent commencer ou finir.</li>
   <li>Un chemin ne peut pas croiser d’autres chemins ou passer au travers de terminaisons.</li>
  </ul>
-<h1 align="center"> <img rc="https://i.ibb.co/km3nvdH/68747470733a2f2f696d6167652e70726e747363722e636f6d2f696d6167652f76725432626d6b3352504b6d695634326d61746934672e706e67.png"></h1>
+<h1 align="center"> <img src="https://i.ibb.co/km3nvdH/68747470733a2f2f696d6167652e70726e747363722e636f6d2f696d6167652f76725432626d6b3352504b6d695634326d61746934672e706e67.png"></h1>
     
 <h2>💾 Installation</h2>
 Le fichier d'installation de l'application se trouve <a href="https://github.com/Jeje2201/Pixelly/raw/master/Documents/applicationfinal/release/Pixelly.apk">ici</a>
