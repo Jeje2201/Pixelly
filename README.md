@@ -10,9 +10,13 @@
 développement d&#39;une application type puzzle/logique ou jeu de plateau. Dans notre cas, il s’agira de
   développer un jeu de puzzle/logique inspiré du jeu Pixel Pop se nommant Pixelly.</b></p>
 
+<hr>
+
 <h2>💼 À propos de BrainItAll</h2>
 
 BrainItAll est une mini-entreprise française qui a vu le jour au sein de l’Université d’Aix-Marseille. Elle est spécialisée dans le développement de jeu de type puzzle/logique sous Android. Notre équipe se compose de cinq membres de la Licence Professionnelle SIL-NTI : Manon BRUN, Loïc EZRATI, Jérémy LERICHE, Mélodie MEISSEL et Aurélia RAHARISON.
+
+<hr>
 
 <h2>🎮 Le Principe du jeu</h2>
 <p>Le principe du jeu est de pouvoir remplir l’intégralité d’une grille avec des chemins sachant que :</p>
@@ -25,8 +29,12 @@ terminaisons par lesquelles ils doivent commencer ou finir.</li>
  </ul>
 <h1 align="center"> <img src="https://i.ibb.co/km3nvdH/68747470733a2f2f696d6167652e70726e747363722e636f6d2f696d6167652f76725432626d6b3352504b6d695634326d61746934672e706e67.png"></h1>
     
+<hr>
+
 <h2>💾 Installation</h2>
 Le fichier d'installation de l'application se trouve <a href="https://github.com/Jeje2201/Pixelly/raw/master/Documents/applicationfinal/release/Pixelly.apk">ici</a>
+
+<hr>
 
 <h2>📱 Support Mobile</h2>
 <table>
@@ -41,6 +49,8 @@ Le fichier d'installation de l'application se trouve <a href="https://github.com
     <td align="center">Non</td>
   </tr>
 </table>
+
+<hr>
 
 <h2>💛 Team</h2>
 <table>
